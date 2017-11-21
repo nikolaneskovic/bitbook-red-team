@@ -1,26 +1,43 @@
-import default from "./fetchDataService";
-import {BASE_SERVICE_URL} from "./../constants";
+import FetchDataService from "./fetchDataService";
+import default "./redirectService";
 
 class AuthenticationService {
-    
-    constructor(){
+    constructor() {
         this.serviceData = new FetchDataService();
     }
-    
-    logIn(user){
-        let userLoginUrl = `${BASE_SERVICE_URL}/login`;
-        this.serviceData.post(userLoginUrl,(data)=>{
-            
-        },(error)=>{});
 
-        // sessionStorage.setItem({}}, );
+    logIn(user) {
 
+        let userLoginUrl = `/login`;
+        this.serviceData.post(userLoginUrl, user, (data) => {
+
+            sessionStorage.setItem("sessionId", data.sessionId);
+        }, (error) => {
+            return error;
+        });
     }
-    logOut(){
 
+    logOut() {
+        sessionStorage.setItem("sessionId", null);
+        redirect("/");
     }
-    isUserAuthentic(){}
-    register(){}
+
+    isUserAuthenticated(user) {
+        let userLoginUrl = `/login`;
+        this.serviceData.get(userLoginUrl, (data) => {
+            if (user.email === data.email) {
+                redirect('/profile');
+            }
+        });
+    }
+    register(user) {
+        let userLoginUrl = `/register`;
+        this.serviceData.post(userLoginUrl, user, (data) => {
+            redirect("/");
+        }, (error) => {
+            return error;
+        });
+    }
 }
 
 export default AuthenticationService;

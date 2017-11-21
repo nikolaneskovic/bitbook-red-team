@@ -1,10 +1,9 @@
 import { HEADER_KEY } from "./../constants";
+import { BASE_SERVICE_URL } from "./../constants";
 
 
 class FetchDataService {
     constructor() { }
-
-
 
     createHeader() {
         return {
@@ -19,24 +18,23 @@ class FetchDataService {
             headers: this.createHeader(),
         };
 
-
         fetch(url, myInit)
-            .then(function (response) {
+            .then((response) => {
                 return response.json();
             })
-            .then(function (response) {
-                handler(response);
+            .then((data) => {
+                handler(data);
             })
             .catch(error => errorHandler(error) || console.log(error));
     }
 
-
-    post(url, handler, errorHandler) {
-        var myInit = {
+    post(path, data, handler, errorHandler) {
+        const requestOptions = {
             method: "POST",
             headers: this.createHeader(),
+            body: JSON.stringify(data)
         };
-        fetch(url, myInit)
+        fetch(`${BASE_SERVICE_URL}${path}`, requestOptions)
             .then((response) => response.json())
             .then(response => {
                 handler(response);
