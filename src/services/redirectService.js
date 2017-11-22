@@ -1,6 +1,9 @@
 
-function redirect(path) {
-    return window.location.href = path;
+class RedirectionService{
+
+    redirect(path){
+        window.location.assign("/#/${path}");
+    }
 }
 
-export default redirect;
+export default RedirectionService;

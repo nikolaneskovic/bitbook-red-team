@@ -18,6 +18,24 @@ const LoginPage = (props) => {
 
                 <div className="col-lg-6">
 
+=======
+                    <div className="table">
+
+                        <div className="row" id="thead">
+                            <div className="col-sm-6">
+                                <Link to="/login">Login</Link>
+                            </div>
+                            <div className="col-sm-6">
+                                <Link to="/register">Register</Link>
+                            </div>
+                        </div>
+                        <div className="col-lg-12">
+                            <Switch>
+                                <Route exact path="/" component={LoginForm} />
+                                <Route path="/login" component={LoginForm} />
+                                <Route path="/register" component={RegisterForm} />
+>>
+
 
                     <div className="row" id="thead">
                         <div className="col-sm-6">
@@ -27,6 +45,7 @@ const LoginPage = (props) => {
                             <Link to="/register">Register</Link>
                         </div>
                     </div>
+
                     <div className="col-lg-12">
                         <Switch>
                             <Route exact path="/" component={LoginForm} />
@@ -36,6 +55,8 @@ const LoginPage = (props) => {
 
                         </Switch>
                     </div>
+
+=======
 
                 </div>
             </div>
