@@ -1,21 +1,26 @@
 import React from "react";
 
+import FetchDataService from "../../services/fetchDataService";
+
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: ""
         };
+        this.dataService = new FetchDataService();
         
 
-        this.emailEntry = this.emailEntry.bind(this);
+        this.usernameEntry = this.usernameEntry.bind(this);
         this.passwordEntry = this.passwordEntry.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        
     }
-    emailEntry(event) {
+    usernameEntry(event) {
         const value = event.target.value;
         this.setState({
-            email: value
+            username: value
         });
 
     };
@@ -27,6 +32,17 @@ class LoginForm extends React.Component {
         });
     };
 
+    handleClick(){
+        const data = {
+            username: this.state.username,
+            password: this.state.password
+        };
+
+        this.dataService.post("/login",data, (response)=>{console.log(response);});
+
+    }
+
+
     render() {
         return (
             <div className="row">
@@ -34,9 +50,9 @@ class LoginForm extends React.Component {
                 <form className="col s12" id="form">
                     <div className="row">
                         <div className="input-field col s6">
-                            <label className="login-form"> Email </label> <br /> 
+                            <label className="login-form"> Username </label> <br /> 
                             <input id="input_text" type="text" data-length="25"
-                                value={this.state.email} onChange={this.emailEntry}
+                                value={this.state.username} onChange={this.usernameEntry}
                             />
                         </div>
                     </div>
@@ -48,7 +64,7 @@ class LoginForm extends React.Component {
                             />
                         </div>
                     </div>
-                    <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login">
+                    <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick= {this.handleClick}>
                     Login
                     </button>
                 </form>

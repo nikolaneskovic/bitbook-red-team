@@ -3,7 +3,7 @@ import LoginPage from "./login/loginPage";
 import LoginForm from "./login/loginForm";
 import RegisterForm from "./login/registerForm";
 import { Switch, Route, Redirect } from "react-router-dom";
-import HelloWorld from "./helloWorld/helloWorld";
+
 
 
 class App extends React.Component {

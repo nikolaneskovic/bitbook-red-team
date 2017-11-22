@@ -1,45 +1,59 @@
 import { HEADER_KEY } from "./../constants";
 import { BASE_SERVICE_URL } from "./../constants";
-
+import axios from "axios";
 
 class FetchDataService {
     constructor() { }
 
     createHeader() {
-        return {
-            "key": HEADER_KEY,
-            "sessionId": sessionStorage.getItem("sessionId")
-        };
+        if (sessionStorage.getItem("sessionId") !== null) {
+            return {
+                "Content-Type": " application/json",
+                "Accept": "application/json",
+                "Key": HEADER_KEY,
+                "sessionId": sessionStorage.getItem("sessionId")
+            };
+        } else {
+            return {
+                "Accept": "application/json",
+                "Content-Type": " application/json",
+                "Key": HEADER_KEY
+            };
+        }
+
     }
 
-    get(url, handler, errorHandler) {
-        var myInit = {
-            method: "GET",
-            headers: this.createHeader(),
-        };
 
-        fetch(url, myInit)
+    get(path, handler, errorHandler) {
+
+        axios({
+            method: "GET",
+            url: `${BASE_SERVICE_URL}${path}`,
+            headers: this.createHeader(),
+
+        })
             .then((response) => {
                 return response.json();
             })
-            .then((data) => {
-                handler(data);
-            })
+            .then((data) => { handler(data); })
             .catch(error => errorHandler(error) || console.log(error));
     }
 
-    post(path, data, handler, errorHandler) {
-        const requestOptions = {
+
+    post(path, data, handler) {
+        
+        axios({
             method: "POST",
+            url: `${BASE_SERVICE_URL}${path}`,
+            data: JSON.stringify(data),
             headers: this.createHeader(),
-            body: JSON.stringify(data)
-        };
-        fetch(`${BASE_SERVICE_URL}${path}`, requestOptions)
-            .then((response) => response.json())
+            json: true
+        })
             .then(response => {
-                handler(response);
+                return handler(response);
+
             })
-            .catch(error => errorHandler(error) || console.log(error));
+            .catch(error => console.log(error));
     }
 
 }
