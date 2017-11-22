@@ -9,15 +9,19 @@
 
 #login{
     width: 40%;
-    margin-top:20px;
+    margin-top:15px;
     background-color: white;
     color: rgb(90, 90, 219);
+    border-radius: 25px;
 }
+
+
 
 #login:hover{
     background-color: rgb(65, 65, 206);
     color: white;
 }
+
 
 label{
     margin-top:10px;
@@ -54,4 +58,9 @@ body{
     height: 50px;
     padding-top:10px;
     font-size: 18px;
+    border-radius: 25px;
+}
+
+#input_text{
+    border-radius: 25px;
 }

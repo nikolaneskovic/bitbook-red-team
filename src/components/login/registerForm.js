@@ -8,7 +8,8 @@ class RegisterForm extends React.Component {
             username: "",
             password: "",
             name: "",
-            email: ""
+            email: "",
+            errorMsg: ""
         };
         this.authenticationService = new AuthenticationService();
 
@@ -55,7 +56,11 @@ class RegisterForm extends React.Component {
             name: this.state.name,
             email: this.state.email
         };
-        this.authenticationService.register(data);
+        this.authenticationService.register(data, (error) => {
+            this.setState({errorMsg: error});
+        });
+
+
 
     }
 
@@ -102,6 +107,7 @@ class RegisterForm extends React.Component {
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.onRegisterClick}>
                         Register Now
                     </button>
+                    <div>{this.state.errorMsg}</div>
                 </form>
             </div >
         );

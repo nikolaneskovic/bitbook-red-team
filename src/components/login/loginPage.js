@@ -5,6 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 
+console.log("Stop! This is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Facebook feature or hack someones account, it is a scam and will give them access to your Facebook account. See bitbook website for more information");
+
 const LoginPage = (props) => {
     return (
         <div className="container-fluid">
@@ -17,46 +19,24 @@ const LoginPage = (props) => {
                 </div>
 
                 <div className="col-lg-6">
-
-=======
-                    <div className="table">
-
-                        <div className="row" id="thead">
-                            <div className="col-sm-6">
-                                <Link to="/login">Login</Link>
-                            </div>
-                            <div className="col-sm-6">
-                                <Link to="/register">Register</Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-12">
-                            <Switch>
-                                <Route exact path="/" component={LoginForm} />
-                                <Route path="/login" component={LoginForm} />
-                                <Route path="/register" component={RegisterForm} />
->>
-
-
                     <div className="row" id="thead">
-                        <div className="col-sm-6">
-                            <Link to="/login">Login</Link>
+                        <div className="col-sm-6 login"><Link to="/login">
+                            Login</Link>
                         </div>
                         <div className="col-sm-6">
                             <Link to="/register">Register</Link>
                         </div>
                     </div>
 
+
                     <div className="col-lg-12">
                         <Switch>
                             <Route exact path="/" component={LoginForm} />
                             <Route path="/login" component={LoginForm} />
                             <Route path="/register" component={RegisterForm} />
-
-
                         </Switch>
                     </div>
 
-=======
 
                 </div>
             </div>

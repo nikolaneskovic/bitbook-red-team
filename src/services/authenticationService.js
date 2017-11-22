@@ -1,19 +1,23 @@
 import FetchDataService from "./fetchDataService";
 import RedirectionService from "./redirectService";
+import ErrorHandlerService from "./errorHandlerService";
 
 class AuthenticationService {
     constructor() {
         this.serviceData = new FetchDataService();
         this.redirectService = new RedirectionService();
+        this.errorHandlerService = new ErrorHandlerService();
     }
 
+    logIn(user, showError) {
 
-    logIn(user) {
+
         let userLoginUrl = "/login";
         this.serviceData.post(userLoginUrl, user, (response) => {
-            console.log(response);
             sessionStorage.setItem("sessionId", response.data.sessionId);
 
+        }, (error) => {
+            showError(error);
         });
     }
 
@@ -25,13 +29,13 @@ class AuthenticationService {
     isUserAuthenticated() {
         return !!localStorage.getItem("sessionId");
     }
-    register(user) {
+    register(user, registerError) {
         let userRegisterUrl = "/register";
         this.serviceData.post(userRegisterUrl, user, (response) => {
-            console.log(response);
+            // console.log(response);
             this.redirectService.redirect("/");
         }, (error) => {
-            return error;
+            registerError(error);
         });
     }
 }

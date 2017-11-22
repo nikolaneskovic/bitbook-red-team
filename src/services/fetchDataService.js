@@ -37,8 +37,8 @@ class FetchDataService {
     }
 
 
-    post(path, data, handler) {
-        
+    post(path, data, handler, errorHandler) {
+
         axios({
             method: "POST",
             url: `${BASE_SERVICE_URL}${path}`,
@@ -49,7 +49,9 @@ class FetchDataService {
             .then(response => {
                 return handler(response);
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                errorHandler(error.response.data.error.message) || console.log(error);
+            });
     }
 
 }
