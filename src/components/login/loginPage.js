@@ -17,7 +17,7 @@ const LoginPage = (props) => {
                 </div>
 
                 <div className="col-lg-6">
-                    <table className="table">
+                    <div className="table">
 
                         <div className="row" id="thead">
                             <div className="col-sm-6">
@@ -36,7 +36,7 @@ const LoginPage = (props) => {
 
                             </Switch>
                         </div>
-                    </table>
+                    </div>
                 </div>
             </div>
 
