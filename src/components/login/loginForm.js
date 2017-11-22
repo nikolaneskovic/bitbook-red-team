@@ -11,7 +11,9 @@ class LoginForm extends React.Component {
         this.state = {
             username: "",
             password: "",
-            errorMsg: ""
+            errorMsg: "",
+            errorMsgClientUserName: "",
+            errorMsgClientPassword: ""
         };
         this.dataService = new FetchDataService();
         this.authenticationService = new AuthenticationService();
@@ -34,12 +36,20 @@ class LoginForm extends React.Component {
 
     passwordEntry(event) {
         const passwordValue = event.target.value;
+
         this.setState({
             password: passwordValue
         });
     };
 
     handleClick() {
+        if(this.state.username === ""){
+            this.setState({errorMsgClientUserName: "Empty username field."});
+        }
+        if(this.state.password === ""){
+            this.setState({ errorMsgClientPassword: "Empty password field."});
+        }
+
         const data = {
             username: this.state.username,
             password: this.state.password
@@ -71,6 +81,8 @@ class LoginForm extends React.Component {
                                 value={this.state.username} onChange={this.usernameEntry}
                             />
                         </div>
+                        <div>{this.state.errorMsgClientUserName}</div>
+
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
@@ -79,6 +91,8 @@ class LoginForm extends React.Component {
                                 value={this.state.password} onChange={this.passwordEntry}
                             />
                         </div>
+                        <div>{this.state.errorMsgClientPassword}</div>
+
                     </div>
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.handleClick}>
                         Login

@@ -1,13 +1,13 @@
 
-class ErrorHandlerService{
-    constructor(){}
+class ErrorHandlerService {
+    constructor() { }
 
-    emptyInputData(data){
-        if(data===""){
-            console.log("Empty fields.");
+    emptyLoginInputFields(logInData, showMsg) {
+        if(logInData.username===""){
+            showMsg();
         }
+        
     }
-
 
 
 
