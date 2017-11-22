@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import FetchDataService from "../../services/fetchDataService";
 import AuthenticationService from "../../services/authenticationService";
+import RedirectionService from "../../services/redirectService";
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -13,6 +15,8 @@ class LoginForm extends React.Component {
         };
         this.dataService = new FetchDataService();
         this.authenticationService = new AuthenticationService();
+        this.redirectionService = new RedirectionService();
+
 
         this.usernameEntry = this.usernameEntry.bind(this);
         this.passwordEntry = this.passwordEntry.bind(this);
@@ -41,9 +45,13 @@ class LoginForm extends React.Component {
             password: this.state.password
         };
 
-        this.authenticationService.logIn(data, (errorMsg) => {
+        this.authenticationService.logIn(data, (success) => {
+            this.redirectionService.redirect("home");
+
+        }, (errorMsg) => {
             this.setState({ errorMsg: errorMsg });
         });
+
 
     }
 
@@ -55,7 +63,7 @@ class LoginForm extends React.Component {
         return (
             <div className="row">
 
-                <form className="col s12" id="form">
+                <div className="col s12" id="form">
                     <div className="row">
                         <div className="input-field col s6">
                             <label className="login-form"> Username </label> <br />
@@ -79,7 +87,7 @@ class LoginForm extends React.Component {
                     <button className="btn btn-secondary btn-lg" type="button" name="action" id="login" onClick={this.handleClickLogOut}>
                         LogOut
                     </button>
-                </form>
+                </div>
             </div>
         );
 

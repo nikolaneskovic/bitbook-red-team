@@ -9,12 +9,13 @@ class AuthenticationService {
         this.errorHandlerService = new ErrorHandlerService();
     }
 
-    logIn(user, showError) {
+    logIn(user,showSuccess, showError) {
 
 
         let userLoginUrl = "/login";
         this.serviceData.post(userLoginUrl, user, (response) => {
             sessionStorage.setItem("sessionId", response.data.sessionId);
+            showSuccess();
 
         }, (error) => {
             showError(error);
@@ -23,7 +24,7 @@ class AuthenticationService {
 
     logOut() {
         sessionStorage.removeItem("sessionId");
-        this.redirectService.redirect("/");
+        this.redirectService.redirect("");
     }
 
     isUserAuthenticated() {
@@ -33,7 +34,7 @@ class AuthenticationService {
         let userRegisterUrl = "/register";
         this.serviceData.post(userRegisterUrl, user, (response) => {
             // console.log(response);
-            this.redirectService.redirect("/");
+            this.redirectService.redirect("login");
         }, (error) => {
             registerError(error);
         });

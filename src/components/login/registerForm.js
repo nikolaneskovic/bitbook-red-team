@@ -59,16 +59,12 @@ class RegisterForm extends React.Component {
         this.authenticationService.register(data, (error) => {
             this.setState({errorMsg: error});
         });
-
-
-
     }
-
 
     render() {
         return (
             <div className="row">
-                <form className="col s12" id="form">
+                <div className="col s12" id="form">
                     <div className="row">
                         <div className="input-field col s6">
                             <label> Username</label><br />
@@ -108,7 +104,7 @@ class RegisterForm extends React.Component {
                         Register Now
                     </button>
                     <div>{this.state.errorMsg}</div>
-                </form>
+                </div>
             </div >
         );
 
