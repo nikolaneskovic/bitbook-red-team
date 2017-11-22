@@ -1,6 +1,7 @@
 import React from "react";
 
 import FetchDataService from "../../services/fetchDataService";
+import AuthenticationService from "../../services/authenticationService";
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -10,25 +11,26 @@ class LoginForm extends React.Component {
             password: ""
         };
         this.dataService = new FetchDataService();
-        
+        this.authenticationService = new AuthenticationService();
 
         this.usernameEntry = this.usernameEntry.bind(this);
         this.passwordEntry = this.passwordEntry.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleClickLogOut = this.handleClickLogOut.bind(this);
         
     }
     usernameEntry(event) {
-        const value = event.target.value;
+        const usernameValue = event.target.value;
         this.setState({
-            username: value
+            username: usernameValue
         });
 
     };
 
     passwordEntry(event) {
-        const value = event.target.value;
+        const passwordValue = event.target.value;
         this.setState({
-            password: value
+            password: passwordValue
         });
     };
 
@@ -38,8 +40,13 @@ class LoginForm extends React.Component {
             password: this.state.password
         };
 
-        this.dataService.post("/login",data, (response)=>{console.log(response);});
-
+        this.authenticationService.logIn(data);
+        // this.dataService.post("/login",data, (response)=>{console.log(response);});
+        
+        
+    }
+    handleClickLogOut(){
+        this.authenticationService.logOut();
     }
 
 
@@ -66,6 +73,9 @@ class LoginForm extends React.Component {
                     </div>
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick= {this.handleClick}>
                     Login
+                    </button>< br />
+                    <button className="btn btn-secondary btn-lg" type="button" name="action" id="login" onClick= {this.handleClickLogOut}>
+                    LogOut
                     </button>
                 </form>
             </div>
