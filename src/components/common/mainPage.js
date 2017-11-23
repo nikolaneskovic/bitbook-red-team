@@ -1,19 +1,16 @@
 import React from "react";
 import Header from "./header";
-import AuthenticationService from "../../services/authenticationService";
-
+import Footer from "./footer";
 
 class MainPage extends React.Component {
     constructor(props) {
         super(props);
-        this.AuthenticationService = new AuthenticationService();
-
     }
-
     render() {
         return (
             <div>
                 <Header />
+                <Footer />
             </div>
         );
     }

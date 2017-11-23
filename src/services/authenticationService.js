@@ -1,37 +1,41 @@
 import FetchDataService from "./fetchDataService";
 import RedirectionService from "./redirectService";
+import ErrorHandlerService from "./errorHandlerService";
 
 class AuthenticationService {
     constructor() {
         this.serviceData = new FetchDataService();
         this.redirectService = new RedirectionService();
+        this.errorHandlerService = new ErrorHandlerService();
     }
 
+    logIn(user,showSuccess, showError) {
 
-    logIn(user) {
+
         let userLoginUrl = "/login";
         this.serviceData.post(userLoginUrl, user, (response) => {
-            console.log(response);
             sessionStorage.setItem("sessionId", response.data.sessionId);
+            showSuccess();
 
+        }, (error) => {
+            showError(error);
         });
     }
 
     logOut() {
         sessionStorage.removeItem("sessionId");
-        this.redirectService.redirect("/");
+        this.redirectService.redirect("login");
     }
 
     isUserAuthenticated() {
         return !!localStorage.getItem("sessionId");
     }
-    register(user) {
+    register(user, registerError) {
         let userRegisterUrl = "/register";
         this.serviceData.post(userRegisterUrl, user, (response) => {
-            console.log(response);
-            this.redirectService.redirect("/");
+            this.redirectService.redirect("login");
         }, (error) => {
-            return error;
+            registerError(error);
         });
     }
 }
