@@ -15,7 +15,6 @@ class App extends React.Component {
 
 
     render() {
-        console.log("is auth: ", this.authenticationService.isUserAuthenticated());
         
         if (!this.authenticationService.isUserAuthenticated()) {
             return (

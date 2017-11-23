@@ -19,6 +19,19 @@ class Profile {
     get commentsCount() {
         return this._commentsCount;
     }
+
+    set name(newName) {
+        this._name = newName;
+    }
+    set avatarUrl(newAvatarUrl) {
+        this._avatarUrl = newAvatarUrl;
+    }
+    set postsCount(newPostsCount) {
+        this._postsCount = newPostsCount;
+    }
+    set commentsCount(newCommentsCount) {
+        this._commentsCount = newCommentsCount;
+    }
 }
 
 export default Profile;

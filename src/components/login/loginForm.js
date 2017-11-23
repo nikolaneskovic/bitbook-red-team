@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <label className="login-form"> Password </label><br />
-                            <input id="input_text" type="text" data-length="25" name="password"
+                            <input id="input_text" type="password" data-length="25" name="password"
                                 value={this.state.password} onChange={this.handleChange}
                             />
                         </div>
