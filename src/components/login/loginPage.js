@@ -5,6 +5,8 @@ import { Switch, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 
+console.log("Stop! This is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Facebook feature or hack someones account, it is a scam and will give them access to your Facebook account. See bitbook website for more information");
+
 const LoginPage = (props) => {
     return (
         <div className="container-fluid">
@@ -17,6 +19,7 @@ const LoginPage = (props) => {
                 </div>
 
                 <div className="col-lg-6">
+
 
 
                     <div className="table">
@@ -37,6 +40,7 @@ const LoginPage = (props) => {
                             </Switch>
                         </div>
                     </div>
+
                 </div>
 
             </div>

@@ -3,32 +3,33 @@ import LoginPage from "./login/loginPage";
 import LoginForm from "./login/loginForm";
 import RegisterForm from "./login/registerForm";
 import { Switch, Route, Redirect } from "react-router-dom";
-
-import Header from "./common/header";
-
-
-
+import MainPage from "./common/mainPage";
+import AuthenticationService from "./../services/authenticationService";
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.authenticationService = new AuthenticationService();
     }
+
 
     render() {
-
-        return (
-
-            <div>
+        console.log("is auth: ", this.authenticationService.isUserAuthenticated());
+        
+        if (!this.authenticationService.isUserAuthenticated()) {
+            return (
                 <Switch>
-                    <Route exact path="/" component={LoginPage} />   
-                                
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/register" component={LoginPage} />
+                    <Redirect exact from="/" to="/login" />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/register" component={LoginPage} />
                 </Switch>
-            </div>
-        );
+            );
+        }
+
+        return <MainPage />;
     }
 }
+
 
 export default App;
