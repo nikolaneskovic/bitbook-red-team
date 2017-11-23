@@ -13,7 +13,6 @@ class LoginForm extends React.Component {
             username: "",
             password: "",
             errorMsg: ""
-
         };
         this.importClasses();
         this.bindFunction();
@@ -53,14 +52,12 @@ class LoginForm extends React.Component {
             return;
         } else {
             this.authenticationService.logIn(data, (success) => {
-                this.redirectionService.redirect("home");
+                this.redirectionService.redirect("/");
 
             }, (errorMsg) => {
                 this.setState({ errorMsg: errorMsg });
             });
         }
-
-
     }
 
     render() {
