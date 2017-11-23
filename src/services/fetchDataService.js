@@ -33,7 +33,7 @@ class FetchDataService {
 
         })
             .then((data) => { handler(data); })
-            .catch(error =>  console.log(error));
+            .catch(error => console.log(error));
     }
 
 
@@ -41,6 +41,23 @@ class FetchDataService {
 
         axios({
             method: "POST",
+            url: `${BASE_SERVICE_URL}${path}`,
+            data: data,
+            headers: this.createHeader(),
+            json: true
+        })
+            .then(response => {
+                return handler(response);
+            })
+            .catch(error => {
+                errorHandler(error.response.data.error.message) || console.log(error);
+            });
+    }
+
+    put(path, data, handler, errorHandler) {
+
+        axios({
+            method: "PUT",
             url: `${BASE_SERVICE_URL}${path}`,
             data: data,
             headers: this.createHeader(),

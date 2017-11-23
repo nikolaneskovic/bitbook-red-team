@@ -45,10 +45,11 @@ body{
     background-image: url("img/bg1.jpg");
     background-repeat: no-repeat;
     background-size: 100% ;
-    color: white;
-
-    
+    /* color: white; */
+    height: 100%;    
 }
+
+
 
 #thead{
     background-color: white;
@@ -68,4 +69,39 @@ body{
     margin-left: 5px;
     background-color: white;
     color: blue;
+}
+#leprofile{
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 150px;
+    background-color: rgba(221, 217, 203, 0.808); 
+    border-radius: 25px;
+    color: rgb(20, 20, 185);
+    padding: 10px;   
+}
+
+#footerhd{ 
+    position: fixed;
+    bottom: 0;   
+}
+
+#footerhd h4{
+    text-align: left;
+}
+
+.boxModal{
+    background-color: black;
+}
+.modalBox input, textarea{
+    display: block;
+    width: 100%;
+}
+.modal-header .close{
+    margin: 0;
+    padding:0;
+    padding-top:7px;
+}
+.modal-header{
+    display: block;
 }
