@@ -64,3 +64,8 @@ body{
 #input_text{
     border-radius: 25px;
 }
+#logout{
+    margin-left: 5px;
+    background-color: white;
+    color: blue;
+}

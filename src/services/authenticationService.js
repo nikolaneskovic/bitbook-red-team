@@ -24,7 +24,7 @@ class AuthenticationService {
 
     logOut() {
         sessionStorage.removeItem("sessionId");
-        this.redirectService.redirect("");
+        this.redirectService.redirect("login");
     }
 
     isUserAuthenticated() {
@@ -33,7 +33,6 @@ class AuthenticationService {
     register(user, registerError) {
         let userRegisterUrl = "/register";
         this.serviceData.post(userRegisterUrl, user, (response) => {
-            // console.log(response);
             this.redirectService.redirect("login");
         }, (error) => {
             registerError(error);
