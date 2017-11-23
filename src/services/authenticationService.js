@@ -24,11 +24,11 @@ class AuthenticationService {
 
     logOut() {
         sessionStorage.removeItem("sessionId");
-        this.redirectService.redirect("login");
+        this.redirectService.redirect("/");
     }
 
     isUserAuthenticated() {
-        return !!localStorage.getItem("sessionId");
+        return !!sessionStorage.getItem("sessionId");
     }
     register(user, registerError) {
         let userRegisterUrl = "/register";

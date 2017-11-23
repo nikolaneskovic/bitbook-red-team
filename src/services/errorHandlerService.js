@@ -9,7 +9,7 @@ class ErrorHandlerService {
             return "Empty username field.";
         } else if (!logInData.password) {
             return "Empty password field.";
-        } else if (logInData.password.length < 6) {
+        } else if (logInData.password.length < 2) {
             return "Password must have at least 6 characters.";
         }
     }
@@ -31,11 +31,11 @@ class ErrorHandlerService {
             return "Empty name field.";
         } else if (!registerData.email) {
             return "Empty email field.";
-        } else if (registerData.password.length < 6) {
+        } else if (registerData.password.length < 4) {
             return "Password must be at least 6 characters long.";
         }else if(!this.validateEmail(registerData.email)){
             return "Wrong email input.";
-        }else if(registerData.password !== registerData.repeatpassword ){
+        }else if(registerData.password !== registerData.repeatPassword ){
             return "Password not match.";
         }
     }
