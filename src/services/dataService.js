@@ -1,5 +1,5 @@
 import FetchDataService from "./fetchDataService";
-import Profile from "./profile";
+import Profile from "./profileDTO";
 
 class DataService {
     constructor() {
@@ -15,7 +15,7 @@ class DataService {
             const avatarUrl = response.data.avatarUrl;
             const postsCount = response.data.postsCount;
             const commentsCount = response.data.commentsCount;
-
+            
             const profile = new Profile(name, avatarUrl, postsCount, commentsCount);
 
             profileDataHandler(profile);
@@ -23,4 +23,4 @@ class DataService {
     };
 }
 
-export default DataService;
+export default DataService; 
