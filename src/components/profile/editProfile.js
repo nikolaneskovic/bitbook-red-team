@@ -1,16 +1,27 @@
 import React from "react";
 import Modal from "react-modal";
 import DataService from "../../services/dataService";
+import ErrorHandlerService from "../../services/errorHandlerService";
+import PropTypes from "prop-types";
 
 class EditProfile extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            showModal: false
+            showModal: false,
+            errorMsg: "",
+            profileObject: this.props.profileObject,
+
         };
+        
+        this.errorHandlerService = new ErrorHandlerService();
         this.dataService = new DataService();
+
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleSaveClicked = this.handleSaveClicked.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
     }
 
     handleOpenModal() {
@@ -22,16 +33,40 @@ class EditProfile extends React.Component {
 
 
     }
-    handleSaveClicked() {
-        this.dataService.updateProfile(updateProfile, (response) => {
+    componentWillReceiveProps(nextProps) {
+        this.setState({ profileObject: nextProps.profileObject });
+    }
 
+    handleChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+
+        this.setState((prevState) => {
+            prevState.profileObject[name] = value;
+            return prevState;
+        });
+    }
+
+    handleSaveClicked() {
+        let dataObject = {
+            name: this.state.profileObject.name,
+            about: this.state.profileObject.about,
+            avatarUrl: this.state.profileObject.avatarUrl,
+            email: this.state.profileObject.email,
+            aboutShort: this.state.profileObject.aboutShort,
+        };
+
+        this.errorHandlerService.validateEditProfileForm(dataObject);
+        this.dataService.updateProfile(dataObject, (response) => {
+            this.props.profileUpdated(dataObject);
+            this.setState({showModal: false});
         });
     }
 
     render() {
         return (
             <div>
-                <button onClick={this.handleOpenModal}>Edit profile</button>
+                <button onClick={this.handleOpenModal} id="login">Edit profile</button>
                 <Modal
                     className="Modal__Bootstrap modal-dialog"
                     closeTimeoutMS={150}
@@ -47,19 +82,22 @@ class EditProfile extends React.Component {
                         </div>
                         <div className="modal-body modalBox">
                             <label htmlFor="name">Name</label>
-                            <input type="text" id="name" />
-
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" />
+                            <input type="text" id="name" name="name" value={this.state.profileObject.name} onChange={this.handleChange} />
 
                             <label htmlFor="about">About</label>
-                            <input type="text" id="about" />
+                            <input type="text" id="about" name="about" value={this.state.profileObject.about} onChange={this.handleChange} />
 
-                            <label htmlFor="short">Short about</label>
-                            <input id="short" />
+                            <label htmlFor="email">Email</label>
+                            <input type="text" id="email" name="email" value={this.state.profileObject.email} onChange={this.handleChange} />
+
+                            <label htmlFor="aboutShort">Short about</label>
+                            <input type="text" id="aboutShort" name="aboutShort" value={this.state.profileObject.aboutShort} onChange={this.handleChange} />
+
 
                             <label htmlFor="avatar">Avatar url</label>
-                            <textarea id="avatar" placeholder="Image src..."></textarea>
+                            <textarea id="avatar" name="avatarUrl" placeholder="Image src..." value={this.state.profileObject.avatarUrl} onChange={this.handleChange}></textarea>
+
+                            <p>{this.state.errorMsg}</p>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" onClick={this.handleCloseModal}>Close</button>
@@ -73,4 +111,8 @@ class EditProfile extends React.Component {
     }
 }
 
+EditProfile.propTypes = {
+    profileObject: PropTypes.object,
+    profileUpdated: PropTypes.func
+};
 export default EditProfile;

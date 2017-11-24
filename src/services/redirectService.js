@@ -2,7 +2,7 @@
 class RedirectionService{
 
     redirect(path){
-        window.location.assign(`#${path}`);
+        window.location.assign(`/#${path}`);
     }
 }
 

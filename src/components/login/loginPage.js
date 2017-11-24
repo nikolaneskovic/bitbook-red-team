@@ -12,7 +12,7 @@ const LoginPage = (props) => {
         <div className="container-fluid">
             <div className="row" id="mainrow">
 
-                <div className="col-lg-6" id="welcome">
+                <div className="col-lg-6 welcome" >
 
                     <h1>Welcome to BitBook</h1>
                     <p>Lorem ipsum dolor sit amet, ad vis mazim legere virtute. Per ne labore graecis menandri. Vel mutat causae ut, ferri debet omnium vim et. Ea mel delenit consetetur, ne convenire philosophia pri, equidem omittam blandit no est. Id dicta nostro qui. Reque iisque nominavi sed in, eam in nulla consequat, sea philosophia definitionem et</p>

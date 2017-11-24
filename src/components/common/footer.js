@@ -2,9 +2,10 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <div className="container">
+        
+        <div className="container-fluid">
             <footer className="footer">
-                <span className="text-muted"> Copyright Ⓒ Team Candies </span>
+                <span > Copyright Ⓒ Team Candies </span>
             </footer>
         </div>
     );
