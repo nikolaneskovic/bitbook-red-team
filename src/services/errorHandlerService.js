@@ -41,19 +41,24 @@ class ErrorHandlerService {
     }
     validateEditProfileForm(editProfileData) {
 
-        if (!editProfileData.username && !editProfileData.name && !editProfileData.email && !editProfileData.about && !editProfileData.avatarUrl) {
+        if (!editProfileData.name && !editProfileData.about && !editProfileData.email && !editProfileData.aboutShort && !editProfileData.avatarUrl) {
             return "Empty input fields.";
-        } else if (!editProfileData.username) {
-            return "Empty username field.";
-        } else if (!editProfileData.password) {
-            return "Empty password field.";
         } else if (!editProfileData.name) {
             return "Empty name field.";
+        } else if (!editProfileData.about) {
+            return "Empty about field.";
+        } else if (!editProfileData.email) {
+            return "Empty email field.";
+        }else if (!editProfileData.aboutShort) {
+            return "Empty short about field.";
+        }else if (!editProfileData.avatarUrl) {
+            return "Empty image field.";
+        }else if(!this.validateEmail(editProfileData.email)){
+            return "Wrong email input.";
         }
     }
 
 }
-
 
 
 

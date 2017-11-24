@@ -56,11 +56,18 @@ class EditProfile extends React.Component {
             aboutShort: this.state.profileObject.aboutShort,
         };
 
-        this.errorHandlerService.validateEditProfileForm(dataObject);
-        this.dataService.updateProfile(dataObject, (response) => {
-            this.props.profileUpdated(dataObject);
-            this.setState({showModal: false});
-        });
+        const validate = this.errorHandlerService.validateEditProfileForm(dataObject);
+        
+        this.setState({errorMsg:validate});
+
+        if(validate){
+            return;
+        }else{
+            this.dataService.updateProfile(dataObject, (response) => {
+                this.props.profileUpdated(dataObject);
+                this.setState({showModal: false});
+            });
+        }
     }
 
     render() {

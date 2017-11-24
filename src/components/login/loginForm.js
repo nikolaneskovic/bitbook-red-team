@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import FetchDataService from "../../services/fetchDataService";
 import AuthenticationService from "../../services/authenticationService";
 import RedirectionService from "../../services/redirectService";
-import ErrorHandlerService from "../../services/errorHandlerService";
+// import ErrorHandlerService from "../../services/errorHandlerService";
+import HandleErrorService from "../../services/handleError";
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -12,7 +13,10 @@ class LoginForm extends React.Component {
         this.state = {
             username: "",
             password: "",
-            errorMsg: ""
+            emptyInput: "",
+            passLength: "",
+            invalidEmail: "",
+            // errorMsg: ""
         };
         this.importClasses();
         this.bindFunction();
@@ -20,9 +24,10 @@ class LoginForm extends React.Component {
 
     importClasses() {
         this.dataService = new FetchDataService();
-        this.errorHandlerService = new ErrorHandlerService();
+        // this.errorHandlerService = new ErrorHandlerService();
         this.authenticationService = new AuthenticationService();
         this.redirectionService = new RedirectionService();
+        this.handleErrorService = new HandleErrorService();
     }
 
     bindFunction() {
@@ -44,11 +49,20 @@ class LoginForm extends React.Component {
             username: this.state.username,
             password: this.state.password
         };
+        // const msg = this.errorHandlerService.validateLogInForm(data);
+        // this.setState({ errorMsg: msg });
 
-        const msg = this.errorHandlerService.validateLogInForm(data);
-        this.setState({ errorMsg: msg });
+        const emptyInput = this.handleErrorService.validateEmptyField(data);
+        const passLength = this.handleErrorService.validateInputLength(data.password, 7);
+        const invalidEmail = this.handleErrorService.validateEmail(data.username);
 
-        if (msg) {
+        this.setState({
+            emptyInput: emptyInput,
+            passLength: passLength,
+            invalidEmail: invalidEmail
+        });
+
+        if (emptyInput || passLength || invalidEmail) {
             return;
         } else {
             this.authenticationService.logIn(data, (success) => {
@@ -58,6 +72,17 @@ class LoginForm extends React.Component {
                 this.setState({ errorMsg: errorMsg });
             });
         }
+
+        // if (msg) {
+        //     return;
+        // } else {
+        //     this.authenticationService.logIn(data, (success) => {
+        //         this.redirectionService.redirect("/");
+
+        //     }, (errorMsg) => {
+        //         this.setState({ errorMsg: errorMsg });
+        //     });
+        // }
     }
 
     render() {
@@ -66,12 +91,15 @@ class LoginForm extends React.Component {
 
                 <div className="col s12" id="form">
                     <div className="row">
+
                         <div className="input-field col s6">
                             <label className="login-form"> Username </label> <br />
                             <input id="input_text" type="text" data-length="25" name="username"
                                 value={this.state.username} onChange={this.handleChange}
                             />
-                        </div>
+                        </div><br />
+                        <div>{this.state.invalidEmail}</div>
+
 
                     </div>
                     <div className="row">
@@ -80,12 +108,14 @@ class LoginForm extends React.Component {
                             <input id="input_text" type="password" data-length="25" name="password"
                                 value={this.state.password} onChange={this.handleChange}
                             />
-                        </div>
+                        </div><br />
+                        <div>{this.state.passLength}</div>
                     </div>
+                    <div>{this.state.emptyInput}</div>
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.handleClick}>
                         Login
                     </button>< br />
-                    <div>{this.state.errorMsg}</div>
+
                 </div>
             </div>
         );
