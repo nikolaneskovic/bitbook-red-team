@@ -33,7 +33,7 @@ class AuthenticationService {
     register(user, registerError) {
         let userRegisterUrl = "/register";
         this.serviceData.post(userRegisterUrl, user, (response) => {
-            this.redirectService.redirect("login");
+            this.redirectService.redirect("/login");
         }, (error) => {
             registerError(error);
         });
