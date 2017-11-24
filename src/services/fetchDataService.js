@@ -67,6 +67,7 @@ class FetchDataService {
                 return handler(response);
             })
             .catch(error => {
+                console.log(error);
                 errorHandler(error.response.data.error.message) || console.log(error);
             });
     }

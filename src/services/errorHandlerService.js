@@ -20,7 +20,7 @@ class ErrorHandlerService {
     }
 
     validateRegisterForm(registerData) {
-      
+
         if (!registerData.username && !registerData.password && !registerData.name && !registerData.email && !registerData.repeatPassword) {
             return "Empty input fields.";
         } else if (!registerData.username) {
@@ -33,10 +33,22 @@ class ErrorHandlerService {
             return "Empty email field.";
         } else if (registerData.password.length < 4) {
             return "Password must be at least 6 characters long.";
-        }else if(!this.validateEmail(registerData.email)){
+        } else if (!this.validateEmail(registerData.email)) {
             return "Wrong email input.";
-        }else if(registerData.password !== registerData.repeatPassword ){
+        } else if (registerData.password !== registerData.repeatPassword) {
             return "Password not match.";
+        }
+    }
+    validateEditProfileForm(editProfileData) {
+
+        if (!editProfileData.username && !editProfileData.name && !editProfileData.email && !editProfileData.about && !editProfileData.avatarUrl) {
+            return "Empty input fields.";
+        } else if (!editProfileData.username) {
+            return "Empty username field.";
+        } else if (!editProfileData.password) {
+            return "Empty password field.";
+        } else if (!editProfileData.name) {
+            return "Empty name field.";
         }
     }
 

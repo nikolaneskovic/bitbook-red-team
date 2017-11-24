@@ -1,10 +1,15 @@
 
 class Profile {
-    constructor(name, avatarUrl, postsCount, commentsCount) {
+    constructor(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount) {
         this._name = name;
         this._avatarUrl = avatarUrl;
         this._postsCount = postsCount;
         this._commentsCount = commentsCount;
+        this._about = about;
+        this._aboutShort = aboutShort;
+        this._email = email;
+        
+        
     }
 
     get name() {
@@ -31,6 +36,29 @@ class Profile {
     }
     set commentsCount(newCommentsCount) {
         this._commentsCount = newCommentsCount;
+    }
+
+    get about() {
+        return this._about;
+    }
+
+    set about(value) {
+        this._about = value;
+    }
+
+    get aboutShort() {
+        return this._aboutShort;
+    }
+
+    set aboutShort(value) {
+        this._aboutShort = value;
+    }
+    get email() {
+        return this._email;
+    }
+
+    set email(value) {
+        this._email = value;
     }
 }
 
