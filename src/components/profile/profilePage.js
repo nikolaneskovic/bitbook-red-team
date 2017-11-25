@@ -4,6 +4,7 @@ import { IMAGE_PLACE_HOLDER } from "../../constants";
 import EditProfile from "./editProfile";
 import ReactModal from "react-modal";
 import Profile from "../../entities/profileDTO";
+import { Link } from "react-router-dom";
 
 class ProfilePage extends React.Component {
 
@@ -13,7 +14,7 @@ class ProfilePage extends React.Component {
 
         this.state = {
             name: "",
-            avatarUrl: imagePlaceHolder,
+            avatarUrl: "",
             commentsCount: "",
             postsCount: "",
             about: "",
@@ -29,7 +30,6 @@ class ProfilePage extends React.Component {
     componentDidMount() {
 
         this.dataService.getProfile((profile) => {
-            console.log(users);
             this.setState({
                 profile: profile
             });
@@ -41,7 +41,7 @@ class ProfilePage extends React.Component {
     }
 
     render() {
-        if(!this.state.profile){
+        if (!this.state.profile) {
             return <h1>loading</h1>;
         }
 
@@ -57,8 +57,9 @@ class ProfilePage extends React.Component {
                                     <h3>{this.state.profile.name}</h3>
 
                                     <p>{this.state.profile.about}</p>
-                                    <p><span id="comment">Comments count:</span>{this.state.profile.commentsCount}</p>
-                                    <p><span id="post">Posts count:</span>{this.state.profile.postsCount}</p>
+                                    <p>
+                                        <Link to="#"><span id="comment">Comments count:</span>{this.state.profile.commentsCount}</Link></p>
+                                    <p><Link to="#"><span id="post">Posts count:</span>{this.state.profile.postsCount}</Link></p>
                                     <p>{this.state.profile.shortAbout}</p>
 
                                     <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />

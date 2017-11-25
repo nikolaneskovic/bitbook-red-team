@@ -30,7 +30,6 @@ export default class Search extends React.Component {
     render() {
         return (<div className="col-12">
             <input className="searchInput" value={this.state.searchString} onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
-            {/* <button className="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button> */}
         </div>
         );
     }

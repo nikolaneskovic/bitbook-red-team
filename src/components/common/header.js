@@ -20,7 +20,7 @@ const Header = () => {
                         <Link className="nav-link" to="/people">People<span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item active">
-                        <Link className="nav-link" to="/people">Feed<span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="#">Feed<span className="sr-only">(current)</span></Link>
                     </li>
 
                 </ul>
