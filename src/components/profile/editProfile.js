@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 import DataService from "../../services/dataService";
-import ErrorHandlerService from "../../services/errorHandlerService";
 import PropTypes from "prop-types";
 
 class EditProfile extends React.Component {
@@ -13,8 +12,7 @@ class EditProfile extends React.Component {
             profileObject: this.props.profileObject,
 
         };
-        
-        this.errorHandlerService = new ErrorHandlerService();
+
         this.dataService = new DataService();
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -56,18 +54,14 @@ class EditProfile extends React.Component {
             aboutShort: this.state.profileObject.aboutShort,
         };
 
-        const validate = this.errorHandlerService.validateEditProfileForm(dataObject);
-        
-        this.setState({errorMsg:validate});
 
-        if(validate){
-            return;
-        }else{
-            this.dataService.updateProfile(dataObject, (response) => {
-                this.props.profileUpdated(dataObject);
-                this.setState({showModal: false});
-            });
-        }
+
+
+        this.dataService.updateProfile(dataObject, (response) => {
+            this.props.profileUpdated(dataObject);
+            this.setState({ showModal: false });
+        });
+
     }
 
     render() {

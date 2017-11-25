@@ -23,6 +23,11 @@ export default class HandleErrorService {
             return "The input is short.";
         }
     }
+    validateInputMatch(firstInput,secondInput){
+        if(firstInput !== secondInput){
+            return "Password does not match.";
+        }
+    }
 
 }
 

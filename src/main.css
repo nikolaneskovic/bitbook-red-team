@@ -118,3 +118,30 @@ body{
     border: none;
     border-bottom: 1px solid rgb(175, 205, 240);
 }
+.user{
+    background-color: white;
+    margin: 10px;
+    border-radius: 7px;
+    padding: 5px;
+}
+.user .row{
+    height: 150px;
+}
+.imgDiv{
+
+    text-align: center;
+    border-radius: 80px;
+    box-shadow: 4px 4px 4px rgb(235, 157, 138);
+}
+.imgDiv img{
+    padding: 10px;
+
+}
+.searchInput{
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}

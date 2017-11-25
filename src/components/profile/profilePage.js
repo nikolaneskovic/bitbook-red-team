@@ -3,7 +3,7 @@ import DataService from "../../services/dataService";
 import { IMAGE_PLACE_HOLDER } from "../../constants";
 import EditProfile from "./editProfile";
 import ReactModal from "react-modal";
-import Profile from "../../services/profileDTO";
+import Profile from "../../entities/profileDTO";
 
 class ProfilePage extends React.Component {
 
@@ -13,7 +13,7 @@ class ProfilePage extends React.Component {
 
         this.state = {
             name: "",
-            avatarUrl: "",
+            avatarUrl: imagePlaceHolder,
             commentsCount: "",
             postsCount: "",
             about: "",
@@ -29,7 +29,7 @@ class ProfilePage extends React.Component {
     componentDidMount() {
 
         this.dataService.getProfile((profile) => {
-
+            console.log(users);
             this.setState({
                 profile: profile
             });

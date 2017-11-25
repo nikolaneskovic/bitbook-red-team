@@ -1,5 +1,5 @@
 import FetchDataService from "./fetchDataService";
-import Profile from "./profileDTO";
+import Profile from "../entities/profileDTO";
 
 class DataService {
     constructor() {
@@ -24,9 +24,14 @@ class DataService {
             profileDataHandler(profile);
         });
     };
+    getUsers(usersDataHandler){
+        this.fetchDataService.get("users", response=>{
+            let listOfUsers = response.data;
+            usersDataHandler(listOfUsers);
+        });
+    }
 
     updateProfile(profileData, profileDataHandler) {
-
         this.fetchDataService.put("Profiles", profileData, (response) => {
             profileDataHandler(response);
         });

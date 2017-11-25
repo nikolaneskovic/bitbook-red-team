@@ -3,6 +3,7 @@ import Header from "./header";
 import Footer from "./footer";
 import ProfilePage from "../profile/profilePage";
 import { Switch, Route } from "react-router-dom";
+import People from "../peoplePage/people";
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class MainPage extends React.Component {
                 <Header />
 
                 <Switch>
-                    <Route path="/profile" component={ProfilePage} />
+                    <Route exact path="/profile" component={ProfilePage} />
+                    <Route path="/people" component={People} />
+
                 </Switch>
                 
                 <Footer />

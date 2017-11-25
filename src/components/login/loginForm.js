@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import FetchDataService from "../../services/fetchDataService";
 import AuthenticationService from "../../services/authenticationService";
 import RedirectionService from "../../services/redirectService";
-// import ErrorHandlerService from "../../services/errorHandlerService";
 import HandleErrorService from "../../services/handleError";
 
 class LoginForm extends React.Component {
@@ -16,7 +15,7 @@ class LoginForm extends React.Component {
             emptyInput: "",
             passLength: "",
             invalidEmail: "",
-            // errorMsg: ""
+            errorMsgServer: ""
         };
         this.importClasses();
         this.bindFunction();
@@ -24,7 +23,6 @@ class LoginForm extends React.Component {
 
     importClasses() {
         this.dataService = new FetchDataService();
-        // this.errorHandlerService = new ErrorHandlerService();
         this.authenticationService = new AuthenticationService();
         this.redirectionService = new RedirectionService();
         this.handleErrorService = new HandleErrorService();
@@ -49,11 +47,9 @@ class LoginForm extends React.Component {
             username: this.state.username,
             password: this.state.password
         };
-        // const msg = this.errorHandlerService.validateLogInForm(data);
-        // this.setState({ errorMsg: msg });
 
         const emptyInput = this.handleErrorService.validateEmptyField(data);
-        const passLength = this.handleErrorService.validateInputLength(data.password, 7);
+        const passLength = this.handleErrorService.validateInputLength(data.password, 1);
         const invalidEmail = this.handleErrorService.validateEmail(data.username);
 
         this.setState({
@@ -69,20 +65,9 @@ class LoginForm extends React.Component {
                 this.redirectionService.redirect("/");
 
             }, (errorMsg) => {
-                this.setState({ errorMsg: errorMsg });
+                this.setState({ errorMsgServer: errorMsg });
             });
         }
-
-        // if (msg) {
-        //     return;
-        // } else {
-        //     this.authenticationService.logIn(data, (success) => {
-        //         this.redirectionService.redirect("/");
-
-        //     }, (errorMsg) => {
-        //         this.setState({ errorMsg: errorMsg });
-        //     });
-        // }
     }
 
     render() {
