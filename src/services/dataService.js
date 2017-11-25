@@ -31,6 +31,12 @@ class DataService {
         });
     }
 
+    getUserProfile(userId, usersDataHandler){
+        this.fetchDataService.get(`users/${userId}`, response=>{
+            usersDataHandler(response);
+        });
+    }
+
     updateProfile(profileData, profileDataHandler) {
         this.fetchDataService.put("Profiles", profileData, (response) => {
             profileDataHandler(response);

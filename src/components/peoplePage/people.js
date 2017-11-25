@@ -15,7 +15,6 @@ class People extends React.Component {
     }
     componentDidMount() {
         this.dataService.getUsers((users) => {
-            console.log(users);
             this.setState({
                 users: users
             });
@@ -43,9 +42,9 @@ class People extends React.Component {
             <div className="container">
                 <div className="row">
                     <Search useSearchString={this.searchUserByName} />
-                    {userList.map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} />)}
+                    {userList.map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} id={ element.id}/>)}
                 </div>
-            </div>
+            </div>     
 
         );
     }

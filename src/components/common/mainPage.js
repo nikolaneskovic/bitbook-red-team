@@ -17,7 +17,7 @@ class MainPage extends React.Component {
 
                 <Switch>
                     <Route exact path="/profile" component={ProfilePage} />
-                    <Route path="/people" component={People} />
+                    <Route exact path="/people" component={People} />
                     <Route path="/people/:id" component={UserProfile} />
                 </Switch>
                 
