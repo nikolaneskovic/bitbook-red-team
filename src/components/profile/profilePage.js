@@ -46,29 +46,23 @@ class ProfilePage extends React.Component {
         }
 
         return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="row">
+            <div className="container">
+                <div className="row profilePage">
+                    <div className='col-5'>
+                        <img src={this.state.profile.avatarUrl} width="100%" id="slika" />
+                        
+                        <p><Link to="#"><button type="button" className="btn btn-primary"> Comments count: {this.state.profile.commentsCount}</button></Link></p>
+                        <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.profile.postsCount}</button></Link></p>
 
-                                <div className="col-lg-4 offset-4" id="leprofile">
-                                    <img src={this.state.profile.avatarUrl} width="100px" id="slika" />
-                                    <h3>{this.state.profile.name}</h3>
-
-                                    <p>{this.state.profile.about}</p>
-                                    <p>
-                                        <Link to="#"><span id="comment">Comments count:</span>{this.state.profile.commentsCount}</Link></p>
-                                    <p><Link to="#"><span id="post">Posts count:</span>{this.state.profile.postsCount}</Link></p>
-                                    <p>{this.state.profile.shortAbout}</p>
-
-                                    <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />
-                                </div>
-                            </div>
-                        </div>
+                        <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />
                     </div>
-                </div>
-            </div>
+                    <div className='col-7'>
+                        <h3>{this.state.profile.name}</h3>
+                        <p className='shortAbout'>{this.state.profile.shortAbout}</p>
+                        <p>{this.state.profile.about}</p>
+                    </div>
+                </div >
+            </div >
         );
     }
 }

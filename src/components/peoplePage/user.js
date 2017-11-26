@@ -10,8 +10,8 @@ const User = (props) => {
     return (
         <div className="col-12 user">
             <div className="row">
-                <div className="col-2 offset-1 imgDiv">
-                    <img src={props.avatarUrl} width="100px" height="100px"/>
+                <div className="col-2 offset-1">
+                    <img src={props.avatarUrl} />
                 </div>
                 <div className="col-9">
                     <h4> {props.name}</h4>

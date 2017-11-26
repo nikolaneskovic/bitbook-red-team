@@ -5,6 +5,7 @@ import ProfilePage from "../profile/profilePage";
 import { Switch, Route } from "react-router-dom";
 import People from "../peoplePage/people";
 import UserProfile from "../peoplePage/userProfile";
+import FeedPage from "../feed/feedPage";
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -19,6 +20,8 @@ class MainPage extends React.Component {
                     <Route exact path="/profile" component={ProfilePage} />
                     <Route exact path="/people" component={People} />
                     <Route path="/people/:id" component={UserProfile} />
+                    <Route path="/feed" component={FeedPage} />
+
                 </Switch>
                 
                 <Footer />

@@ -52,28 +52,21 @@ class UserProfile extends React.Component {
      
 
         return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="row">
-
-                                <div className="col-lg-4 offset-4" id="leprofile">
-                                    <img src={this.state.avatarUrl} width="100px" id="slika" />
-                                    <h3>{this.state.name}</h3>
-
-                                    <p>{this.state.about}</p>
-                                    <p>
-                                        <Link to="#"><span id="comment">Comments count:</span>{this.state.commentsCount}</Link></p>
-                                    <p><Link to="#"><span id="post">Posts count:</span>{this.state.postsCount}</Link></p>
-                                    <p>{this.state.aboutShort}</p>
-
-                                </div>
-                            </div>
-                        </div>
+            <div className="container">
+                <div className="row profilePage">
+                    <div className='col-5'>
+                        <img src={this.state.avatarUrl} width="100%" id="slika" />
+                        
+                        <p><Link to="#"><button type="button" className="btn btn-primary"> Comments count: {this.state.commentsCount}</button></Link></p>
+                        <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.postsCount}</button></Link></p>
                     </div>
-                </div>
-            </div>
+                    <div className='col-7'>
+                        <h3>{this.state.name}</h3>
+                        <p className='shortAbout'>{this.state.shortAbout}</p>
+                        <p>{this.state.about}</p>
+                    </div>
+                </div >
+            </div >
         );
     }
 }

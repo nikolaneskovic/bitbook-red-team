@@ -66,8 +66,8 @@ class EditProfile extends React.Component {
 
     render() {
         return (
-            <div>
-                <button onClick={this.handleOpenModal} id="login">Edit profile</button>
+            <div><button type="button" className="btn btn-warning" onClick={this.handleOpenModal}>Edit Profile</button>
+
                 <Modal
                     className="Modal__Bootstrap modal-dialog"
                     closeTimeoutMS={150}
