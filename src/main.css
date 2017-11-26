@@ -118,7 +118,7 @@ label{
     padding: 5px;
 }
 .user .row{
-    height: 150px;
+    min-height: 150px;
 }
 
 .user img{
@@ -126,9 +126,8 @@ label{
     height: 150px;
     width: 150px;
     border-radius: 50%;
+    border: none;
     box-shadow: 4px 4px 4px #dfe3ee;
-    background-color: 	#8b9dc3;
-    padding: 10px;
 }
 
 
@@ -138,6 +137,7 @@ label{
     margin-top: 40px;
     padding: 5px;
     border: none;
+    box-shadow: 1px 1px 1px #3b5998;
     border-radius: 5px;
 }
 
@@ -166,7 +166,14 @@ label{
     background-color: blue;
 }
 .footer {
-    height: 300px;
-    color: white;
+    height: 100px;
     text-align: center;
+    padding: 30px;
+}
+.footer span{
+    color: #3b5998;
+
+}
+.btn-light a{
+    text-decoration: none;
 }
