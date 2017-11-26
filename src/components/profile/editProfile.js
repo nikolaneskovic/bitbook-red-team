@@ -56,7 +56,6 @@ class EditProfile extends React.Component {
 
 
 
-
         this.dataService.updateProfile(dataObject, (response) => {
             this.props.profileUpdated(dataObject);
             this.setState({ showModal: false });
@@ -66,7 +65,7 @@ class EditProfile extends React.Component {
 
     render() {
         return (
-            <div><button type="button" className="btn btn-warning" onClick={this.handleOpenModal}>Edit Profile</button>
+            <div><button type="button" className="btn btn-warning pink" onClick={this.handleOpenModal}>Edit Profile</button>
 
                 <Modal
                     className="Modal__Bootstrap modal-dialog"

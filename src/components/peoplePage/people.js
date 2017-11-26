@@ -21,6 +21,7 @@ class People extends React.Component {
         });
     }
 
+    
     searchUserByName(nameOfUser) {
         let filterUsers = [];
         if (nameOfUser === "") {

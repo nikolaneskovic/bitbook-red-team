@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <div className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className='container'>
-                <a className="navbar-brand" href="/feed">Bitbook</a>
+                <Link className="navbar-brand" to="/feed">Bitbook</Link>
 
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">

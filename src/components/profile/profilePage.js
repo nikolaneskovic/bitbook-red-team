@@ -48,17 +48,17 @@ class ProfilePage extends React.Component {
         return (
             <div className="container">
                 <div className="row profilePage">
-                    <div className='col-5'>
+                    <div className='col-sm-12 col-lg-5'>
                         <img src={this.state.profile.avatarUrl} width="100%" id="slika" />
                         
-                        <p><Link to="#"><button type="button" className="btn btn-primary"> Comments count: {this.state.profile.commentsCount}</button></Link></p>
+                        <p><Link to="#"><button type="button" className="btn btn-primary "> Comments count:<span className="badge"> {this.state.profile.commentsCount}</span></button></Link></p>
                         <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.profile.postsCount}</button></Link></p>
 
                         <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />
                     </div>
-                    <div className='col-7'>
+                    <div className='col-sm-12 col-lg-7'>
                         <h3>{this.state.profile.name}</h3>
-                        <p className='shortAbout'>{this.state.profile.shortAbout}</p>
+                        <p className='shortAbout'>{this.state.profile.aboutShort}</p>
                         <p>{this.state.profile.about}</p>
                     </div>
                 </div >
