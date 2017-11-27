@@ -44,7 +44,7 @@ class People extends React.Component {
         let currentUsers = this.state.allUsers;
 
         if (nameOfUser === "") {
-            this.setState({ filteredUsers: currentUsers });
+            this.setState({ filteredUsers: this.state.allUsers });
             return;
         } else {
             const filteredList = currentUsers.filter(element => {

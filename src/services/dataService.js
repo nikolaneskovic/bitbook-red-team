@@ -9,7 +9,6 @@ class DataService {
     getProfile(profileDataHandler) {
 
         this.fetchDataService.get("profile", (response) => {
-            // console.log(response);
             const name = response.data.name;
             const avatarUrl = response.data.avatarUrl;
             const postsCount = response.data.postsCount;
@@ -18,23 +17,28 @@ class DataService {
             const aboutShort = response.data.aboutShort;
             const email = response.data.email;
             const userId = response.data.userId;
-            
-            
 
-            const profile = new Profile(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount,userId);
+            const profile = new Profile(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount, userId);
 
             profileDataHandler(profile);
         });
     };
-    getUsers(usersDataHandler){
-        this.fetchDataService.get("users", response=>{
+    getUsers(usersDataHandler) {
+        this.fetchDataService.get("users", response => {
             let listOfUsers = response.data;
             usersDataHandler(listOfUsers);
         });
     }
 
-    getUserProfile(userId, usersDataHandler){
-        this.fetchDataService.get(`users/${userId}`, response=>{
+    getAllPosts(handleAllPosts) {
+        this.fetchDataService.get("Posts", response => {
+            let allPosts = response.data;
+            handleAllPosts(allPosts);
+        });
+    }
+
+    getUserProfile(userId, usersDataHandler) {
+        this.fetchDataService.get(`users/${userId}`, response => {
             usersDataHandler(response);
         });
     }
@@ -44,6 +48,8 @@ class DataService {
             profileDataHandler(response);
         });
     }
+
+
 }
 
 export default DataService; 
