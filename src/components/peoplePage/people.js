@@ -12,7 +12,8 @@ class People extends React.Component {
         this.state = {
             allUsers: [],
             filteredUsers: [],
-            userId: ""
+            userId: "",
+            errorMsgServer: ""
         };
         this.dataService = new DataService();
         this.searchUserByName = this.searchUserByName.bind(this);
@@ -32,13 +33,15 @@ class People extends React.Component {
                 allUsers: users,
                 filteredUsers: users
             });
-        }, error=>console.log(error));
+        }, error => {
+            this.setState({ errorMsgServer: error });
+        });
     }
 
     filterLoggedInUser() {
         this.dataService.getProfile((profile) => {
             this.setState({ userId: profile.userId });
-        });
+        }, (error) => console.log(error));
     }
 
     searchUserByName(nameOfUser) {
@@ -68,7 +71,7 @@ class People extends React.Component {
             <div className="container">
                 <div className="row">
                     <Search useSearchString={this.searchUserByName} />
-                    {userList.filter(element => element.id !== this.state.userId).map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} lastPostDate={element.lastPostDate} />)}
+                    {userList.filter(element => element.id !== this.state.userId).map((element) => <User user={element} key={element.id} />)}
                 </div>
             </div>
 
