@@ -7,7 +7,7 @@
     background-color: 	#f7f7f7;
 }
 .errorField{
-    color: red;
+    color: rgb(180, 33, 33);
     font-size: 0.8em;
 }
 #form{
@@ -53,7 +53,10 @@ label{
     margin-right: 10px;
 
 }
-
+.input-field input{
+    display: block;
+    width: 100%;
+}
 .logInPage{
     background-image: url("img/bg1.jpg");
     background-repeat: repeat-y;
@@ -194,4 +197,16 @@ padding: 100px;
 }
 .btn-light a{
     text-decoration: none;
+}
+.feedPost{
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+.typeOfPost{
+    text-align: right;
+}
+.btn-group{
+    padding: 20px;
 }

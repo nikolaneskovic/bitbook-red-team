@@ -7,13 +7,12 @@ class Post extends React.Component {
     }
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <p className='col-12'>{this.props.text}</p>
-                    <p className="col-4">{this.props.userDisplayName}</p>
-                    <p className="col-4">{this.props.type}</p>
-                </div>
-            </div>);
+            <div className="row feedPost">
+                <p className='col-12'>{this.props.text}</p>
+                <p className="col-4">{this.props.userDisplayName}</p>
+                <p className="col-4 typeOfPost">{this.props.type}</p>
+            </div>
+        );
     }
 }
 
