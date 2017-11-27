@@ -23,8 +23,7 @@ class FetchDataService {
 
     }
 
-
-    get(path, handler) {
+    get(path, handler, errorHandler) {
 
         axios({
             method: "GET",
@@ -33,7 +32,9 @@ class FetchDataService {
 
         })
             .then((data) => { handler(data); })
-            .catch(error => console.log(error));
+            .catch(error => {
+                errorHandler(error) || console.log(error);
+            });
     }
 
 
@@ -49,9 +50,7 @@ class FetchDataService {
             .then(response => {
                 return handler(response);
             })
-            .catch(error => {
-                errorHandler(error.response.data.error.message) || console.log(error);
-            });
+            .catch(error => { errorHandler(error.response.data.error.message) || console.log(error);});
     }
 
     put(path, data, handler, errorHandler) {
@@ -68,7 +67,7 @@ class FetchDataService {
             })
             .catch(error => {
                 console.log(error);
-                errorHandler(error.response.data.error.message) || console.log(error);
+                errorHandler(error) || console.log(error);
             });
     }
 

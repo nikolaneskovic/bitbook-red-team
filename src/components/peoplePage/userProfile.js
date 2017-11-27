@@ -4,6 +4,7 @@ import { IMAGE_PLACE_HOLDER } from "../../constants";
 import Profile from "../../entities/profileDTO";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { error } from "util";
 
 
 class UserProfile extends React.Component {
@@ -45,7 +46,7 @@ class UserProfile extends React.Component {
                 aboutShort:  user.aboutShort,
                 id: user.id
             });
-        });
+        }, error=>console.log(error));
 
     }
 

@@ -97,6 +97,8 @@ class LoginForm extends React.Component {
                         <div>{this.state.passLength}</div>
                     </div>
                     <div>{this.state.emptyInput}</div>
+                    <div>{this.state.errorMsgServer}</div>
+
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.handleClick}>
                         Login
                     </button>< br />
