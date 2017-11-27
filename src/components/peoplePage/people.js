@@ -41,7 +41,9 @@ class People extends React.Component {
     filterLoggedInUser() {
         this.dataService.getProfile((profile) => {
             this.setState({ userId: profile.userId });
-        }, (error) => console.log(error));
+        }, (error) => {
+            this.setState({ errorMsgServer: error });
+        });
     }
 
     searchUserByName(nameOfUser) {
@@ -60,6 +62,7 @@ class People extends React.Component {
     }
     render() {
         let userList = this.state.filteredUsers;
+        
         if (!userList) {
             return (
                 <div className="center-align">
@@ -72,6 +75,7 @@ class People extends React.Component {
                 <div className="row">
                     <Search useSearchString={this.searchUserByName} />
                     {userList.filter(element => element.id !== this.state.userId).map((element) => <User user={element} key={element.id} />)}
+                    <div>{this.state.errorMsgServer}</div>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import DataService from "../../services/dataService";
 import PropTypes from "prop-types";
 import HandleErrorService from "../../services/handleError";
+import { error } from "util";
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class EditProfile extends React.Component {
             shortAboutError: "",
             avatarUrlError: "",
             nameHavingError: "",
+            errorMsgServer: "",
+
         };
 
         this.dataService = new DataService();
@@ -75,24 +78,27 @@ class EditProfile extends React.Component {
             invalidEmail: invalidEmail,
             fieldsError: fieldsError,
             aboutError: aboutError,
-            shortAboutError:shortAboutError,
-            avatarUrlError:avatarUrlError,
+            shortAboutError: shortAboutError,
+            avatarUrlError: avatarUrlError,
             nameHavingError: nameHavingError
         });
 
         if (nameHavingError || aboutError || shortAboutError || avatarUrlError) {
             return;
         }
-        else {
-            this.dataService.updateProfile(dataObject, (response) => {
-                this.props.profileUpdated(dataObject);
-                this.setState({ showModal: false });
-            });
-        }
-    }
 
+        this.dataService.updateProfile(dataObject, (response) => {
+            this.props.profileUpdated(dataObject);
+            this.setState({ showModal: false });
+        }, error => {
+            this.setState({ errorMsgServer: error.message });
+        });
+
+    }
+    
 
     render() {
+    
         return (
             <div><button type="button" className="btn btn-warning pink" onClick={this.handleOpenModal}>Edit Profile</button>
 
@@ -112,26 +118,27 @@ class EditProfile extends React.Component {
                         <div className="modal-body modalBox">
                             <label htmlFor="name">Name</label>
                             <input type="text" id="name" name="name" value={this.state.profileObject.name} onChange={this.handleChange} />
-                            {this.state.nameHavingError}<br />
+                            <span className='errorField'>{this.state.nameHavingError}</span><br />
 
                             <label htmlFor="about">About</label>
                             <input type="text" id="about" name="about" value={this.state.profileObject.about} onChange={this.handleChange} />
-                            {this.state.aboutError}<br />
+                            <span className='errorField'>{this.state.aboutError}</span><br />
 
                             <label htmlFor="email">Email</label>
                             <input type="text" id="email" name="email" value={this.state.profileObject.email} onChange={this.handleChange} />
-                            <div>{this.state.invalidEmail}</div><br />
+                            <div> <span className='errorField'>{this.state.invalidEmail}</span></div><br />
 
                             <label htmlFor="aboutShort">Short about</label>
                             <input type="text" id="aboutShort" name="aboutShort" value={this.state.profileObject.aboutShort} onChange={this.handleChange} />
-                            {this.state.shortAboutError}<br /><br />
+                            <span className='errorField'>{this.state.shortAboutError}</span><br /><br />
 
                             <label htmlFor="avatar">Avatar url</label>
                             <textarea id="avatar" name="avatarUrl" placeholder="Image src..." value={this.state.profileObject.avatarUrl} onChange={this.handleChange}></textarea>
 
-                            <p>{this.state.avatarUrlError}</p><br />
+                            <p><span className='errorField'>{this.state.avatarUrlError}</span></p><br />
+                            <p><span className='errorField'>{this.state.errorMsgServer}</span></p><br />
+
                         </div>
-                        <div className="container">{this.state.fieldsError}</div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" onClick={this.handleCloseModal}>Close</button>
                             <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button>

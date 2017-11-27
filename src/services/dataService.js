@@ -2,7 +2,6 @@ import FetchDataService from "./fetchDataService";
 import Profile from "../entities/profileDTO";
 import UserDTO from "../entities/userDTO";
 import { PostDTO } from "../entities/postDTO";
-// import { error } from "util";
 
 class DataService {
     constructor() {

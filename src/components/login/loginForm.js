@@ -12,7 +12,8 @@ class LoginForm extends React.Component {
         this.state = {
             username: "",
             password: "",
-            emptyInput: "",
+            emptyUsername: "",
+            emptyEmail: "",
             passLength: "",
             invalidEmail: "",
             errorMsgServer: ""
@@ -31,6 +32,7 @@ class LoginForm extends React.Component {
     bindFunction() {
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.validateLogInForm = this.validateLogInForm.bind(this);
     }
 
     handleChange(event) {
@@ -41,33 +43,51 @@ class LoginForm extends React.Component {
 
     }
 
+    validateLogInForm() {
+        const data = {
+            username: this.state.username,
+            password: this.state.password
+        };
+
+        const emptyUsername = this.handleErrorService.validateEmptyField(data.username);
+        const emptyEmail = this.handleErrorService.validateEmptyField(data.email);
+        const passLength = this.handleErrorService.validateInputLength(data.password, 1);
+        const invalidEmail = this.handleErrorService.validateEmail(data.username);
+
+        this.setState({
+            emptyEmail: emptyEmail,
+            emptyUsername: emptyUsername,
+            passLength: passLength,
+            invalidEmail: invalidEmail,
+
+        });
+
+        if (emptyEmail || emptyUsername || passLength || invalidEmail) {
+            return false;
+        }
+        return true;
+
+    }
+
     handleClick() {
 
         const data = {
             username: this.state.username,
             password: this.state.password
         };
+        const isValid = this.validateLogInForm();
 
-        const emptyInput = this.handleErrorService.validateEmptyField(data);
-        const passLength = this.handleErrorService.validateInputLength(data.password, 1);
-        const invalidEmail = this.handleErrorService.validateEmail(data.username);
+        if (!isValid) {
+            return;
+        };
 
-        this.setState({
-            emptyInput: emptyInput,
-            passLength: passLength,
-            invalidEmail: invalidEmail
+        this.authenticationService.logIn(data, (success) => {
+            this.redirectionService.redirect("/");
+
+        }, (errorMsg) => {
+            this.setState({ errorMsgServer: errorMsg });
         });
 
-        if (emptyInput || passLength || invalidEmail) {
-            return;
-        } else {
-            this.authenticationService.logIn(data, (success) => {
-                this.redirectionService.redirect("/");
-
-            }, (errorMsg) => {
-                this.setState({ errorMsgServer: errorMsg });
-            });
-        }
     }
 
     render() {
@@ -80,8 +100,8 @@ class LoginForm extends React.Component {
                         <div className="input-field col s6">
                             <label className="login-form"> Username </label> <br />
                             <input id="input_text" type="text" data-length="25" name="username"
-                                value={this.state.username} onChange={this.handleChange}
-                            />
+                                value={this.state.username} onChange={this.handleChange} onBlur={this.validateLogInForm}
+                            /><span className='errorField'>{this.state.invalidEmail}</span>
                         </div><br />
                         <div>{this.state.invalidEmail}</div>
 
@@ -91,10 +111,9 @@ class LoginForm extends React.Component {
                         <div className="input-field col s6">
                             <label className="login-form"> Password </label><br />
                             <input id="input_text" type="password" data-length="25" name="password"
-                                value={this.state.password} onChange={this.handleChange}
-                            />
-                        </div><br />
-                        <div>{this.state.passLength}</div>
+                                value={this.state.password} onChange={this.handleChange} onBlur={this.validateLogInForm}
+                            /> <span className='errorField'>{this.state.passLength}</span>
+                        </div>
                     </div>
                     <div>{this.state.emptyInput}</div>
                     <div>{this.state.errorMsgServer}</div>

@@ -21,6 +21,7 @@ class UserProfile extends React.Component {
             about: "",
             aboutShort: "",
             id: "",
+            errorMsgServer:"",
             profile: null
         };
 
@@ -46,7 +47,9 @@ class UserProfile extends React.Component {
                 aboutShort:  user.aboutShort,
                 id: user.id
             });
-        }, error=>console.log(error));
+        }, error=>{
+            this.setState({errorMsgServer:error});
+        });
 
     }
 
@@ -66,7 +69,7 @@ class UserProfile extends React.Component {
                         <h3>{this.state.name}</h3>
                         <p className='shortAbout'>{this.state.shortAbout}</p>
                         <p>{this.state.about}</p>
-
+                        <p>{this.state.errorMsgServer}</p>
                     </div>
                 </div >
             </div >

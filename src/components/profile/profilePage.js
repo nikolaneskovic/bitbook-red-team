@@ -5,6 +5,7 @@ import EditProfile from "./editProfile";
 import ReactModal from "react-modal";
 import Profile from "../../entities/profileDTO";
 import { Link } from "react-router-dom";
+import { error } from "util";
 
 class ProfilePage extends React.Component {
 
@@ -34,7 +35,7 @@ class ProfilePage extends React.Component {
             this.setState({
                 profile: profile
             });
-        });
+        }, error=>{console.log(error);});
     }
 
     afterUpdate() {

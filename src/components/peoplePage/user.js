@@ -19,7 +19,7 @@ const User = (props) => {
                     <p className="btn btn-light"><Link to={`/people/${props.user.id}`}>Find out more</Link></p>
                 </div>
                 <div className='col-3'>
-                    Last post at: {props.user.lastPostDate}
+                    Last post at: {new Date(props.user.lastPostDate).toLocaleTimeString()}
                 </div>
             </div>
         </div>

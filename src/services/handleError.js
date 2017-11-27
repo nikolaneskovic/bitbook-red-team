@@ -19,7 +19,7 @@ export default class HandleErrorService {
     }
 
     validateInputLength(input, numOfChar) {
-        if (input.length < numOfChar) {
+        if (!input || input.length < numOfChar) {
             return "The input is short.";
         }
     }
