@@ -12,11 +12,10 @@ class EditProfile extends React.Component {
             errorMsg: "",
             profileObject: this.props.profileObject,
             invalidEmail: "",
-            // allInputsError: "",
             nameError: "",
             aboutError: "",
-            // shortAboutError: "",
-            // avatarUrlError: ""
+            shortAboutError: "",
+            avatarUrlError: ""
 
         };
 
@@ -68,14 +67,18 @@ class EditProfile extends React.Component {
         const invalidEmail = this.handleErrorService.validateEmail(dataObject.email);
         const nameError = this.handleErrorService.validateEmptyField(dataObject);
         const aboutError = this.handleErrorService.validateEmptyField(dataObject);
+        const shortAboutError = this.handleErrorService.validateEmptyField(dataObject);
+        const avatarUrlError = this.handleErrorService.validateEmptyField(dataObject);
 
         this.setState({
             invalidEmail: invalidEmail,
             nameError: nameError,
-            aboutError: aboutError
+            aboutError: aboutError,
+            shortAboutError:shortAboutError,
+            avatarUrlError:avatarUrlError
         });
 
-        if (invalidEmail || nameError || aboutError) {
+        if (invalidEmail || nameError || aboutError || shortAboutError || avatarUrlError) {
             return;
         }
         else {
