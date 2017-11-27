@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import DataService from "../../services/dataService";
 import PropTypes from "prop-types";
+import HandleErrorService from "../../services/handleError";
 
 class EditProfile extends React.Component {
     constructor(props) {
@@ -10,17 +11,26 @@ class EditProfile extends React.Component {
             showModal: false,
             errorMsg: "",
             profileObject: this.props.profileObject,
+            invalidEmail: "",
+            // allInputsError: "",
+            nameError: "",
+            aboutError: "",
+            // shortAboutError: "",
+            // avatarUrlError: ""
 
         };
 
         this.dataService = new DataService();
+        this.handleErrorService = new HandleErrorService();
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleSaveClicked = this.handleSaveClicked.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
+
     }
+
 
     handleOpenModal() {
         this.setState({ showModal: true });
@@ -55,13 +65,27 @@ class EditProfile extends React.Component {
         };
 
 
+        const invalidEmail = this.handleErrorService.validateEmail(dataObject.email);
+        const nameError = this.handleErrorService.validateEmptyField(dataObject);
+        const aboutError = this.handleErrorService.validateEmptyField(dataObject);
 
-        this.dataService.updateProfile(dataObject, (response) => {
-            this.props.profileUpdated(dataObject);
-            this.setState({ showModal: false });
+        this.setState({
+            invalidEmail: invalidEmail,
+            nameError: nameError,
+            aboutError: aboutError
         });
 
+        if (invalidEmail || nameError || aboutError) {
+            return;
+        }
+        else {
+            this.dataService.updateProfile(dataObject, (response) => {
+                this.props.profileUpdated(dataObject);
+                this.setState({ showModal: false });
+            });
+        }
     }
+
 
     render() {
         return (
@@ -83,12 +107,15 @@ class EditProfile extends React.Component {
                         <div className="modal-body modalBox">
                             <label htmlFor="name">Name</label>
                             <input type="text" id="name" name="name" value={this.state.profileObject.name} onChange={this.handleChange} />
+                           
 
                             <label htmlFor="about">About</label>
                             <input type="text" id="about" name="about" value={this.state.profileObject.about} onChange={this.handleChange} />
+                      
 
                             <label htmlFor="email">Email</label>
                             <input type="text" id="email" name="email" value={this.state.profileObject.email} onChange={this.handleChange} />
+                            <div>{this.state.invalidEmail}</div>
 
                             <label htmlFor="aboutShort">Short about</label>
                             <input type="text" id="aboutShort" name="aboutShort" value={this.state.profileObject.aboutShort} onChange={this.handleChange} />
@@ -99,6 +126,7 @@ class EditProfile extends React.Component {
 
                             <p>{this.state.errorMsg}</p>
                         </div>
+                        <div className="container">{this.state.nameError}</div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" onClick={this.handleCloseModal}>Close</button>
                             <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button>
