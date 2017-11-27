@@ -5,5 +5,4 @@ class RedirectionService{
         window.location.assign(`/#${path}`);
     }
 }
-
 export default RedirectionService;

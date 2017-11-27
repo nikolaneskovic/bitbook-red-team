@@ -1,7 +1,7 @@
 import React from "react";
 
 import AuthenticationService from "../../services/authenticationService";
-import ErrorHandlerService from "../../services/errorHandlerService";
+import HandleErrorService from "../../services/handleError";
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -12,10 +12,14 @@ class RegisterForm extends React.Component {
             name: "",
             email: "",
             repeatPassword: "",
-            errorMsg: ""
+            emptyInput: "",
+            passLength: "",
+            invalidEmail: "",
+            passNotMatch: "",
+            errorMsgServer: ""
         };
+        this.handleErrorService = new HandleErrorService();
         this.authenticationService = new AuthenticationService();
-        this.errorHandlerService = new ErrorHandlerService();
         this.bindFunction();
     }
 
@@ -40,16 +44,29 @@ class RegisterForm extends React.Component {
             repeatPassword: this.state.repeatPassword
         };
 
-        const msg = this.errorHandlerService.validateRegisterForm(data);
-        this.setState({ errorMsg: msg });
+        
+        const emptyInput = this.handleErrorService.validateEmptyField(data);
+        const passLength = this.handleErrorService.validateInputLength(data.password, 1);
+        const invalidEmail = this.handleErrorService.validateEmail(data.email);
+        const invalidUsername = this.handleErrorService.validateEmail(data.username);
+        const passNotMatch = this.handleErrorService.validateInputMatch(data.password, data.repeatPassword);
 
-        if (msg) {
+        this.setState({
+            emptyInput: emptyInput,
+            passLength: passLength,
+            invalidEmail: invalidEmail,
+            passNotMatch: passNotMatch
+        });
+
+
+        if (emptyInput || passLength || invalidEmail || invalidUsername || passNotMatch) {
             return;
         } else {
             this.authenticationService.register(data, (error) => {
-                this.setState({ errorMsg: error });
+                this.setState({ errorMsgServer: error });
             });
         }
+
     }
 
     render() {
@@ -100,7 +117,12 @@ class RegisterForm extends React.Component {
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.onRegisterClick}>
                         Register Now
                     </button>
-                    <div>{this.state.errorMsg}</div>
+                    <div>{this.state.emptyInput}</div>
+                    <div>{this.state.errorMsgServer}</div>
+                    <div>{this.state.invalidEmail}</div>
+                    <div>{this.state.passLength}</div>
+                    <div>{this.state.passNotMatch}</div>
+
                 </div>
             </div >
         );

@@ -3,7 +3,8 @@ import DataService from "../../services/dataService";
 import { IMAGE_PLACE_HOLDER } from "../../constants";
 import EditProfile from "./editProfile";
 import ReactModal from "react-modal";
-import Profile from "../../services/profileDTO";
+import Profile from "../../entities/profileDTO";
+import { Link } from "react-router-dom";
 
 class ProfilePage extends React.Component {
 
@@ -29,7 +30,6 @@ class ProfilePage extends React.Component {
     componentDidMount() {
 
         this.dataService.getProfile((profile) => {
-
             this.setState({
                 profile: profile
             });
@@ -41,33 +41,28 @@ class ProfilePage extends React.Component {
     }
 
     render() {
-        if(!this.state.profile){
+        if (!this.state.profile) {
             return <h1>loading</h1>;
         }
 
         return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="row">
+            <div className="container">
+                <div className="row profilePage">
+                    <div className='col-sm-12 col-lg-5'>
+                        <img src={this.state.profile.avatarUrl} width="100%" id="slika" />
+                        
+                        <p><Link to="#"><button type="button" className="btn btn-primary "> Comments count:<span className="badge"> {this.state.profile.commentsCount}</span></button></Link></p>
+                        <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.profile.postsCount}</button></Link></p>
 
-                                <div className="col-lg-4 offset-4" id="leprofile">
-                                    <img src={this.state.profile.avatarUrl} width="100px" id="slika" />
-                                    <h3>{this.state.profile.name}</h3>
-
-                                    <p>{this.state.profile.about}</p>
-                                    <p><span id="comment">Comments count:</span>{this.state.profile.commentsCount}</p>
-                                    <p><span id="post">Posts count:</span>{this.state.profile.postsCount}</p>
-                                    <p>{this.state.profile.shortAbout}</p>
-
-                                    <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />
-                                </div>
-                            </div>
-                        </div>
+                        <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />
                     </div>
-                </div>
-            </div>
+                    <div className='col-sm-12 col-lg-7'>
+                        <h3>{this.state.profile.name}</h3>
+                        <p className='shortAbout'>{this.state.profile.aboutShort}</p>
+                        <p>{this.state.profile.about}</p>
+                    </div>
+                </div >
+            </div >
         );
     }
 }

@@ -1,12 +1,10 @@
 import FetchDataService from "./fetchDataService";
 import RedirectionService from "./redirectService";
-import ErrorHandlerService from "./errorHandlerService";
 
 class AuthenticationService {
     constructor() {
         this.serviceData = new FetchDataService();
         this.redirectService = new RedirectionService();
-        this.errorHandlerService = new ErrorHandlerService();
     }
 
     logIn(user,showSuccess, showError) {

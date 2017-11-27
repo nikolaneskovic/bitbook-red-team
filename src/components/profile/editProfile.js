@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 import DataService from "../../services/dataService";
-import ErrorHandlerService from "../../services/errorHandlerService";
 import PropTypes from "prop-types";
 
 class EditProfile extends React.Component {
@@ -13,8 +12,7 @@ class EditProfile extends React.Component {
             profileObject: this.props.profileObject,
 
         };
-        
-        this.errorHandlerService = new ErrorHandlerService();
+
         this.dataService = new DataService();
 
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -56,17 +54,19 @@ class EditProfile extends React.Component {
             aboutShort: this.state.profileObject.aboutShort,
         };
 
-        this.errorHandlerService.validateEditProfileForm(dataObject);
+
+
         this.dataService.updateProfile(dataObject, (response) => {
             this.props.profileUpdated(dataObject);
-            this.setState({showModal: false});
+            this.setState({ showModal: false });
         });
+
     }
 
     render() {
         return (
-            <div>
-                <button onClick={this.handleOpenModal} id="login">Edit profile</button>
+            <div><button type="button" className="btn btn-warning pink" onClick={this.handleOpenModal}>Edit Profile</button>
+
                 <Modal
                     className="Modal__Bootstrap modal-dialog"
                     closeTimeoutMS={150}
