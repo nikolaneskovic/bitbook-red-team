@@ -1,6 +1,6 @@
 
 class Profile {
-    constructor(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount) {
+    constructor(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount, userId) {
         this._name = name;
         this._avatarUrl = avatarUrl;
         this._postsCount = postsCount;
@@ -8,6 +8,7 @@ class Profile {
         this._about = about;
         this._aboutShort = aboutShort;
         this._email = email;
+        this._userId = userId;
         
         
     }
@@ -59,6 +60,13 @@ class Profile {
 
     set email(value) {
         this._email = value;
+    }
+    get userId() {
+        return this._userId;
+    }
+
+    set userId(value) {
+        this._userId = value;
     }
 }
 

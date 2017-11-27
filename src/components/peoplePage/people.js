@@ -2,18 +2,29 @@ import React from "react";
 import DataService from "../../services/dataService";
 import User from "./user";
 import Search from "./../common/searchInput";
+import PropTypes from "prop-types";
 
 class People extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            userId: ""
         };
         this.dataService = new DataService();
         this.searchUserByName = this.searchUserByName.bind(this);
+        this.filterLoggedInUser = this.filterLoggedInUser.bind(this);
+        this.getUserList = this.getUserList.bind(this);
     }
+
     componentDidMount() {
+        this.getUserList();
+        this.filterLoggedInUser();
+
+    }
+
+    getUserList() {
         this.dataService.getUsers((users) => {
             this.setState({
                 users: users
@@ -21,7 +32,12 @@ class People extends React.Component {
         });
     }
 
-    
+    filterLoggedInUser() {
+        this.dataService.getProfile((profile) => {
+            this.setState({ userId: profile.userId });
+        });
+    }
+
     searchUserByName(nameOfUser) {
         let filterUsers = [];
         if (nameOfUser === "") {
@@ -32,7 +48,6 @@ class People extends React.Component {
                     filterUsers.push(element);
                 }
             });
-
             this.setState({ users: filterUsers });
 
         }
@@ -43,12 +58,15 @@ class People extends React.Component {
             <div className="container">
                 <div className="row">
                     <Search useSearchString={this.searchUserByName} />
-                    {userList.map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} id={ element.id}/>)}
+                    {userList.filter(element => element.id !== this.state.userId).map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} id={element.id} />)}
                 </div>
-            </div>     
+            </div>
 
         );
     }
 }
+People.propTypes = {
+    userId: PropTypes.number,
+};
 
 export default People;

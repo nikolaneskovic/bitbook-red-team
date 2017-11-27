@@ -19,6 +19,7 @@ class ProfilePage extends React.Component {
             postsCount: "",
             about: "",
             aboutShort: "",
+            userId:"",
             profile: null
         };
 

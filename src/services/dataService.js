@@ -9,7 +9,7 @@ class DataService {
     getProfile(profileDataHandler) {
 
         this.fetchDataService.get("profile", (response) => {
-            console.log(response);
+            // console.log(response);
             const name = response.data.name;
             const avatarUrl = response.data.avatarUrl;
             const postsCount = response.data.postsCount;
@@ -17,9 +17,11 @@ class DataService {
             const about = response.data.about;
             const aboutShort = response.data.aboutShort;
             const email = response.data.email;
+            const userId = response.data.userId;
+            
             
 
-            const profile = new Profile(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount);
+            const profile = new Profile(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount,userId);
 
             profileDataHandler(profile);
         });
