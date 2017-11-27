@@ -1,12 +1,14 @@
 import FetchDataService from "./fetchDataService";
 import Profile from "../entities/profileDTO";
+import UserDTO from "../entities/userDTO";
+// import { error } from "util";
 
 class DataService {
     constructor() {
         this.fetchDataService = new FetchDataService();
     }
 
-    getProfile(profileDataHandler) {
+    getProfile(profileDataHandler, errorHandler) {
 
         this.fetchDataService.get("profile", (response) => {
             const name = response.data.name;
@@ -19,33 +21,49 @@ class DataService {
             const userId = response.data.userId;
 
             const profile = new Profile(name, avatarUrl, about, aboutShort, email, postsCount, commentsCount, userId);
-
             profileDataHandler(profile);
+        }, errorMsg => {
+            errorHandler(errorMsg);
         });
     };
-    getUsers(usersDataHandler) {
+
+    getUsers(usersDataHandler, errorHandler) {
         this.fetchDataService.get("users", response => {
-            let listOfUsers = response.data;
+            console.log(response.data);
+            const arrOfUsers = response.data;
+            
+            const listOfUsers = arrOfUsers.map(user => {
+                let userProfile = new UserDTO(user.aboutShort, user.avatarUrl, user.id, user.lastPostDate, user.name);
+                return userProfile;
+            });
+            
+            console.log(listOfUsers);
             usersDataHandler(listOfUsers);
-        });
+        }, (errorMsg) => { errorHandler(errorMsg); });
     }
 
-    getAllPosts(handleAllPosts) {
+    getAllPosts(handleAllPosts, errorHandler) {
         this.fetchDataService.get("Posts", response => {
             let allPosts = response.data;
             handleAllPosts(allPosts);
+        }, errorMsg => {
+            errorHandler(errorMsg);
         });
     }
 
-    getUserProfile(userId, usersDataHandler) {
+    getUserProfile(userId, usersDataHandler, errorHandler) {
         this.fetchDataService.get(`users/${userId}`, response => {
             usersDataHandler(response);
+        }, errorMsg => {
+            errorHandler(errorMsg);
         });
     }
 
-    updateProfile(profileData, profileDataHandler) {
+    updateProfile(profileData, profileDataHandler, errorHandler) {
         this.fetchDataService.put("Profiles", profileData, (response) => {
             profileDataHandler(response);
+        }, errorMsg => {
+            errorHandler(errorMsg);
         });
     }
 

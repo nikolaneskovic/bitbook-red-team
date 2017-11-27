@@ -13,10 +13,13 @@ const User = (props) => {
                 <div className="col-2 offset-1">
                     <img src={props.avatarUrl} />
                 </div>
-                <div className="col-9">
+                <div className="col-6">
                     <h4> {props.name}</h4>
                     <div><span>About</span>{props.about}</div>
                     <p className="btn btn-light"><Link to={`/people/${props.id}`}>Find out more</Link></p>
+                </div>
+                <div className='col-3'>
+                    Last post at: {props.lastPostDate}
                 </div>
             </div>
         </div>
@@ -31,7 +34,8 @@ User.propTypes = {
     name: PropTypes.string,
     avatarUrl: PropTypes.string,
     about: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.number,
+    lastPostDate: PropTypes.string
 
 };
 export default User;

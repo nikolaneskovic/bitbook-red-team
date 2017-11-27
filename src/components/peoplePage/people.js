@@ -3,6 +3,7 @@ import DataService from "../../services/dataService";
 import User from "./user";
 import Search from "./../common/searchInput";
 import PropTypes from "prop-types";
+// import { error } from "util";
 
 class People extends React.Component {
 
@@ -31,7 +32,7 @@ class People extends React.Component {
                 allUsers: users,
                 filteredUsers: users
             });
-        });
+        }, error=>console.log(error));
     }
 
     filterLoggedInUser() {
@@ -67,7 +68,7 @@ class People extends React.Component {
             <div className="container">
                 <div className="row">
                     <Search useSearchString={this.searchUserByName} />
-                    {userList.filter(element => element.id !== this.state.userId).map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} id={element.id} />)}
+                    {userList.filter(element => element.id !== this.state.userId).map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} lastPostDate={element.lastPostDate} />)}
                 </div>
             </div>
 

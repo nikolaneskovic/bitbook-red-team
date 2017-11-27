@@ -23,8 +23,7 @@ class FetchDataService {
 
     }
 
-
-    get(path, handler) {
+    get(path, handler, errorHandler) {
 
         axios({
             method: "GET",
@@ -33,7 +32,9 @@ class FetchDataService {
 
         })
             .then((data) => { handler(data); })
-            .catch(error => console.log(error));
+            .catch(error => {
+                errorHandler(error) || console.log(error);
+            });
     }
 
 
