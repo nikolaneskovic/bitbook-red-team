@@ -19,6 +19,7 @@ class UserProfile extends React.Component {
             postsCount: "",
             about: "",
             aboutShort: "",
+            id: "",
             profile: null
         };
 
@@ -33,7 +34,7 @@ class UserProfile extends React.Component {
 
     showUserData(peopleId){
         this.dataService.getUserProfile(peopleId, (response)=>{
-            console.log(response.data);
+            // console.log(response.data);
             let user = response.data;
             this.setState({
                 name: user.name,
@@ -42,7 +43,7 @@ class UserProfile extends React.Component {
                 postsCount:  user.postsCount,
                 about:  user.about,
                 aboutShort:  user.aboutShort,
-    
+                id: user.id
             });
         });
 
@@ -64,6 +65,7 @@ class UserProfile extends React.Component {
                         <h3>{this.state.name}</h3>
                         <p className='shortAbout'>{this.state.shortAbout}</p>
                         <p>{this.state.about}</p>
+
                     </div>
                 </div >
             </div >

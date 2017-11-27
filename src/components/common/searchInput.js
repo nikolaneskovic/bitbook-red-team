@@ -25,7 +25,6 @@ export default class Search extends React.Component {
 
     handleChange(event) {
         this.setState({ searchString: event.target.value });
-        this.handleClick();
     }
     render() {
         return (<div className="col-12">
