@@ -12,11 +12,11 @@ class EditProfile extends React.Component {
             errorMsg: "",
             profileObject: this.props.profileObject,
             invalidEmail: "",
-            nameError: "",
+            fieldsError: "",
             aboutError: "",
             shortAboutError: "",
-            avatarUrlError: ""
-
+            avatarUrlError: "",
+            nameHavingError: "",
         };
 
         this.dataService = new DataService();
@@ -65,20 +65,22 @@ class EditProfile extends React.Component {
 
 
         const invalidEmail = this.handleErrorService.validateEmail(dataObject.email);
-        const nameError = this.handleErrorService.validateEmptyField(dataObject);
-        const aboutError = this.handleErrorService.validateEmptyField(dataObject);
-        const shortAboutError = this.handleErrorService.validateEmptyField(dataObject);
-        const avatarUrlError = this.handleErrorService.validateEmptyField(dataObject);
+        const fieldsError = this.handleErrorService.validateEmptyField(dataObject);
+        const aboutError = this.handleErrorService.validateEmptyField(dataObject.about);
+        const shortAboutError = this.handleErrorService.validateEmptyField(dataObject.aboutShort);
+        const avatarUrlError = this.handleErrorService.validateEmptyField(dataObject.avatarUrl);
+        const nameHavingError = this.handleErrorService.validateEmptyField(dataObject.name);
 
         this.setState({
             invalidEmail: invalidEmail,
-            nameError: nameError,
+            fieldsError: fieldsError,
             aboutError: aboutError,
             shortAboutError:shortAboutError,
-            avatarUrlError:avatarUrlError
+            avatarUrlError:avatarUrlError,
+            nameHavingError: nameHavingError
         });
 
-        if (invalidEmail || nameError || aboutError || shortAboutError || avatarUrlError) {
+        if (nameHavingError || aboutError || shortAboutError || avatarUrlError) {
             return;
         }
         else {
@@ -110,26 +112,26 @@ class EditProfile extends React.Component {
                         <div className="modal-body modalBox">
                             <label htmlFor="name">Name</label>
                             <input type="text" id="name" name="name" value={this.state.profileObject.name} onChange={this.handleChange} />
-                           
+                            {this.state.nameHavingError}<br />
 
                             <label htmlFor="about">About</label>
                             <input type="text" id="about" name="about" value={this.state.profileObject.about} onChange={this.handleChange} />
-                      
+                            {this.state.aboutError}<br />
 
                             <label htmlFor="email">Email</label>
                             <input type="text" id="email" name="email" value={this.state.profileObject.email} onChange={this.handleChange} />
-                            <div>{this.state.invalidEmail}</div>
+                            <div>{this.state.invalidEmail}</div><br />
 
                             <label htmlFor="aboutShort">Short about</label>
                             <input type="text" id="aboutShort" name="aboutShort" value={this.state.profileObject.aboutShort} onChange={this.handleChange} />
-
+                            {this.state.shortAboutError}<br /><br />
 
                             <label htmlFor="avatar">Avatar url</label>
                             <textarea id="avatar" name="avatarUrl" placeholder="Image src..." value={this.state.profileObject.avatarUrl} onChange={this.handleChange}></textarea>
 
-                            <p>{this.state.errorMsg}</p>
+                            <p>{this.state.avatarUrlError}</p><br />
                         </div>
-                        <div className="container">{this.state.nameError}</div>
+                        <div className="container">{this.state.fieldsError}</div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" onClick={this.handleCloseModal}>Close</button>
                             <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button>
