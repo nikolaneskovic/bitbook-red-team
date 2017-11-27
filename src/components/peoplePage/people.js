@@ -9,7 +9,8 @@ class People extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [],
+            allUsers: [],
+            filteredUsers: [],
             userId: ""
         };
         this.dataService = new DataService();
@@ -27,7 +28,8 @@ class People extends React.Component {
     getUserList() {
         this.dataService.getUsers((users) => {
             this.setState({
-                users: users
+                allUsers: users,
+                filteredUsers: users
             });
         });
     }
@@ -39,26 +41,32 @@ class People extends React.Component {
     }
 
     searchUserByName(nameOfUser) {
-        let filterUsers = [];
-        let allUsers = this.state.users;
+        let currentUsers = this.state.allUsers;
+
         if (nameOfUser === "") {
-            return allUsers;
+            this.setState({ filteredUsers: currentUsers });
+            return;
         } else {
-            this.state.users.forEach(element => {
-                if (element.name.includes(nameOfUser)) {
-                    filterUsers.push(element);
-                }
+            const filteredList = currentUsers.filter(element => {
+                return element.name.includes(nameOfUser);
             });
-            this.setState({ users: filterUsers });
+            this.setState({ filteredUsers: filteredList });
 
         }
     }
     render() {
-        let userList = this.state.users;
+        let userList = this.state.filteredUsers;
+        if (!userList) {
+            return (
+                <div className="center-align">
+                    <h4>Loading users...</h4>
+                </div>
+            );
+        }
         return (
             <div className="container">
                 <div className="row">
-                    <Search useSearchString={this.searchUserByName}  />
+                    <Search useSearchString={this.searchUserByName} />
                     {userList.filter(element => element.id !== this.state.userId).map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} id={element.id} />)}
                 </div>
             </div>

@@ -9,23 +9,11 @@ export default class Search extends React.Component {
             searchString: ""
         };
         this.handleChange = this.handleChange.bind(this);
-        // this.handleClick = this.handleClick.bind(this);
-        // this.handleKeyDown = this.handleKeyDown.bind(this);
     }
-
-    // handleKeyDown(event) {
-    //     if (event.keyCode === 13) {
-    //         this.handleClick();
-    //     }
-    // }
-    // handleClick() {
-    //     let searchString = this.state.searchString;
-    //     this.props.useSearchString(searchString);
-    // }
 
     handleChange(event) {
         const value = event.target.value;
-        this.setState({ searchString:  value});
+        this.setState({ searchString: value });
 
         this.props.useSearchString(value);
     }
