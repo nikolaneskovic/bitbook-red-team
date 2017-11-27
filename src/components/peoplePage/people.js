@@ -40,8 +40,9 @@ class People extends React.Component {
 
     searchUserByName(nameOfUser) {
         let filterUsers = [];
+        let allUsers = this.state.users;
         if (nameOfUser === "") {
-            return;
+            return allUsers;
         } else {
             this.state.users.forEach(element => {
                 if (element.name.includes(nameOfUser)) {
@@ -57,7 +58,7 @@ class People extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Search useSearchString={this.searchUserByName} />
+                    <Search useSearchString={this.searchUserByName}  />
                     {userList.filter(element => element.id !== this.state.userId).map((element) => <User name={element.name} avatarUrl={element.avatarUrl} about={element.about} key={element.id} id={element.id} />)}
                 </div>
             </div>
