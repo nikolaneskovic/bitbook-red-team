@@ -54,7 +54,7 @@ class ProfilePage extends React.Component {
                         <img src={this.state.profile.avatarUrl} width="100%" id="slika" />
                         
                         <p><Link to="#"><button type="button" className="btn btn-primary "> Comments count:<span className="badge"> {this.state.profile.commentsCount}</span></button></Link></p>
-                        <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.profile.postsCount}</button></Link></p>
+                        <p><Link to="#"> <button type="button" className="btn btn-primary"> Posts count:{this.state.profile.postsCount}</button></Link></p>
 
                         <EditProfile profileObject={this.state.profile} profileUpdated={this.afterUpdate} />
                     </div>
