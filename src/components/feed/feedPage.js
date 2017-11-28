@@ -68,7 +68,10 @@ class FeedPage extends React.Component {
 
     handleCloseModal() {
         this.setState({ showModal: false });
-        this.redirectionService.redirect("/feed");
+        //fix this
+        window.location.reload();
+        
+        //this.redirectionService.redirect("/feed");
 
     }
 

@@ -37,7 +37,6 @@ class AddBtn extends React.Component {
 }
 
 AddBtn.propTypes = {
-    //addVideoOnPage: PropTypes.func,
     handleOpen: PropTypes.func
 
 };
