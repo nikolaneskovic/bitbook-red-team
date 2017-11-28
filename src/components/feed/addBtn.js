@@ -3,6 +3,8 @@ import AddPost from "./postModalBox";
 import AddVideo from "./videoModalBox";
 import AddImage from "./imageModalBox";
 import Modal from "react-modal";
+import PropTypes from "prop-types";
+
 
 class AddBtn extends React.Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class AddBtn extends React.Component {
     bindFunction() {
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.addVideo = this.addVideo.bind(this);
     }
 
     handleCloseModal() {
@@ -31,6 +34,10 @@ class AddBtn extends React.Component {
         });
     }
 
+    addVideo(newVideo){
+        this.props.addVideoOnPage(newVideo);
+    }
+
     getPostTypeComponent() {
         if (this.state.selectedType === "image") {
             return <AddImage closeModal={this.handleCloseModal} />;
@@ -40,7 +47,7 @@ class AddBtn extends React.Component {
             return <AddPost  closeModal={this.handleCloseModal}/>;
         }
 
-        return <AddVideo closeModal={this.handleCloseModal}/>;
+        return <AddVideo closeModal={this.handleCloseModal} showVideoPost={this.addVideo}/>;
     }
 
     render() {
@@ -70,4 +77,8 @@ class AddBtn extends React.Component {
     }
 }
 
+AddBtn.propTypes = {
+    addVideoOnPage: PropTypes.func
+
+};
 export default AddBtn;

@@ -5,13 +5,30 @@ import PropTypes from "prop-types";
 class AddVideo extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            videoUrl: ""
+        };
+
         this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSaveClicked = this.handleSaveClicked.bind(this);
     }
-    
-    handleClick(){
+
+    handleClick() {
         this.props.closeModal();
     }
 
+    handleChange(event) {
+        this.setState({
+            videoUrl: event.target.value
+        });
+    }
+
+    handleSaveClicked() {
+        const videoUrl = this.state.videoUrl;
+        this.props.showVideoPost(videoUrl);
+
+    }
     render() {
 
         return (
@@ -25,11 +42,11 @@ class AddVideo extends React.Component {
                 </div>
                 <div className="modal-body modalBox">
                     <h3>New video</h3>
-                    <textarea></textarea>
+                    <textarea name="videoUrl" placeholder="You tube video" value={this.state.videoUrl} onChange={this.handleChange}></textarea>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-default" onClick={this.handleClick}>Close</button>
-                    {/* <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button> */}
+                    <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button>
                 </div>
             </div>
 
@@ -37,8 +54,8 @@ class AddVideo extends React.Component {
     }
 }
 AddVideo.propTypes = {
-    showModal: PropTypes.bool,
-    closeModal: PropTypes.func
+    closeModal: PropTypes.func,
+    showVideoPost: PropTypes.func
 
 };
 export default AddVideo;

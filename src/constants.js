@@ -2,3 +2,4 @@
 export const HEADER_KEY = "qHkk6XZN";
 export const BASE_SERVICE_URL = "https://bitbookapi.azurewebsites.net/api/";
 export const IMAGE_PLACE_HOLDER = "http://via.placeholder.com/200x150";
+export const YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v=";

@@ -15,16 +15,26 @@ class FeedPage extends React.Component {
         this.dataService = new DataService();
     }
     componentDidMount() {
+
         this.dataService.getAllPosts((posts) => {
             this.setState({ allPosts: posts });
         }, error => this.setState({ errorMsgServer: error }));
+        this.addVideoOnFeedPage();
+    }
+
+    addVideoOnFeedPage(newVideo){
+
+        let postList = this.state.allPosts;
+        postList.push(newVideo);
     }
 
     render() {
         return (<div className='container'>
-            <AddBtn />
+            <AddBtn addVideoOnPage={this.addVideoOnFeedPage}/>
+
             {this.state.allPosts.map(post => <Post post={post} key={post.id} />)}
             <div>{this.state.errorMsgServer}</div>
+            
         </div>);
     }
 }
