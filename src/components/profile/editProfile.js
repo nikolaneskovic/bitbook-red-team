@@ -94,7 +94,7 @@ class EditProfile extends React.Component {
 
     render() {
         return (
-            <div><button type="button" className="btn btn-warning pink" onClick={this.handleOpenModal}>Edit Profile</button>
+            <div><button type="button" className="btn btn-primary" onClick={this.handleOpenModal}>Edit Profile</button>
 
                 <Modal
                     className="Modal__Bootstrap modal-dialog"
