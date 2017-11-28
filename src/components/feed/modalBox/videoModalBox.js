@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { YOUTUBE_VIDEO_URL } from "../../../constants";
 
 
 class AddVideo extends React.Component {
@@ -16,6 +17,7 @@ class AddVideo extends React.Component {
 
     handleClick() {
         this.props.closeModal();
+
     }
 
     handleChange(event) {
@@ -26,9 +28,11 @@ class AddVideo extends React.Component {
 
     handleSaveClicked() {
         const videoUrl = this.state.videoUrl;
-        this.props.showVideoPost(videoUrl);
+        const splitedVideoUrl = videoUrl.split("=");
 
+        this.props.showVideoPost(`${YOUTUBE_VIDEO_URL}${splitedVideoUrl[1]}`);
     }
+
     render() {
 
         return (

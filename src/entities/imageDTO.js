@@ -1,11 +1,13 @@
-export class PostDTO{
-    constructor(dateCreated, id, text, type, userDisplayName, userId){
+export default class ImageDTO {
+    constructor(imageUrl, id, dateCreated, userId,  userDisplayName, type, commentsNum ) {
+        this._imageUrl= imageUrl;
         this._dateCreated = dateCreated;
         this._id = id;
-        this._text = text;
         this._type = type;
         this._userDisplayName = userDisplayName;
         this._userId = userId;
+        this._commentsNum = commentsNum;
+        
     }
 
 
@@ -21,8 +23,8 @@ export class PostDTO{
     set id(newValue) {
         this._id = newValue;
     }
-    get text() {
-        return this._text;
+    get imageUrl() {
+        return this._imageUrl;
     }
     set type(newValue) {
         this._type = newValue;
@@ -30,8 +32,8 @@ export class PostDTO{
     get type() {
         return this._type;
     }
-    set text(newValue) {
-        this._text = newValue;
+    set imageUrl(newValue) {
+        this._imageUrl = newValue;
     }
     get userDisplayName() {
         return this._userDisplayName;
@@ -45,8 +47,11 @@ export class PostDTO{
     set userId(newValue) {
         this._userId = newValue;
     }
+    get commentsNum() {
+        return this._commentsNum;
+    }
+    set commentsNum(newValue) {
+        this._commentsNum = newValue;
+    }
 
-
-
-
-} 
+}

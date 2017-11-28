@@ -47,10 +47,20 @@ label{
     text-align: center;
 }
 
-
-
+.videoPost{
+    padding: 20px;
+    background-color: white;
+    margin-top: 10px;
+    text-align: center;
+}
+.videoPost p{
+    padding: 6px;
+}
+.videoPost img{
+    height: 400px;
+}
 .login-form{
-    margin-right: 10px;
+    margin: 10px;
 
 }
 .input-field input{

@@ -5,13 +5,31 @@ import PropTypes from "prop-types";
 class AddImage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            imageUrl: ""
+        };
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSaveClicked = this.handleSaveClicked.bind(this);
+
     }
-    
-    handleClick(){
+
+    handleClick() {
         this.props.closeModal();
     }
+
+    handleChange(event) {
+        this.setState({
+            imageUrl: event.target.value
+        });
+    }
+
+    handleSaveClicked() {
+        let imageUrl = this.state.imageUrl;
+        this.props.handleImageUrl(imageUrl);
+    }
+
     render() {
 
         return (
@@ -25,11 +43,11 @@ class AddImage extends React.Component {
                 </div>
                 <div className="modal-body modalBox">
                     <h3>New image</h3>
-                    <textarea></textarea>
+                    <textarea value={this.state.imageUrl} onChange={this.handleChange}></textarea>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-default" onClick={this.handleClick}>Close</button>
-                    {/* <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button> */}
+                    <button type="button" className="btn btn-primary" onClick={this.handleSaveClicked}>Save changes</button>
                 </div>
             </div>
 
@@ -38,6 +56,7 @@ class AddImage extends React.Component {
 }
 AddImage.propTypes = {
     closeModal: PropTypes.func,
+    handleImageUrl: PropTypes.func
 
 };
 export default AddImage;
