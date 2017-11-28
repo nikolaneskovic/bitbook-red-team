@@ -3,6 +3,7 @@ import Post from "./post";
 import DataService from "../../services/dataService";
 import { error } from "util";
 import AddBtn from "./addBtn";
+import { posix } from "path";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class FeedPage extends React.Component {
     render() {
         return (<div className='container'>
             <AddBtn />
-            {this.state.allPosts.map(post => <Post text={post.text} key={post.userId} dateCreated={post.dateCreated} type={post.type} userDisplayName={post.userDisplayName} />)}
+            {this.state.allPosts.map(post => <Post post={post} key={post.id} />)}
             <div>{this.state.errorMsgServer}</div>
         </div>);
     }

@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 const User = (props) => {
     // const imagePlaceHolder = IMAGE_PLACE_HOLDER;
+    
+
     // props.avatarUrl = imagePlaceHolder;
     return (
         <div className="col-12 user">

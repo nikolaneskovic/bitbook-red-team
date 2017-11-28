@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-class AddPost extends React.Component {
+class AddImage extends React.Component {
     constructor(props) {
         super(props);
+
         this.handleClick = this.handleClick.bind(this);
     }
-
     
     handleClick(){
         this.props.closeModal();
@@ -36,8 +36,8 @@ class AddPost extends React.Component {
         );
     }
 }
-AddPost.propTypes = {
+AddImage.propTypes = {
     closeModal: PropTypes.func,
 
 };
-export default AddPost;
+export default AddImage;

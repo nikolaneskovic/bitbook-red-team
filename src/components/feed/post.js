@@ -8,18 +8,16 @@ class Post extends React.Component {
     render() {
         return (
             <div className="row feedPost">
-                <p className='col-12'>{this.props.text}</p>
-                <p className="col-4">{this.props.userDisplayName}</p>
-                <p className="col-4 typeOfPost">{this.props.type}</p>
+                <p className='col-12'>{this.props.post.text}</p>
+                <p className="col-4">{this.props.post.userDisplayName}</p>
+                <p className="col-4 typeOfPost">{this.props.post.type}</p>
             </div>
         );
     }
 }
 
 Post.propTypes = {
-    text: PropTypes.string,
-    type: PropTypes.string,
-    userDisplayName: PropTypes.string
+    post: PropTypes.object
 
 };
 export default Post;

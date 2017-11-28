@@ -1,25 +1,47 @@
 import React from "react";
 import AddPost from "./postModalBox";
-
+import AddVideo from "./videoModalBox";
+import AddImage from "./imageModalBox";
+import Modal from "react-modal";
 
 class AddBtn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showModal: false,
+            selectedType: "" 
         };
         this.bindFunction();
     }
 
-    bindFunction(){
-        this.handleOpenModal= this.handleOpenModal.bind(this);        
+    bindFunction() {
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    handleOpenModal() {
-        this.setState({ showModal: true });
+    handleCloseModal() {
+        this.setState({ showModal: false });
     }
 
-   
+
+    handleOpenModal(event) {
+        this.setState({
+            showModal: true,
+            selectedType: event.target.name  
+        });
+    }
+
+    getPostTypeComponent() {
+        if (this.state.selectedType === "image") {
+            return <AddImage closeModal={this.handleCloseModal} />;
+        }
+
+        if (this.state.selectedType === "post") {
+            return <AddPost  closeModal={this.handleCloseModal}/>;
+        }
+
+        return <AddVideo closeModal={this.handleCloseModal}/>;
+    }
 
     render() {
         return (
@@ -30,11 +52,20 @@ class AddBtn extends React.Component {
                     <span className="sr-only"></span>
                 </button>
                 <div className="dropdown-menu">
-                    <button className="dropdown-item" >Image</button>
-                    <button className="dropdown-item" onClick={this.handleOpenModal} >Post</button>
-                    <button className="dropdown-item">Video</button>
-                    <AddPost showModal={this.state.showModal}/>
+                    <button name="image" className="dropdown-item" onClick={this.handleOpenModal}>Image</button>
+                    <button name="post" className="dropdown-item" onClick={this.handleOpenModal}>Post</button>
+                    <button name="video" className="dropdown-item" onClick={this.handleOpenModal}>Video</button>
+
+                    
+
                 </div>
+                <Modal
+                    className="Modal__Bootstrap modal-dialog"
+                    closeTimeoutMS={150}
+                    isOpen={this.state.showModal}
+                >
+                    {this.getPostTypeComponent()}
+                </Modal>
             </div>);
     }
 }

@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-class AddPost extends React.Component {
+class AddVideo extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-
     
     handleClick(){
         this.props.closeModal();
     }
+
     render() {
 
         return (
@@ -21,10 +21,10 @@ class AddPost extends React.Component {
                         <span aria-hidden="true">&times;</span>
                         <span className="sr-only">Close</span>
                     </button>
-                    <h4 className="modal-title">Add image</h4>
+                    <h4 className="modal-title">Add video</h4>
                 </div>
                 <div className="modal-body modalBox">
-                    <h3>New image</h3>
+                    <h3>New video</h3>
                     <textarea></textarea>
                 </div>
                 <div className="modal-footer">
@@ -36,8 +36,9 @@ class AddPost extends React.Component {
         );
     }
 }
-AddPost.propTypes = {
-    closeModal: PropTypes.func,
+AddVideo.propTypes = {
+    showModal: PropTypes.bool,
+    closeModal: PropTypes.func
 
 };
-export default AddPost;
+export default AddVideo;
