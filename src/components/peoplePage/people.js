@@ -3,7 +3,6 @@ import DataService from "../../services/dataService";
 import User from "./user";
 import Search from "./../common/searchInput";
 import PropTypes from "prop-types";
-// import { error } from "util";
 
 class People extends React.Component {
 

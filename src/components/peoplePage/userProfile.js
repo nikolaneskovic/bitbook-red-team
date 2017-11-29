@@ -11,11 +11,11 @@ class UserProfile extends React.Component {
 
     constructor(props) {
         super(props);
-        this.imagePlaceHolder = IMAGE_PLACE_HOLDER;
+        const imagePlaceHolder = IMAGE_PLACE_HOLDER;
 
         this.state = {
             name: "",
-            avatarUrl: "",
+            avatarUrl: imagePlaceHolder,
             commentsCount: "",
             postsCount: "",
             about: "",

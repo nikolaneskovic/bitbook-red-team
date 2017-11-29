@@ -72,6 +72,23 @@ class FetchDataService {
             });
     }
 
+    delete(path, data, handler, errorHandler) {
+
+        axios({
+            method: "DELETE",
+            url: `${BASE_SERVICE_URL}${path}`,
+            data: data,
+            headers: this.createHeader(),
+            json: true
+        })
+            .then(response => {
+                return handler(response);
+            })
+            .catch(error => {
+                errorHandler(error.response.data.error.message) || console.log(error);
+            });
+    }
+
 }
 
 export default FetchDataService;

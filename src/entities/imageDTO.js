@@ -1,24 +1,21 @@
-export default class PostDTO {
-    constructor({ text, id, dateCreated, userId, userDisplayName, type, commentsNum }) {
-        this._text = text;
-        this._id = id;
+export default class ImageDTO {
+    constructor(imageUrl, id, dateCreated, userId,  userDisplayName, type, commentsNum ) {
+        this._imageUrl= imageUrl;
         this._dateCreated = dateCreated;
-        this._userId = userId;
-        this._userDisplayName = userDisplayName;
+        this._id = id;
         this._type = type;
+        this._userDisplayName = userDisplayName;
+        this._userId = userId;
         this._commentsNum = commentsNum;
+        
     }
+
+
     get dateCreated() {
         return this._dateCreated;
     }
     set dateCreated(newValue) {
         this._dateCreated = newValue;
-    }
-    get commentsNum() {
-        return this._commentsNum;
-    }
-    set commentsNum(newValue) {
-        this._commentsNum = newValue;
     }
     get id() {
         return this._id;
@@ -26,8 +23,8 @@ export default class PostDTO {
     set id(newValue) {
         this._id = newValue;
     }
-    get text() {
-        return this._text;
+    get imageUrl() {
+        return this._imageUrl;
     }
     set type(newValue) {
         this._type = newValue;
@@ -35,8 +32,8 @@ export default class PostDTO {
     get type() {
         return this._type;
     }
-    set text(newValue) {
-        this._text = newValue;
+    set imageUrl(newValue) {
+        this._imageUrl = newValue;
     }
     get userDisplayName() {
         return this._userDisplayName;
@@ -50,8 +47,11 @@ export default class PostDTO {
     set userId(newValue) {
         this._userId = newValue;
     }
+    get commentsNum() {
+        return this._commentsNum;
+    }
+    set commentsNum(newValue) {
+        this._commentsNum = newValue;
+    }
 
-
-
-
-} 
+}

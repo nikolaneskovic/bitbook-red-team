@@ -44,15 +44,11 @@ class LoginForm extends React.Component {
     }
 
     validateLogInForm() {
-        const data = {
-            username: this.state.username,
-            password: this.state.password
-        };
-
-        const emptyUsername = this.handleErrorService.validateEmptyField(data.username);
-        const emptyEmail = this.handleErrorService.validateEmptyField(data.email);
-        const passLength = this.handleErrorService.validateInputLength(data.password, 1);
-        const invalidEmail = this.handleErrorService.validateEmail(data.username);
+    
+        const emptyUsername = this.handleErrorService.validateEmptyField(this.state.username);
+        const emptyEmail = this.handleErrorService.validateEmptyField(this.state.email);
+        const passLength = this.handleErrorService.validateInputLength(this.state.password,0);
+        const invalidEmail = this.handleErrorService.validateEmail(this.state.username);
 
         this.setState({
             emptyEmail: emptyEmail,
@@ -76,6 +72,7 @@ class LoginForm extends React.Component {
             password: this.state.password
         };
         const isValid = this.validateLogInForm();
+        this.setState({isValid:isValid});
 
         if (!isValid) {
             return;
@@ -101,9 +98,11 @@ class LoginForm extends React.Component {
                             <label className="login-form"> Username </label> <br />
                             <input id="input_text" type="text" data-length="25" name="username"
                                 value={this.state.username} onChange={this.handleChange} onBlur={this.validateLogInForm}
-                            /><span className='errorField'>{this.state.invalidEmail}</span>
+                            />
+                            <span>{this.state.invalidEmail} {this.state.emptyUsername}</span>
+                           
+
                         </div><br />
-                        <div>{this.state.invalidEmail}</div>
 
 
                     </div>
@@ -112,10 +111,11 @@ class LoginForm extends React.Component {
                             <label className="login-form"> Password </label><br />
                             <input id="input_text" type="password" data-length="25" name="password"
                                 value={this.state.password} onChange={this.handleChange} onBlur={this.validateLogInForm}
-                            /> <span className='errorField'>{this.state.passLength}</span>
+                            /> 
+                            <span>{this.state.passLength}</span>
                         </div>
                     </div>
-                    <div>{this.state.emptyInput}</div>
+
                     <div>{this.state.errorMsgServer}</div>
 
                     <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.handleClick}>

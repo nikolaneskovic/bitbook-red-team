@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 const User = (props) => {
     // const imagePlaceHolder = IMAGE_PLACE_HOLDER;
+    
+
     // props.avatarUrl = imagePlaceHolder;
     return (
         <div className="col-12 user">
@@ -18,7 +20,7 @@ const User = (props) => {
                     <div><span>About</span>{props.user.about}</div>
                     <p className="btn btn-light"><Link to={`/people/${props.user.id}`}>Find out more</Link></p>
                 </div>
-                <div className='col-3'>
+                <div className='col-3 '>
                     Last post at: {new Date(props.user.lastPostDate).toLocaleTimeString()}
                 </div>
             </div>
