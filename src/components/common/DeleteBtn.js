@@ -20,7 +20,7 @@ class DeleteButton extends Component {
     }
 }
 
-Post.propTypes = {
+DeleteButton.propTypes = {
     postObject: PropTypes.object
 
 };
