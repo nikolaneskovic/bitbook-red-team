@@ -53,15 +53,39 @@ label{
     margin-top: 10px;
     text-align: center;
 }
-.videoPost p{
-    padding: 6px;
-}
-.videoPost img{
+
+.postImage{
     height: 400px;
+}
+.videoPost input{
+    display: block;
+    width: 70%;
+    border: none;
+    padding: 5px;
+    border-bottom: 1px solid rgb(183, 183, 224);
+}
+.videoPost button{
+    background-color: #a31862;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    width: 13%;
+    margin-left: 20px;
+}
+.typeOfPost{
+    padding-top: 40px;
 }
 .login-form{
     margin: 10px;
 
+}
+.linkBtn{
+    padding-top: 5px;
+}
+.comments{
+    text-align: center;
 }
 .input-field input{
     display: block;
@@ -75,10 +99,22 @@ label{
     max-width: 100%;
     height: 1000px;    
 }
+.commentSection{
+    background: white;
+    padding: 20px;
+    margin-top: 10px;
+}
 
 .logInForm{
 padding: 100px;
 }
+/* .authorImg{
+    display: block;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+} */
 
 #thead{
     text-align: center;
@@ -92,7 +128,9 @@ padding: 100px;
 
     padding: 10px;
 }
-
+.commentPar{
+    padding: 20px;
+}
 .radiusBtnRight{
     border-radius: 0px 25px 25px 0px;
     background-color: rgb(90, 90, 235);
@@ -213,10 +251,4 @@ padding: 100px;
     margin: 10px;
     background-color: white;
     border-radius: 5px;
-}
-.typeOfPost{
-    text-align: right;
-}
-.btn-group{
-    padding: 20px;
 }

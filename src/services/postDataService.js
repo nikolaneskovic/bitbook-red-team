@@ -1,5 +1,9 @@
 import FetchDataService from "../services/fetchDataService";
 import { error } from "util";
+import VideoDTO from "../entities/videoDTO";
+import CommentDTO from "../entities/commentDTO";
+import ImageDTO from "../entities/imageDTO";
+import PostDTO from "../entities/postDTO";
 
 class PostDataService {
     constructor() {
@@ -23,27 +27,72 @@ class PostDataService {
     postVideo(videoUrl, videoDataHandler, errorHandler) {
 
         this.fetchDataService.post("VideoPosts", { videoUrl: videoUrl }, (response) => {
-            console.log(response);
             videoDataHandler(response);
         }, error => {
             errorHandler(error);
         });
     }
-    postImage(newImage, imageDataHandler, errorHandler){
-        this.fetchDataService.post("ImagePosts", {imageUrl:newImage}, (response)=>{
-            console.log(response);
+    postImage(newImage, imageDataHandler, errorHandler) {
+        this.fetchDataService.post("ImagePosts", { imageUrl: newImage }, (response) => {
             imageDataHandler(response);
-        }), error=>{
+        }), error => {
             errorHandler(error);
         };
     }
-    postText(newText, textDataHandler, errorHandler){
-        this.fetchDataService.post("TextPosts", {text:newText}, response=>{
+    postText(newText, textDataHandler, errorHandler) {
+        this.fetchDataService.post("TextPosts", { text: newText }, response => {
             textDataHandler(response);
-            console.log("text blog ", response);
-        }, error=>{
+        }, error => {
             errorHandler(error);
         });
+    }
+
+    postComment(commentObj, commentDataHandler, errorHandler) {
+
+        this.fetchDataService.post("Comments", commentObj, response => {
+            commentDataHandler(response);
+        }, error => {
+            errorHandler(error);
+        });
+    }
+
+    getAllComments(postId, handleComments, handleError) {
+        this.fetchDataService.get(`Comments?postId=${postId}`, response => {
+
+            let listOfComments = response.data;
+
+            listOfComments = listOfComments.map(comment => {
+                let commentData = new CommentDTO(comment.id, comment.dateCreated, comment.body, comment.postId, comment.authorName, comment.authorId);
+                return commentData;
+            });
+            handleComments(listOfComments);
+        }, error => {
+            handleError(error);
+        });
+    }
+
+    getSingleVideoPost(videoId, usersDataHandler, errorHandler) {
+        this.fetchDataService.get(`VideoPosts/${videoId}`, response => {
+            let videoData = response.data;
+            let singleVideo = new VideoDTO(videoData.videoUrl, videoData.id, videoData.dateCreated, videoData.userId, videoData.userDisplayName, videoData.type, videoData.commentsNum);
+            usersDataHandler(singleVideo);
+        }, errorMsg => errorHandler(errorMsg));
+    }
+
+    getSingleImagePost(imageId, usersDataHandler, errorHandler) {
+        this.fetchDataService.get(`ImagePosts/${imageId}`, response => {
+            let imageData = response.data;
+            let singleImage = new ImageDTO(imageData.imageUrl, imageData.id, imageData.dateCreated, imageData.userId, imageData.userDisplayName, imageData.type, imageData.commentsNum);
+            usersDataHandler(singleImage);
+        }, errorMsg => errorHandler(errorMsg));
+    }
+    getSingleTextPost(textId, usersDataHandler, errorHandler) {
+        this.fetchDataService.get(`TextPosts/${textId}`, response => {
+            let textPostData = response.data;
+            console.log(textPostData);
+            let singleTextPost = new PostDTO(textPostData.text, textPostData.id, textPostData.dateCreated, textPostData.userId,textPostData.userDisplayName, textPostData.type, textPostData.commentsNum);
+            usersDataHandler(singleTextPost);
+        }, errorMsg => errorHandler(errorMsg));
     }
 
 }

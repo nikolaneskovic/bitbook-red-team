@@ -21,7 +21,6 @@ class DataService {
 
     getUsers(usersDataHandler, errorHandler) {
         this.fetchDataService.get("users", response => {
-            console.log(response.data);
             const arrOfUsers = response.data;
 
             const listOfUsers = arrOfUsers.map(user => {
@@ -29,7 +28,6 @@ class DataService {
                 return userProfile;
             });
 
-            console.log(listOfUsers);
             usersDataHandler(listOfUsers);
         }, (errorMsg) => errorHandler(errorMsg));
     }
@@ -37,12 +35,11 @@ class DataService {
     getAllPosts(handleAllPosts, errorHandler) {
         this.fetchDataService.get("Posts", response => {
             let arrOfPosts = response.data;
-            console.log(arrOfPosts);
 
 
             let allPosts = arrOfPosts.map(post => {
                 if (post.type === "text") {
-                    let postData = new PostDTO(post.dateCreated, post.id, post.text, post.type, post.userDisplayName, post.userId);
+                    let postData = new PostDTO(post.text, post.id, post.dateCreated, post.userId, post.userDisplayName, post.type, post.commentsNum);
                     return postData;
                 }
                 if (post.type == "video") {

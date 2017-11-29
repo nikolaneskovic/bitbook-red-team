@@ -1,11 +1,12 @@
 export class PostDTO{
-    constructor(dateCreated, id, text, type, userDisplayName, userId){
-        this._dateCreated = dateCreated;
-        this._id = id;
+    constructor(text, id, dateCreated, userId, userDisplayName, type, commentsNum){
         this._text = text;
-        this._type = type;
-        this._userDisplayName = userDisplayName;
+        this._id = id;
+        this._dateCreated = dateCreated;
         this._userId = userId;
+        this._userDisplayName = userDisplayName;
+        this._type = type;
+        this._commentsNum = commentsNum;
     }
 
 
@@ -14,6 +15,12 @@ export class PostDTO{
     }
     set dateCreated(newValue) {
         this._dateCreated = newValue;
+    }
+    get commentsNum() {
+        return this._commentsNum;
+    }
+    set commentsNum(newValue) {
+        this._commentsNum = newValue;
     }
     get id() {
         return this._id;

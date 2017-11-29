@@ -8,11 +8,12 @@ class Video extends React.Component {
     }
     render() {
         return (
-            <Link to="/feed/video"><div className="row videoPost">
+            <div className="row videoPost">
                 <iframe width="900" height="400" src={this.props.post.videoUrl} frameBorder="0" allowFullScreen></iframe>
-                <p className="col-4">{this.props.post.userDisplayName}</p>
+                <p className="col-4 typeOfPost">{this.props.post.userDisplayName}</p>
                 <p className="col-4 typeOfPost">Comments: {this.props.post.commentsNum}</p>
-            </div></Link>
+                <p className="col-4 linkBtn"><Link to={`/feed/video/${this.props.post.id}`}><img className="linkImg"src="../../../img/linkBtn.png" width="50px" height="50px" /></Link></p>
+            </div>
         );
     }
 }
