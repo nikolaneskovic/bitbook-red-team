@@ -44,7 +44,7 @@ class RegisterForm extends React.Component {
             repeatPassword: this.state.repeatPassword
         };
 
-        
+
         const emptyInput = this.handleErrorService.validateEmptyField(data);
         const passLength = this.handleErrorService.validateInputLength(data.password, 1);
         const invalidEmail = this.handleErrorService.validateEmail(data.email);
@@ -71,52 +71,34 @@ class RegisterForm extends React.Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col s12" id="form">
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <label> Username</label><br />
-                            <input id="input_text" type="text" data-length="25" name="username"
-                                value={this.state.username} onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <label> Password</label><br />
-                            <input id="input_text" type="password" data-length="25" name="password"
-                                value={this.state.password} onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <label> Name</label><br />
-                            <input id="input_text" type="text" data-length="25" name="name"
-                                value={this.state.name} onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <label> Email</label><br />
-                            <input id="input_text" type="email" data-length="25" name="email"
-                                value={this.state.email} onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <label> Repeat password</label><br />
-                            <input id="input_text" type="password" data-length="25" name="repeatPassword"
-                                value={this.state.repeatPassword} onChange={this.handleChange}
-                            />
-                        </div>
-                    </div>
+            <div className="row formStyle">
+                <div className="col-12">
+                    <label> Username</label><br />
+                    <input type="text" data-length="25" name="username"
+                        value={this.state.username} onChange={this.handleChange} placeholder="exampleUsername@example.com"
+                    />
 
-                    <button className="btn btn-secondary btn-lg" type="submit" name="action" id="login" onClick={this.onRegisterClick}>
-                        Register Now
-                    </button>
+                    <label> Password</label><br />
+                    <input type="password" data-length="25" name="password"
+                        value={this.state.password} onChange={this.handleChange} placeholder="examplePassword123"
+                    />
+
+                    <label> Name</label><br />
+                    <input type="text" data-length="25" name="name"
+                        value={this.state.name} onChange={this.handleChange} placeholder="Examplename"
+                    />
+
+                    <label>Email</label><br />
+                    <input type="email" data-length="25" name="email"
+                        value={this.state.email} onChange={this.handleChange} placeholder="exampleEmail@example.com"
+                    />
+
+                    <label> Repeat password</label><br />
+                    <input type="password" data-length="25" name="repeatPassword"
+                        value={this.state.repeatPassword} onChange={this.handleChange} placeholder="examplePassword123"
+                    />
+
+                    <button className="btnBlack" type="submit" name="action" id="login" onClick={this.onRegisterClick}>Register Now</button>
                     <div>{this.state.emptyInput}</div>
                     <div>{this.state.errorMsgServer}</div>
                     <div>{this.state.invalidEmail}</div>
@@ -124,7 +106,7 @@ class RegisterForm extends React.Component {
                     <div>{this.state.passNotMatch}</div>
 
                 </div>
-            </div >
+            </div>
         );
 
     }
