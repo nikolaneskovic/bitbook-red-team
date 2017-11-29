@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import PostDataService from "../../services/postDataService";
 import RedirectionService from "../../services/redirectService";
+import { WSAEINVALIDPROVIDER } from "constants";
 
 class Comments extends React.Component {
     constructor(props) {
@@ -31,7 +32,6 @@ class Comments extends React.Component {
             console.log(error);
         });
 
-        // this.redirectionService.redirect(`/video/${this.props.postId}`);
     }
 
 
@@ -40,10 +40,10 @@ class Comments extends React.Component {
             <div className="container">
                 <div className="row videoPost">
                     <input type="text" value={this.state.body} onChange={this.handleChange} />
-                    <button onClick={this.handleClick}>Comment</button>
+                    <button className="commentBtn" onClick={this.handleClick}>Comment</button>
                 </div>
             </div>
-            
+
         );
     };
 }

@@ -44,6 +44,7 @@ class VideoPage extends React.Component {
             <div className="container">
                 <div className="row videoPost">
                     <iframe width="900" height="400" src={this.state.videoUrl} frameBorder="0" allowFullScreen></iframe>
+                    <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
                     <ListOfComments postId={this.videoId} />
                 </div>
                 <Comments postId={this.videoId} />

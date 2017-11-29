@@ -86,7 +86,7 @@ class PostDataService {
             usersDataHandler(singleImage);
         }, errorMsg => errorHandler(errorMsg));
     }
-    
+
     getSingleTextPost(textId, dataHandler, errorHandler) {
         this.fetchDataService.get(`TextPosts/${textId}`, response => {
             let textPostData = response.data;
@@ -97,6 +97,13 @@ class PostDataService {
         }, errorMsg => errorHandler(errorMsg));
     }
 
+    deleteSinglePost(postId, postObject, dataHandler, errorHandler) {
+        this.fetchDataService.delete(`Posts/${postId}`, postObject, response => {
+            dataHandler(response);
+        }, error => {
+            errorHandler(error);
+        });
+    }
 }
 
 export default PostDataService;

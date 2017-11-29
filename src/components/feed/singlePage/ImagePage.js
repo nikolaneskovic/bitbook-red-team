@@ -45,6 +45,7 @@ class ImagePage extends React.Component {
             <div className="container">
                 <div className="row videoPost">
                     <img width="900" height="400" src={this.state.imageUrl} />
+                    <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
                 </div>
                 <ListOfComments postId={this.imageId} />
                 <Comments postId={this.imageId} />

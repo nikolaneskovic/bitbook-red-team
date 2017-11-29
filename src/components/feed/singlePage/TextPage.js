@@ -35,6 +35,7 @@ class TextPost extends React.Component {
             <div className="container">
                 <div className="row videoPost">
                     <p>{this.state.post.text}</p>
+                    <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
                     <ListOfComments postId={this.textId} />
                 </div>
                 <Comments postId={this.textId} />
