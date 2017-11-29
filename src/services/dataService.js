@@ -2,7 +2,7 @@ import FetchDataService from "./fetchDataService";
 import Profile from "../entities/profileDTO";
 import UserDTO from "../entities/userDTO";
 import VideoDTO from "../entities/videoDTO";
-import { PostDTO } from "../entities/postDTO";
+import PostDTO from "../entities/postDTO";
 import ImageDTO from "../entities/imageDTO";
 
 class DataService {
@@ -39,7 +39,7 @@ class DataService {
 
             let allPosts = arrOfPosts.map(post => {
                 if (post.type === "text") {
-                    let postData = new PostDTO(post.text, post.id, post.dateCreated, post.userId, post.userDisplayName, post.type, post.commentsNum);
+                    let postData = new PostDTO(post);
                     return postData;
                 }
                 if (post.type == "video") {
@@ -47,7 +47,7 @@ class DataService {
                     return videoData;
                 }
                 if (post.type == "image") {
-                    let imageData = new ImageDTO(post.imageUrl, post.id, post.dateCreated, post.userId,  post.userDisplayName, post.type, post.commentsNum);
+                    let imageData = new ImageDTO(post.imageUrl, post.id, post.dateCreated, post.userId, post.userDisplayName, post.type, post.commentsNum);
                     return imageData;
                 }
 

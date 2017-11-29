@@ -20,19 +20,19 @@ class AddBtn extends React.Component {
     render() {
         return (
 
-            <div className="btn-group row">
-                <button type="button" className="btn btn-danger">Add</button>
-                <button type="button" className="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span className="sr-only"></span>
-                </button>
-                <div className="dropdown-menu">
-                    <button name="image" className="dropdown-item" onClick={() => this.handleClick("image")}>Image</button>
-                    <button name="post" className="dropdown-item" onClick={() => this.handleClick("post")}>Post</button>
-                    <button name="video" className="dropdown-item" onClick={() => this.handleClick("video")}>Video</button>
+            <div className="col-2 offset-10">
+                <div className="btn-group">
+                    <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Add posts</button>
 
+                    <div className="dropdown-menu">
+                        <button name="image" className="dropdown-item" onClick={() => this.handleClick("image")}>Image</button>
+                        <button name="post" className="dropdown-item" onClick={() => this.handleClick("post")}>Post</button>
+                        <button name="video" className="dropdown-item" onClick={() => this.handleClick("video")}>Video</button>
+
+                    </div>
                 </div>
-
-            </div>);
+            </div >);
     }
 }
 

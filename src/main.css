@@ -124,6 +124,9 @@ padding: 100px;
 #thead a{
     color: #3b5998;
 }
+.btn-group{
+    padding: 20px;
+}
 .btnBlue{
 
     padding: 10px;

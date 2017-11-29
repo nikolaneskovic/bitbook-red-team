@@ -4,28 +4,31 @@ import Video from "./postTypeComponents/Video";
 import PropTypes from "prop-types";
 import Image from "./postTypeComponents/Image";
 import { posix } from "path";
+import FilterList from "./FilterList";
 
 class AllPosts extends React.Component {
     constructor(props) {
         super(props);
     }
+    
 
-    getComponentByType(post){
-        if(post.type==="text"){
+    getComponentByType(post, type) {
+        if (type === "text") {
             return <Post post={post} key={post.id} />;
         }
-        if(post.type ==="video"){
-            return <Video post={post} key={post.id}/>;
+        if (type === "video") {
+            return <Video post={post} key={post.id} />;
         }
-        if(post.type==="image"){
-            return <Image post={post} key={post.id}/>;
+        if (type === "image") {
+            return <Image post={post} key={post.id} />;
         }
     }
 
     render() {
         return (
             <div>
-                {this.props.posts.map(post => this.getComponentByType(post))}
+                <FilterList />
+                {this.props.posts.map(post => this.getComponentByType(post, post.type))}
             </div>
         );
     }

@@ -6,11 +6,11 @@ import PostDataService from "../../services/postDataService";
 import RedirectionService from "../../services/redirectService";
 
 import AddBtn from "./addBtn";
-//import { PostForm } from "./PostForm";
 import AddPost from "./modalBox/postModalBox";
 import AddVideo from "./modalBox/videoModalBox";
 import AddImage from "./modalBox/imageModalBox";
 import AllPosts from "./AllPosts";
+import FilterList from "./FilterList";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -70,7 +70,7 @@ class FeedPage extends React.Component {
         this.setState({ showModal: false });
         //fix this
         window.location.reload();
-        
+
         //this.redirectionService.redirect("/feed");
 
     }
@@ -96,8 +96,9 @@ class FeedPage extends React.Component {
     }
     render() {
         return (<div className='container'>
-            <AddBtn handleOpen={this.handleOpenModal} />
-
+            <div className="row">
+                <AddBtn handleOpen={this.handleOpenModal} />
+            </div>
             <Modal
                 className="Modal__Bootstrap modal-dialog"
                 isOpen={this.state.showModal}

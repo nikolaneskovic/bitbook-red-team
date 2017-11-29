@@ -1,5 +1,5 @@
-export class PostDTO{
-    constructor(text, id, dateCreated, userId, userDisplayName, type, commentsNum){
+export default class PostDTO {
+    constructor({ text, id, dateCreated, userId, userDisplayName, type, commentsNum }) {
         this._text = text;
         this._id = id;
         this._dateCreated = dateCreated;
@@ -8,8 +8,6 @@ export class PostDTO{
         this._type = type;
         this._commentsNum = commentsNum;
     }
-
-
     get dateCreated() {
         return this._dateCreated;
     }

@@ -86,12 +86,14 @@ class PostDataService {
             usersDataHandler(singleImage);
         }, errorMsg => errorHandler(errorMsg));
     }
-    getSingleTextPost(textId, usersDataHandler, errorHandler) {
+    
+    getSingleTextPost(textId, dataHandler, errorHandler) {
         this.fetchDataService.get(`TextPosts/${textId}`, response => {
             let textPostData = response.data;
-            console.log(textPostData);
-            let singleTextPost = new PostDTO(textPostData.text, textPostData.id, textPostData.dateCreated, textPostData.userId,textPostData.userDisplayName, textPostData.type, textPostData.commentsNum);
-            usersDataHandler(singleTextPost);
+            console.table(textPostData);
+            let singleTextPost = new PostDTO(textPostData);
+            console.table(singleTextPost);
+            dataHandler(singleTextPost);
         }, errorMsg => errorHandler(errorMsg));
     }
 
