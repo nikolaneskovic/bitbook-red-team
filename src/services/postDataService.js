@@ -97,8 +97,8 @@ class PostDataService {
         }, errorMsg => errorHandler(errorMsg));
     }
 
-    deleteSinglePost(postId, postObject, dataHandler, errorHandler) {
-        this.fetchDataService.delete(`Posts/${postId}`, postObject, response => {
+    deleteSinglePost(postId, dataHandler, errorHandler) {
+        this.fetchDataService.delete(`Posts/${postId}`, response => {
             dataHandler(response);
         }, error => {
             errorHandler(error);

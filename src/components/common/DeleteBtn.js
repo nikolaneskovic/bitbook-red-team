@@ -1,17 +1,26 @@
 import React, { Component } from "react";
-import PostDataService from "../../services/postDataService";
 import PropTypes from "prop-types";
 
-class DeleteButton extends Component {
-    constructor(props){
-        super(props);
-        this.state={};
-        this.postDataService = new PostDataService();
-    }
-    handleClick(){
-        // let postId = this.props.postObject.id;
+import PostDataService from "../../services/postDataService";
+import RedirectionService from "../../services/redirectService";
 
-        this.postDataService.deleteSinglePost();
+class DeleteButton extends Component {
+    constructor(props) {
+        super(props);
+
+        this.postDataService = new PostDataService();
+        this.redirectionService = new RedirectionService();
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick() {
+
+        let postId = this.props.postObject.id;
+        this.postDataService.deleteSinglePost(postId, response => {
+           
+        }, error => {
+            // console.log(error);
+        });
+
     }
     render() {
         return (

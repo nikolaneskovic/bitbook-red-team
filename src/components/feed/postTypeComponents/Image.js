@@ -6,6 +6,7 @@ import DeleteButton from "../../common/DeleteBtn";
 class Image extends React.Component {
     constructor(props) {
         super(props);
+        this.postObj = this.props.post;        
     }
     render() {
         return (
@@ -14,7 +15,7 @@ class Image extends React.Component {
                     <img className="postImage" src={this.props.post.imageUrl} width="100%" />
                 </div>
                 <div className="col-1 offset-2">
-                    <DeleteButton />
+                    <DeleteButton  postObject={this.postObj}/>
                 </div>
                 <div className="col-12">
                     <div className="borderTop row">

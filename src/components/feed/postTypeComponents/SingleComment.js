@@ -9,10 +9,7 @@ class SingleComment extends React.Component {
     render() {
         return (
             <div className="row commentSection">
-                <div className="col-3 ">
-                    <img />
-                </div>
-                <div className="col-9">
+                <div className="col-12">
                     <p ><strong>{this.props.comment.authorName}</strong>{this.props.comment.body}</p>
                     <p>Last post at: {new Date(this.props.comment.dateCreated).toLocaleTimeString()}</p>
                 </div>

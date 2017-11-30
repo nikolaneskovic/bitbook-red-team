@@ -31,6 +31,7 @@ class Comments extends React.Component {
         }, error => {
             console.log(error);
         });
+        this.redirectionService.redirect(`feed/${this.props.type}/${this.props.postId}`);
 
     }
 
@@ -49,6 +50,7 @@ class Comments extends React.Component {
 }
 
 Comments.propTypes = {
-    postId: PropTypes.number
+    postId: PropTypes.number,
+    type: PropTypes.string
 };
 export default Comments;

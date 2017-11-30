@@ -36,10 +36,14 @@ class FeedPage extends React.Component {
     }
     componentDidMount() {
 
+        this.loadData();
+
+    }
+
+    loadData() {
         this.dataService.getAllPosts((posts) => {
             this.setState({ allPosts: posts });
         }, error => this.setState({ errorMsgServer: error }));
-
     }
 
     addVideoOnFeedPage(newVideo) {
@@ -107,7 +111,7 @@ class FeedPage extends React.Component {
 
             </Modal>
 
-            <AllPosts posts={this.state.allPosts} />
+            <AllPosts posts={this.state.allPosts}  loadData= {this.loadData} />
             <div>{this.state.errorMsgServer}</div>
 
         </div>);

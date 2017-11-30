@@ -17,6 +17,7 @@ class AllPosts extends React.Component {
         this.filterSelected = this.filterSelected.bind(this);
     }
 
+    
 
     getComponentByType(post, type) {
         if (type === "text" && (this.state.filterType == "text" || this.state.filterType == "all")) {

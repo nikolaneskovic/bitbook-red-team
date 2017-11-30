@@ -6,6 +6,7 @@ import DeleteButton from "../../common/DeleteBtn";
 class Video extends React.Component {
     constructor(props) {
         super(props);
+        this.postObj = this.props.post;        
     }
     render() {
         return (
@@ -14,7 +15,7 @@ class Video extends React.Component {
                     <iframe width="800" height="400" src={this.props.post.videoUrl} frameBorder="0" allowFullScreen></iframe>
                 </div>
                 <div className="col-1 offset-2">
-                    <DeleteButton />
+                    <DeleteButton  postObject={this.postObj}/>
                 </div>
                 <div className="col-12">
                     <div className="borderTop row">

@@ -47,7 +47,7 @@ class VideoPage extends React.Component {
                     <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
                     <ListOfComments postId={this.videoId} />
                 </div>
-                <Comments postId={this.videoId} />
+                <Comments postId={this.videoId} type={this.state.post.type}/>
             </div>
         );
     };

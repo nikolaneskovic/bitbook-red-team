@@ -8,6 +8,7 @@ import DeleteButton from "../../common/DeleteBtn";
 class Post extends React.Component {
     constructor(props) {
         super(props);
+        this.postObj = this.props.post;
     }
     render() {
         return (
@@ -16,7 +17,7 @@ class Post extends React.Component {
                     <p>{this.props.post.text}</p>
                 </div>
                 <div className="col-1 offset-2">
-                    <DeleteButton postObject = {this.props.post}/>
+                    <DeleteButton postObject={this.postObj} />
                 </div>
                 <div className="col-12">
                     <div className="borderTop row">

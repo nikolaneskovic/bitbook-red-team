@@ -48,7 +48,7 @@ class ImagePage extends React.Component {
                     <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
                 </div>
                 <ListOfComments postId={this.imageId} />
-                <Comments postId={this.imageId} />
+                <Comments postId={this.imageId} type={this.state.post.type} />
             </div>
         );
     };

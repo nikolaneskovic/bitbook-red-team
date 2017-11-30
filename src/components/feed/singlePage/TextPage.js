@@ -38,7 +38,7 @@ class TextPost extends React.Component {
                     <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
                     <ListOfComments postId={this.textId} />
                 </div>
-                <Comments postId={this.textId} />
+                <Comments postId={this.textId} type={this.state.post.type}/>
             </div>
         );
     };
