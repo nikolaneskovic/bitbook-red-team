@@ -29,8 +29,8 @@ class AddVideo extends React.Component {
     handleSaveClicked() {
         const videoUrl = this.state.videoUrl;
         const splitedVideoUrl = videoUrl.split("=");
-
         this.props.showVideoPost(`${YOUTUBE_VIDEO_URL}${splitedVideoUrl[1]}`);
+        
     }
 
     render() {

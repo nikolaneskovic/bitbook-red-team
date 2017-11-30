@@ -3,26 +3,39 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import PostDataService from "../../../services/postDataService";
-import { error } from "util";
-
+import DataService from "../../../services/dataService";
 
 
 class PostOnFeedPage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            myId: ""
+        };
         this.postObj = this.props.post;
         this.getComponentByType = this.getComponentByType.bind(this);
         this.postDataService = new PostDataService();
         this.deleteButton = this.deleteButton.bind(this);
+        this.dataService = new DataService();
+        this.showDeleteButton= this.showDeleteButton.bind(this);
     }
     deleteButton() {
-        this.postDataService.deleteSinglePost(this.props.post.id, response=>{
+        this.postDataService.deleteSinglePost(this.props.post.id, response => {
             this.props.refreshPage();
-        }, error=>{
+        }, error => {
             console.log(error);
         });
+    }
 
+    showDeleteButton() {
+        this.dataService.getProfile((profile) => {
+            this.setState({ myId: profile.userId });
+        }, error => { console.log(error); });
 
+        if (this.props.post.userId === this.state.myId) {
+            return <button type="button" className="btn btn-outline-secondary" onClick={this.deleteButton}>x</button>;
+        }
+        return;
     }
     getComponentByType(type) {
         if (type === "text") {
@@ -44,7 +57,8 @@ class PostOnFeedPage extends React.Component {
                     {this.getComponentByType(this.props.post.type)}
                 </div>
                 <div className="col-1 offset-2">
-                    <button type="button" className="btn btn-outline-secondary" onClick={this.deleteButton}>x</button>
+                    {this.showDeleteButton()}
+                    {/* <button type="button" className="btn btn-outline-secondary" onClick={this.deleteButton}>x</button> */}
                 </div>
                 <div className="col-12">
                     <div className="borderTop row">

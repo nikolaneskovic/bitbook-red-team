@@ -47,7 +47,7 @@ class FeedPage extends React.Component {
 
     addVideoOnFeedPage(newVideo) {
         this.postDataService.postVideo(newVideo, (response) => {
-            console.log(response);
+            this.handleCloseModal();
         }, error => {
             console.log(error);
         });
@@ -55,7 +55,7 @@ class FeedPage extends React.Component {
     }
     addImageOnFeedPage(newImage) {
         this.postDataService.postImage(newImage, (response) => {
-            console.log(response);
+            this.handleCloseModal();
         }, error => {
             console.log(error);
         });
@@ -63,7 +63,7 @@ class FeedPage extends React.Component {
 
     addTextPostOnFeedPage(newText) {
         this.postDataService.postText(newText, (response) => {
-            console.log(response);
+            this.handleCloseModal();
         }, error => {
             console.log(error);
         });

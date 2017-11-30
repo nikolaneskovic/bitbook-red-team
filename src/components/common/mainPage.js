@@ -18,7 +18,6 @@ class MainPage extends React.Component {
         return (
             <div>
                 <Header />
-
                 <Switch>
                     <Route exact path="/profile" component={ProfilePage} />
                     <Route exact path="/people" component={People} />

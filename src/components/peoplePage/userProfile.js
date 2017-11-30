@@ -1,21 +1,20 @@
 import React from "react";
 import DataService from "../../services/dataService";
-import { IMAGE_PLACE_HOLDER } from "../../constants";
+import { IMAGE_PLACEHOLDER } from "../../constants";
 import Profile from "../../entities/profileDTO";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { error } from "util";
 
 
 class UserProfile extends React.Component {
 
     constructor(props) {
         super(props);
-        this.imagePlaceHolder = IMAGE_PLACE_HOLDER;
+        this.imagePlaceholder = IMAGE_PLACEHOLDER;
 
         this.state = {
             name: "",
-            avatarUrl: this.imagePlaceHolder,
+            avatarUrl: this.imagePlaceholder,
             commentsCount: "",
             postsCount: "",
             about: "",
@@ -39,7 +38,7 @@ class UserProfile extends React.Component {
             let user = response.data;
             this.setState({
                 name: user.name,
-                avatarUrl: user.avatarUrl || this.imagePlaceHolder,
+                avatarUrl: user.avatarUrl || this.imagePlaceholder,
                 commentsCount:  user.commentsCount,
                 postsCount:  user.postsCount,
                 about:  user.about,

@@ -2,7 +2,7 @@ import React from "react";
 import ReactModal from "react-modal";
 import { Link } from "react-router-dom";
 
-import { IMAGE_PLACE_HOLDER } from "../../constants";
+import { IMAGE_PLACEHOLDER } from "../../constants";
 import DataService from "../../services/dataService";
 import EditProfile from "./editProfile";
 import Profile from "../../entities/profileDTO";
@@ -11,11 +11,11 @@ class ProfilePage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.imagePlaceHolder = IMAGE_PLACE_HOLDER;
+        this.imagePlaceholder = IMAGE_PLACEHOLDER;
 
         this.state = {
             name: "",
-            avatarUrl: this.imagePlaceHolder,
+            avatarUrl: this.imagePlaceholder,
             commentsCount: "",
             postsCount: "",
             about: "",
