@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import PostDataService from "../../../services/postDataService";
+import { error } from "util";
+
 
 
 class PostOnFeedPage extends React.Component {
@@ -9,6 +12,17 @@ class PostOnFeedPage extends React.Component {
         super(props);
         this.postObj = this.props.post;
         this.getComponentByType = this.getComponentByType.bind(this);
+        this.postDataService = new PostDataService();
+        this.deleteButton = this.deleteButton.bind(this);
+    }
+    deleteButton() {
+        this.postDataService.deleteSinglePost(this.props.post.id, response=>{
+            this.props.refreshPage();
+        }, error=>{
+            console.log(error);
+        });
+
+
     }
     getComponentByType(type) {
         if (type === "text") {
@@ -30,6 +44,7 @@ class PostOnFeedPage extends React.Component {
                     {this.getComponentByType(this.props.post.type)}
                 </div>
                 <div className="col-1 offset-2">
+                    <button type="button" className="btn btn-outline-secondary" onClick={this.deleteButton}>x</button>
                 </div>
                 <div className="col-12">
                     <div className="borderTop row">
@@ -44,7 +59,8 @@ class PostOnFeedPage extends React.Component {
 }
 
 PostOnFeedPage.propTypes = {
-    post: PropTypes.object
+    post: PropTypes.object,
+    refreshPage: PropTypes.func
 
 };
 export default PostOnFeedPage;

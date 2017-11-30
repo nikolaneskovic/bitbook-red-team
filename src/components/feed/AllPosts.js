@@ -12,6 +12,7 @@ class AllPosts extends React.Component {
             filterType: "all"
         };
         this.filterSelected = this.filterSelected.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
     }
 
 
@@ -35,19 +36,23 @@ class AllPosts extends React.Component {
         this.setState({
             filterType: type
         });
-    }
 
+    }
+    refreshPage(){
+        this.props.refreshPage();
+    }
     render() {
         return (
             <div>
                 <FilterList onFilterSelected={this.filterSelected} />
-                {this.props.posts.map(post => <PostOnFeedPage key={post.id} post={post} />)}
+                {this.props.posts.map(post => <PostOnFeedPage key={post.id} post={post} refreshPage={this.refreshPage} />)}
             </div>
         );
     }
 }
 AllPosts.propTypes = {
     posts: PropTypes.array,
+    refreshPage: PropTypes.func
 
 };
 

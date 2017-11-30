@@ -33,6 +33,7 @@ class FeedPage extends React.Component {
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.addImageOnFeedPage = this.addImageOnFeedPage.bind(this);
         this.addTextPostOnFeedPage = this.addTextPostOnFeedPage.bind(this);
+        this.loadData = this.loadData.bind(this);
     }
     componentDidMount() {
         this.loadData();
@@ -105,7 +106,7 @@ class FeedPage extends React.Component {
 
             </Modal>
 
-            <AllPosts posts={this.state.allPosts} />
+            <AllPosts posts={this.state.allPosts} refreshPage={this.loadData} />
             <div>{this.state.errorMsgServer}</div>
 
         </div>);
