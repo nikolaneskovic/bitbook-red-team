@@ -11,11 +11,11 @@ class UserProfile extends React.Component {
 
     constructor(props) {
         super(props);
-        const imagePlaceHolder = IMAGE_PLACE_HOLDER;
+        this.imagePlaceHolder = IMAGE_PLACE_HOLDER;
 
         this.state = {
             name: "",
-            avatarUrl: imagePlaceHolder,
+            avatarUrl: this.imagePlaceHolder,
             commentsCount: "",
             postsCount: "",
             about: "",
@@ -36,11 +36,10 @@ class UserProfile extends React.Component {
 
     showUserData(peopleId){
         this.dataService.getUserProfile(peopleId, (response)=>{
-            // console.log(response.data);
             let user = response.data;
             this.setState({
                 name: user.name,
-                avatarUrl: user.avatarUrl,
+                avatarUrl: user.avatarUrl || this.imagePlaceHolder,
                 commentsCount:  user.commentsCount,
                 postsCount:  user.postsCount,
                 about:  user.about,

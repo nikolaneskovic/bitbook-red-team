@@ -26,7 +26,6 @@ class MainPage extends React.Component {
                     <Route exact path="/feed" component={FeedPage} />
                     <Route path="/feed/:type/:id" component={SinglePostPage} />
                 </Switch>
-
                 <Footer />
             </div>
         );
