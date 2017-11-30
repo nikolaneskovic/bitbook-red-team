@@ -60,8 +60,8 @@ class UserProfile extends React.Component {
                     <div className='col-5'>
                         <img src={this.state.avatarUrl} width="100%" id="slika" />
                         
-                        <p><Link to="#"><button type="button" className="btn btn-primary"> Comments count: {this.state.commentsCount}</button></Link></p>
-                        <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.postsCount}</button></Link></p>
+                        <p><strong> Comments count: </strong>{this.state.commentsCount}</p>
+                        <p><strong> Posts count: </strong>{this.state.postsCount}</p>
                     </div>
                     <div className='col-7'>
                         <h3>{this.state.name}</h3>

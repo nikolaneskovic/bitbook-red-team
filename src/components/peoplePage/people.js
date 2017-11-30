@@ -61,7 +61,6 @@ class People extends React.Component {
     }
     render() {
         let userList = this.state.filteredUsers;
-        
         if (!userList) {
             return (
                 <div className="center-align">

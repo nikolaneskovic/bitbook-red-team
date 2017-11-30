@@ -21,10 +21,11 @@ class DataService {
 
     getUsers(usersDataHandler, errorHandler) {
         this.fetchDataService.get("users", response => {
+            console.log(response);
             const arrOfUsers = response.data;
 
             const listOfUsers = arrOfUsers.map(user => {
-                let userProfile = new UserDTO(user.aboutShort, user.avatarUrl, user.id, user.lastPostDate, user.name);
+                let userProfile = new UserDTO(user.aboutShort, user.avatarUrl, user.id, user.lastPostDate, user.name, user.about);
                 return userProfile;
             });
 

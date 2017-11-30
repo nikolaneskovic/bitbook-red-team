@@ -61,7 +61,7 @@ class SinglePostPage extends React.Component {
         }
         if (type === "image") {
             console.log(this.state.post.imageUrl);
-            return <img width="900" height="400" src={this.state.post.imageUrl} />;
+            return <img width="100%" height="400" src={this.state.post.imageUrl} />;
         }
         if (type === "video") {
             return <iframe width="900" height="400" src={this.state.post.videoUrl} frameBorder="0" allowFullScreen></iframe>;
@@ -72,7 +72,7 @@ class SinglePostPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container sngPstPg">
                 <div className="row videoPost">
                     {this.getComponent(this.state.post.type)}
                     <p className="col-12"><strong>Author:</strong> {this.state.post.userDisplayName}</p>

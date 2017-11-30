@@ -25,7 +25,7 @@ const User = (props) => {
                 </div>
                 <div className="col-6">
                     <h4> {props.user.name}</h4>
-                    <div><span>About</span>{props.user.about}</div>
+                    <div>{props.user.aboutShort}</div>
                     <p className="btn btn-light"><Link to={`/people/${props.user.id}`}>Find out more</Link></p>
                 </div>
                 <div className='col-3 '>
