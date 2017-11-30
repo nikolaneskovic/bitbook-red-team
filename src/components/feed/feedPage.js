@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 
-import DataService from "../../services/dataService";
 import PostDataService from "../../services/postDataService";
 import RedirectionService from "../../services/redirectService";
 
@@ -23,7 +22,6 @@ class FeedPage extends React.Component {
             selectedType: ""
         };
 
-        this.dataService = new DataService();
         this.postDataService = new PostDataService();
         this.redirectionService = new RedirectionService();
 

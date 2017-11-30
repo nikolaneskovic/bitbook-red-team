@@ -1,5 +1,4 @@
 import FetchDataService from "../services/fetchDataService";
-import { error } from "util";
 import VideoDTO from "../entities/videoDTO";
 import CommentDTO from "../entities/commentDTO";
 import ImageDTO from "../entities/imageDTO";
@@ -67,6 +66,7 @@ class PostDataService {
                 }
                 if (post.type == "video") {
                     let videoData = new VideoDTO(post);
+                    return videoData;
                 }
                 if (post.type == "image") {
                     let imageData = new ImageDTO(post);

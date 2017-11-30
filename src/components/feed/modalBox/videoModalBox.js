@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { YOUTUBE_VIDEO_URL } from "../../../constants";
+import {YOUTUBE_VIDEO_URL} from "../../../constants";
 
 
 class AddVideo extends React.Component {
@@ -30,7 +30,7 @@ class AddVideo extends React.Component {
         const videoUrl = this.state.videoUrl;
         const splitedVideoUrl = videoUrl.split("=");
         this.props.showVideoPost(`${YOUTUBE_VIDEO_URL}${splitedVideoUrl[1]}`);
-        
+        console.log(`${YOUTUBE_VIDEO_URL}${splitedVideoUrl[1]}`);
     }
 
     render() {
