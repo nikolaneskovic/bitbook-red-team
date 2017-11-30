@@ -7,9 +7,7 @@ import ProfilePage from "../profile/profilePage";
 import People from "../peoplePage/people";
 import UserProfile from "../peoplePage/userProfile";
 import FeedPage from "../feed/feedPage";
-import VideoPage from "../feed/singlePage/VideoPage";
-import ImagePage from "../feed/singlePage/ImagePage";
-import TextPage from "../feed/singlePage/TextPage";
+import SinglePostPage from "../feed/singlePage/SinglePostPage";
 
 
 class MainPage extends React.Component {
@@ -26,9 +24,7 @@ class MainPage extends React.Component {
                     <Route exact path="/people" component={People} />
                     <Route path="/people/:id" component={UserProfile} />
                     <Route exact path="/feed" component={FeedPage} />
-                    <Route path="/feed/video/:id" component={VideoPage} />
-                    <Route path="/feed/image/:id" component={ImagePage} />
-                    <Route path="/feed/text/:id" component={TextPage} />
+                    <Route path="/feed/:type/:id" component={SinglePostPage} />
                 </Switch>
 
                 <Footer />

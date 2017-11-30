@@ -35,14 +35,13 @@ class FeedPage extends React.Component {
         this.addTextPostOnFeedPage = this.addTextPostOnFeedPage.bind(this);
     }
     componentDidMount() {
-
         this.loadData();
-
     }
 
     loadData() {
-        this.dataService.getAllPosts((posts) => {
+        this.postDataService.getAllPosts((posts) => {
             this.setState({ allPosts: posts });
+            console.log(this.state.allPosts);
         }, error => this.setState({ errorMsgServer: error }));
     }
 
@@ -74,9 +73,6 @@ class FeedPage extends React.Component {
         this.setState({ showModal: false });
         //fix this
         window.location.reload();
-
-        //this.redirectionService.redirect("/feed");
-
     }
 
     handleOpenModal(type) {
@@ -111,7 +107,7 @@ class FeedPage extends React.Component {
 
             </Modal>
 
-            <AllPosts posts={this.state.allPosts}  loadData= {this.loadData} />
+            <AllPosts posts={this.state.allPosts} />
             <div>{this.state.errorMsgServer}</div>
 
         </div>);

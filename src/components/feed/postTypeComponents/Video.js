@@ -21,7 +21,7 @@ class Video extends React.Component {
                     <div className="borderTop row">
                         <p className="col-4 typeOfPost ">{this.props.post.userDisplayName}</p>
                         <p className="col-4 typeOfPost">Comments: {this.props.post.commentsNum}</p>
-                        <p className="col-4 linkBtn"><Link to={`/feed/video/${this.props.post.id}`}><img className="linkImg" src="../../../img/linkBtn.png" width="50px" height="50px" /></Link></p>
+                        <p className="col-4 linkBtn"><Link to={`/feed/${this.postObj.type}/${this.props.post.id}`}><img className="linkImg" src="../../../img/linkBtn.png" width="50px" height="50px" /></Link></p>
                     </div>
                 </div>
             </div>

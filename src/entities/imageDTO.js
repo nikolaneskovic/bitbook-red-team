@@ -1,5 +1,5 @@
 export default class ImageDTO {
-    constructor(imageUrl, id, dateCreated, userId,  userDisplayName, type, commentsNum ) {
+    constructor({imageUrl, id, dateCreated, userId,  userDisplayName, type, commentsNum}) {
         this._imageUrl= imageUrl;
         this._dateCreated = dateCreated;
         this._id = id;

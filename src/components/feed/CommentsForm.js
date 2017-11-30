@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PostDataService from "../../services/postDataService";
-import RedirectionService from "../../services/redirectService";
-import { WSAEINVALIDPROVIDER } from "constants";
 
-class Comments extends React.Component {
+class CommentsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,27 +9,12 @@ class Comments extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-
-        this.postDataService = new PostDataService();
-        this.redirectionService = new RedirectionService();
     }
     handleChange(event) {
         this.setState({ body: event.target.value });
-
     }
     handleClick() {
-        let commentObj = {
-            body: this.state.body,
-            postId: this.props.postId
-        };
-
-        this.postDataService.postComment(commentObj, response => {
-            console.log(response);
-        }, error => {
-            console.log(error);
-        });
-        this.redirectionService.redirect(`feed/${this.props.type}/${this.props.postId}`);
-
+        this.props.saveComment(this.state.body);
     }
 
 
@@ -49,8 +31,9 @@ class Comments extends React.Component {
     };
 }
 
-Comments.propTypes = {
+CommentsForm.propTypes = {
     postId: PropTypes.number,
-    type: PropTypes.string
+    type: PropTypes.string,
+    saveComment: PropTypes.func
 };
-export default Comments;
+export default CommentsForm;

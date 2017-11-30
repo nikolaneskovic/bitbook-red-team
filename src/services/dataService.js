@@ -32,31 +32,7 @@ class DataService {
         }, (errorMsg) => errorHandler(errorMsg));
     }
 
-    getAllPosts(handleAllPosts, errorHandler) {
-        this.fetchDataService.get("Posts", response => {
-            let arrOfPosts = response.data;
-
-
-            let allPosts = arrOfPosts.map(post => {
-                if (post.type === "text") {
-                    let postData = new PostDTO(post);
-                    return postData;
-                }
-                if (post.type == "video") {
-                    let videoData = new VideoDTO(post.videoUrl, post.id, post.dateCreated, post.userId, post.userDisplayName, post.type, post.commentsNum);
-                    return videoData;
-                }
-                if (post.type == "image") {
-                    let imageData = new ImageDTO(post.imageUrl, post.id, post.dateCreated, post.userId, post.userDisplayName, post.type, post.commentsNum);
-                    return imageData;
-                }
-
-
-            });
-            handleAllPosts(allPosts);
-        }, errorMsg => errorHandler(errorMsg));
-    }
-
+  
     getUserProfile(userId, usersDataHandler, errorHandler) {
         this.fetchDataService.get(`users/${userId}`, response => {
             usersDataHandler(response);
