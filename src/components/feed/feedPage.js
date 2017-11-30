@@ -11,6 +11,7 @@ import AddVideo from "./modalBox/videoModalBox";
 import AddImage from "./modalBox/imageModalBox";
 import AllPosts from "./AllPosts";
 import FilterList from "./FilterList";
+import Pagination from "./Pagination";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -70,8 +71,8 @@ class FeedPage extends React.Component {
     }
 
     handleCloseModal() {
-        this.setState({ showModal: false });
         this.loadData();
+        this.setState({ showModal: false });
     }
 
     handleOpenModal(type) {
@@ -97,6 +98,7 @@ class FeedPage extends React.Component {
         return (<div className='container'>
             <div className="row">
                 <AddBtn handleOpen={this.handleOpenModal} />
+                <Pagination />
             </div>
             <Modal
                 className="Modal__Bootstrap modal-dialog"

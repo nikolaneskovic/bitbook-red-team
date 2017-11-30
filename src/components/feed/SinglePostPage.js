@@ -25,6 +25,7 @@ class SinglePostPage extends React.Component {
         this.fetchPostData(this.postId, this.postType);
         this.getListOfComments();
     }
+   
 
     getListOfComments() {
         this.postDataService.getAllComments(this.postId, listOfComments => {
