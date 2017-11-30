@@ -6,8 +6,8 @@ import Footer from "./footer";
 import ProfilePage from "../profile/profilePage";
 import People from "../peoplePage/people";
 import UserProfile from "../peoplePage/userProfile";
-import FeedPage from "../feed/feedPage";
-import SinglePostPage from "../feed/singlePage/SinglePostPage";
+import FeedPage from "../feed/FeedPage";
+import SinglePostPage from "../feed/SinglePostPage";
 
 
 class MainPage extends React.Component {

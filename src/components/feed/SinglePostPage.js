@@ -1,8 +1,8 @@
 import React from "react";
-import PostDataService from "../../../services/postDataService";
+import PostDataService from "../../services/postDataService";
 import PropTypes from "prop-types";
-import CommentsForm from "./../CommentsForm";
-import ListOfComments from "./../ListOfComments";
+import CommentsForm from "./CommentsForm";
+import ListOfComments from "./ListOfComments";
 
 class SinglePostPage extends React.Component {
     constructor(props) {
@@ -15,8 +15,6 @@ class SinglePostPage extends React.Component {
 
         this.postId = parseInt(this.props.match.params.id);
         this.postType = this.props.match.params.type;
-
-        
 
         this.postDataService = new PostDataService();
         this.createComment = this.createComment.bind(this);
@@ -31,7 +29,6 @@ class SinglePostPage extends React.Component {
     getListOfComments() {
         this.postDataService.getAllComments(this.postId, listOfComments => {
             this.setState({ allComments: listOfComments });
-
         }, error => {
             console.log(error);
         });
@@ -51,7 +48,7 @@ class SinglePostPage extends React.Component {
             postId: this.postId
         };
         this.postDataService.postComment(commentObj, response => {
-            console.log(response);
+            this.getListOfComments();
         }, error => {
             console.log(error);
         });
@@ -62,6 +59,7 @@ class SinglePostPage extends React.Component {
             return <p>{this.state.post.text}</p>;
         }
         if (type === "image") {
+            console.log(this.state.post.imageUrl);
             return <img width="900" height="400" src={this.state.post.imageUrl} />;
         }
         if (type === "video") {
@@ -76,7 +74,7 @@ class SinglePostPage extends React.Component {
             <div className="container">
                 <div className="row videoPost">
                     {this.getComponent(this.state.post.type)}
-                    <p className="col-12"><strong>Author:</strong> {this.state.userDisplayName}</p>
+                    <p className="col-12"><strong>Author:</strong> {this.state.post.userDisplayName}</p>
 
                     <ListOfComments allComments={this.state.allComments} />
                 </div>

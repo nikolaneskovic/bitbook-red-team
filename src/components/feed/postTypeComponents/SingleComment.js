@@ -10,7 +10,7 @@ class SingleComment extends React.Component {
         return (
             <div className="row commentSection">
                 <div className="col-12">
-                    <p ><strong>{this.props.comment.authorName}</strong>{this.props.comment.body}</p>
+                    <p ><strong>{this.props.comment.authorName}</strong> {this.props.comment.body}</p>
                     <p>Last post at: {new Date(this.props.comment.dateCreated).toLocaleTimeString()}</p>
                 </div>
 

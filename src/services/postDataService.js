@@ -48,7 +48,7 @@ class PostDataService {
             let listOfComments = response.data;
 
             listOfComments = listOfComments.map(comment => {
-                let commentData = new CommentDTO(comment.id, comment.dateCreated, comment.body, comment.postId, comment.authorName, comment.authorId);
+                let commentData = new CommentDTO(comment);
                 return commentData;
             });
             handleComments(listOfComments);
@@ -59,6 +59,7 @@ class PostDataService {
     getAllPosts(handleAllPosts, errorHandler) {
         this.fetchDataService.get("Posts", response => {
             let arrOfPosts = response.data;
+
             let allPosts = arrOfPosts.map(post => {
                 if (post.type === "text") {
                     let postData = new PostDTO(post);
@@ -78,6 +79,7 @@ class PostDataService {
 
 
     getSinglePost(postId, type, dataHandler, errorHandler) {
+
         if (type === "text") {
             this.fetchDataService.get(`TextPosts/${postId}`, response => {
                 let singleTextPost = new PostDTO(response.data);
@@ -87,13 +89,13 @@ class PostDataService {
         if (type === "image") {
             this.fetchDataService.get(`ImagePosts/${postId}`, response => {
                 let singleImage = new ImageDTO(response.data);
-                usersDataHandler(singleImage);
+                dataHandler(singleImage);
             }, errorMsg => errorHandler(errorMsg));
         }
         if (type === "video") {
             this.fetchDataService.get(`VideoPosts/${postId}`, response => {
                 let singleVideo = new VideoDTO(response.data);
-                usersDataHandler(singleVideo);
+                dataHandler(singleVideo);
             }, errorMsg => errorHandler(errorMsg));
         }
 

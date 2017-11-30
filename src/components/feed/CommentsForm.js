@@ -15,6 +15,7 @@ class CommentsForm extends React.Component {
     }
     handleClick() {
         this.props.saveComment(this.state.body);
+        this.setState({body:""});
     }
 
 

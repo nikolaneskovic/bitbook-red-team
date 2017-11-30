@@ -41,7 +41,6 @@ class FeedPage extends React.Component {
     loadData() {
         this.postDataService.getAllPosts((posts) => {
             this.setState({ allPosts: posts });
-            console.log(this.state.allPosts);
         }, error => this.setState({ errorMsgServer: error }));
     }
 
@@ -71,8 +70,7 @@ class FeedPage extends React.Component {
 
     handleCloseModal() {
         this.setState({ showModal: false });
-        //fix this
-        window.location.reload();
+        this.loadData();
     }
 
     handleOpenModal(type) {
