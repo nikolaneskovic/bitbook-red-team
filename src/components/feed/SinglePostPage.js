@@ -25,7 +25,7 @@ class SinglePostPage extends React.Component {
         this.fetchPostData(this.postId, this.postType);
         this.getListOfComments();
     }
-   
+
 
     getListOfComments() {
         this.postDataService.getAllComments(this.postId, listOfComments => {
@@ -37,7 +37,7 @@ class SinglePostPage extends React.Component {
 
     fetchPostData(postId, postType) {
         this.postDataService.getSinglePost(postId, postType, post => {
-            this.setState({post});
+            this.setState({ post });
         }, error => {
             console.log("ERR ", error);
         });
@@ -74,9 +74,10 @@ class SinglePostPage extends React.Component {
         return (
             <div className="container sngPstPg">
                 <div className="row videoPost">
-                    {this.getComponent(this.state.post.type)}
+                    <div className="col-12">
+                        {this.getComponent(this.state.post.type)}
+                    </div>
                     <p className="col-12"><strong>Author:</strong> {this.state.post.userDisplayName}</p>
-
                     <ListOfComments allComments={this.state.allComments} />
                 </div>
                 <CommentsForm saveComment={this.createComment} />

@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import PostOnFeedPage from "./postTypeComponents/PostOnFeedPage";
-
 import FilterList from "./FilterList";
 
 class AllPosts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filterType: "all"
+            filterType: "all",
+
         };
         this.filterSelected = this.filterSelected.bind(this);
         this.refreshPage = this.refreshPage.bind(this);
@@ -17,35 +17,33 @@ class AllPosts extends React.Component {
 
 
 
-    // getComponentByType(post, type) {
+    getComponentByType(post, filterType) {
+        if (post.type === "text" && (filterType == "text" || filterType == "all")) {
+            return <PostOnFeedPage post={post} type={filterType} key={post.id} refreshPage={this.refreshPage} />;
+        }
+        if (post.type === "video" && (filterType == "video" || filterType == "all")) {
+            return <PostOnFeedPage post={post} key={post.id} type={filterType} refreshPage={this.refreshPage} />;
+        }
+        if (post.type === "image" && (filterType == "image" || filterType == "all")) {
+            return <PostOnFeedPage post={post} key={post.id} type={filterType} refreshPage={this.refreshPage} />;
+        }
 
-    //     if (type === "text" && (this.state.filterType == "text" || this.state.filterType == "all")) {
-    //         return <PostOnFeedPage post={post} key={post.id} />;
-    //     }
-    //     if (type === "video" && (this.state.filterType == "video" || this.state.filterType == "all")) {
-    //         return <PostOnFeedPage post={post} key={post.id} />;
-    //     }
-    //     if (type === "image" && (this.state.filterType == "image" || this.state.filterType == "all")) {
-    //         return <PostOnFeedPage post={post} key={post.id} />;
-    //     }
-
-    //     return "";
-    // }
+        return "";
+    }
 
     filterSelected(type) {
         this.setState({
             filterType: type
         });
-
     }
-    refreshPage(){
+    refreshPage() {
         this.props.refreshPage();
     }
     render() {
         return (
             <div>
                 <FilterList onFilterSelected={this.filterSelected} />
-                {this.props.posts.map(post => <PostOnFeedPage key={post.id} post={post} refreshPage={this.refreshPage} />)}
+                {this.props.posts.map(post => this.getComponentByType(post, this.state.filterType))}
             </div>
         );
     }

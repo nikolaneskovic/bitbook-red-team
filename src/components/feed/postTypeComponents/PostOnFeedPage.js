@@ -41,6 +41,7 @@ class PostOnFeedPage extends React.Component {
         }
         return;
     }
+    
     getComponentByType(type) {
         if (type === "text") {
             return <p>{this.props.post.text}</p>;
@@ -85,7 +86,7 @@ class PostOnFeedPage extends React.Component {
                                 </button>
                             </div>
                             <div className="modal-body modalBox">
-                                <h5>Are you sure you want to delete?</h5>
+                                <h5>Delete post?</h5>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-default" onClick={this.handleCloseModal}>Close</button>

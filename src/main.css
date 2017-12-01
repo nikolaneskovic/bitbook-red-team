@@ -4,7 +4,7 @@
 }
 
 .container-fluid{
-    background-image: url('./img/bg2.jpg');
+    /* background-image: url('./img/bg2.jpg'); */
     padding: 0;
     background-color: 	rgb(233, 233, 233);
     margin: 0;
@@ -75,7 +75,7 @@ label{
     /* text-align: center; */
 }
 .sngPstPg{
-    min-height: 700px;
+    min-height: 800px;
 }
 .postImage{
     height: 400px;
@@ -253,7 +253,7 @@ padding: 100px;
     height: 150px;
     text-align: center;
     padding: 70px;
-    background-color: #0d1627;
+    background-color: #1b2c4e;
     color: white;
 }
 .footer span{
