@@ -12,6 +12,7 @@ class UserDTO {
     set aboutShort(newValue) {
         this._aboutShort = newValue;
     }
+    
     get avatarUrl() {
         return this._avatarUrl;
     }

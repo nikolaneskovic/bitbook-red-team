@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 
-import DataService from "../../services/dataService";
 import PostDataService from "../../services/postDataService";
 import RedirectionService from "../../services/redirectService";
 
@@ -11,6 +10,7 @@ import AddVideo from "./modalBox/videoModalBox";
 import AddImage from "./modalBox/imageModalBox";
 import AllPosts from "./AllPosts";
 import FilterList from "./FilterList";
+import Pagination from "./Pagination";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -22,7 +22,6 @@ class FeedPage extends React.Component {
             selectedType: ""
         };
 
-        this.dataService = new DataService();
         this.postDataService = new PostDataService();
         this.redirectionService = new RedirectionService();
 
@@ -33,18 +32,21 @@ class FeedPage extends React.Component {
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.addImageOnFeedPage = this.addImageOnFeedPage.bind(this);
         this.addTextPostOnFeedPage = this.addTextPostOnFeedPage.bind(this);
+        this.loadData = this.loadData.bind(this);
     }
     componentDidMount() {
+        this.loadData();
+    }
 
-        this.dataService.getAllPosts((posts) => {
+    loadData() {
+        this.postDataService.getAllPosts((posts) => {
             this.setState({ allPosts: posts });
         }, error => this.setState({ errorMsgServer: error }));
-
     }
 
     addVideoOnFeedPage(newVideo) {
         this.postDataService.postVideo(newVideo, (response) => {
-            console.log(response);
+            this.handleCloseModal();
         }, error => {
             console.log(error);
         });
@@ -52,7 +54,7 @@ class FeedPage extends React.Component {
     }
     addImageOnFeedPage(newImage) {
         this.postDataService.postImage(newImage, (response) => {
-            console.log(response);
+            this.handleCloseModal();
         }, error => {
             console.log(error);
         });
@@ -60,19 +62,15 @@ class FeedPage extends React.Component {
 
     addTextPostOnFeedPage(newText) {
         this.postDataService.postText(newText, (response) => {
-            console.log(response);
+            this.handleCloseModal();
         }, error => {
             console.log(error);
         });
     }
 
     handleCloseModal() {
+        this.loadData();
         this.setState({ showModal: false });
-        //fix this
-        window.location.reload();
-
-        //this.redirectionService.redirect("/feed");
-
     }
 
     handleOpenModal(type) {
@@ -98,6 +96,7 @@ class FeedPage extends React.Component {
         return (<div className='container'>
             <div className="row">
                 <AddBtn handleOpen={this.handleOpenModal} />
+                <Pagination />
             </div>
             <Modal
                 className="Modal__Bootstrap modal-dialog"
@@ -107,7 +106,7 @@ class FeedPage extends React.Component {
 
             </Modal>
 
-            <AllPosts posts={this.state.allPosts} />
+            <AllPosts posts={this.state.allPosts} refreshPage={this.loadData} />
             <div>{this.state.errorMsgServer}</div>
 
         </div>);

@@ -72,12 +72,11 @@ class FetchDataService {
             });
     }
 
-    delete(path, data, handler, errorHandler) {
+    delete(path, handler, errorHandler) {
 
         axios({
             method: "DELETE",
             url: `${BASE_SERVICE_URL}${path}`,
-            data: data,
             headers: this.createHeader(),
             json: true
         })
@@ -85,7 +84,7 @@ class FetchDataService {
                 return handler(response);
             })
             .catch(error => {
-                errorHandler(error.response.data.error.message) || console.log(error);
+                errorHandler(error) || console.log(error);
             });
     }
 

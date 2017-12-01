@@ -1,5 +1,5 @@
 export default class VideoDTO {
-    constructor(videoUrl, id, dateCreated, userId, userDisplayName, type, commentsNum) {
+    constructor({ videoUrl, id, dateCreated, userId, userDisplayName, type, commentsNum }) {
         this._videoUrl = videoUrl;
         this._id = id;
         this._dateCreated = dateCreated;

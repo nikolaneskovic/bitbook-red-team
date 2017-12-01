@@ -79,7 +79,7 @@ class LoginForm extends React.Component {
         };
 
         this.authenticationService.logIn(data, (success) => {
-            this.redirectionService.redirect("/");
+            this.redirectionService.redirect("/feed");
 
         }, (errorMsg) => {
             this.setState({ errorMsgServer: errorMsg });

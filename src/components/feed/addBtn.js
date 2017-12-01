@@ -7,20 +7,15 @@ class AddBtn extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-
     }
 
     handleClick(type) {
         this.props.handleOpen(type);
-
     }
-
-
-
     render() {
         return (
 
-            <div className="col-2 offset-10">
+            <div className="col-2 offset-10 addBtn">
                 <div className="btn-group">
                     <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Add posts</button>

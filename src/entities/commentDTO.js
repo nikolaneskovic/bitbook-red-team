@@ -1,5 +1,5 @@
 export default class CommentDTO {
-    constructor(id, dateCreated, body, postId, authorName, authorId) {
+    constructor({id, dateCreated, body, postId, authorName, authorId}) {
         this._id = id;
         this._dateCreated = dateCreated;
         this._body = body;

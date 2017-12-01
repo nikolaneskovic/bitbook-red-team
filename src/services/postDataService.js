@@ -1,5 +1,4 @@
 import FetchDataService from "../services/fetchDataService";
-import { error } from "util";
 import VideoDTO from "../entities/videoDTO";
 import CommentDTO from "../entities/commentDTO";
 import ImageDTO from "../entities/imageDTO";
@@ -9,20 +8,6 @@ class PostDataService {
     constructor() {
         this.fetchDataService = new FetchDataService();
     }
-
-    // getAllPosts(handleAllPosts, errorHandler) {
-
-    //     this.fetchDataService.get("Posts", response => {
-
-    //         let arrOfPosts = response.data;
-    //         let allPosts = arrOfPosts.map(post => {
-
-    //             let postData = new PostDTO(post.dateCreated, post.id, post.text, post.type, post.userDisplayName, post.userId);
-    //             return postData;
-    //         });
-    //         handleAllPosts(allPosts);
-    //     }, errorMsg => errorHandler(errorMsg));
-    // }
 
     postVideo(videoUrl, videoDataHandler, errorHandler) {
 
@@ -62,7 +47,7 @@ class PostDataService {
             let listOfComments = response.data;
 
             listOfComments = listOfComments.map(comment => {
-                let commentData = new CommentDTO(comment.id, comment.dateCreated, comment.body, comment.postId, comment.authorName, comment.authorId);
+                let commentData = new CommentDTO(comment);
                 return commentData;
             });
             handleComments(listOfComments);
@@ -70,35 +55,54 @@ class PostDataService {
             handleError(error);
         });
     }
+    getAllPosts(handleAllPosts, errorHandler) {
+        this.fetchDataService.get("Posts", response => {
+            let arrOfPosts = response.data;
 
-    getSingleVideoPost(videoId, usersDataHandler, errorHandler) {
-        this.fetchDataService.get(`VideoPosts/${videoId}`, response => {
-            let videoData = response.data;
-            let singleVideo = new VideoDTO(videoData.videoUrl, videoData.id, videoData.dateCreated, videoData.userId, videoData.userDisplayName, videoData.type, videoData.commentsNum);
-            usersDataHandler(singleVideo);
+            let allPosts = arrOfPosts.map(post => {
+                if (post.type === "text") {
+                    let postData = new PostDTO(post);
+                    return postData;
+                }
+                if (post.type == "video") {
+                    let videoData = new VideoDTO(post);
+                    return videoData;
+                }
+                if (post.type == "image") {
+                    let imageData = new ImageDTO(post);
+                    return imageData;
+                }
+            });
+            handleAllPosts(allPosts);
         }, errorMsg => errorHandler(errorMsg));
     }
 
-    getSingleImagePost(imageId, usersDataHandler, errorHandler) {
-        this.fetchDataService.get(`ImagePosts/${imageId}`, response => {
-            let imageData = response.data;
-            let singleImage = new ImageDTO(imageData.imageUrl, imageData.id, imageData.dateCreated, imageData.userId, imageData.userDisplayName, imageData.type, imageData.commentsNum);
-            usersDataHandler(singleImage);
-        }, errorMsg => errorHandler(errorMsg));
+
+    getSinglePost(postId, type, dataHandler, errorHandler) {
+
+        if (type === "text") {
+            this.fetchDataService.get(`TextPosts/${postId}`, response => {
+                let singleTextPost = new PostDTO(response.data);
+                dataHandler(singleTextPost);
+            }, errorMsg => errorHandler(errorMsg));
+        }
+        if (type === "image") {
+            this.fetchDataService.get(`ImagePosts/${postId}`, response => {
+                let singleImage = new ImageDTO(response.data);
+                dataHandler(singleImage);
+            }, errorMsg => errorHandler(errorMsg));
+        }
+        if (type === "video") {
+            this.fetchDataService.get(`VideoPosts/${postId}`, response => {
+                let singleVideo = new VideoDTO(response.data);
+                dataHandler(singleVideo);
+            }, errorMsg => errorHandler(errorMsg));
+        }
+
     }
 
-    getSingleTextPost(textId, dataHandler, errorHandler) {
-        this.fetchDataService.get(`TextPosts/${textId}`, response => {
-            let textPostData = response.data;
-            console.table(textPostData);
-            let singleTextPost = new PostDTO(textPostData);
-            console.table(singleTextPost);
-            dataHandler(singleTextPost);
-        }, errorMsg => errorHandler(errorMsg));
-    }
-
-    deleteSinglePost(postId, postObject, dataHandler, errorHandler) {
-        this.fetchDataService.delete(`Posts/${postId}`, postObject, response => {
+    deleteSinglePost(postId, dataHandler, errorHandler) {
+        this.fetchDataService.delete(`Posts/${postId}`, response => {
             dataHandler(response);
         }, error => {
             errorHandler(error);
@@ -107,3 +111,4 @@ class PostDataService {
 }
 
 export default PostDataService;
+

@@ -1,21 +1,20 @@
 import React from "react";
 import DataService from "../../services/dataService";
-import { IMAGE_PLACE_HOLDER } from "../../constants";
+import { IMAGE_PLACEHOLDER } from "../../constants";
 import Profile from "../../entities/profileDTO";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { error } from "util";
 
 
 class UserProfile extends React.Component {
 
     constructor(props) {
         super(props);
-        const imagePlaceHolder = IMAGE_PLACE_HOLDER;
+        this.imagePlaceholder = IMAGE_PLACEHOLDER;
 
         this.state = {
             name: "",
-            avatarUrl: imagePlaceHolder,
+            avatarUrl: this.imagePlaceholder,
             commentsCount: "",
             postsCount: "",
             about: "",
@@ -36,11 +35,10 @@ class UserProfile extends React.Component {
 
     showUserData(peopleId){
         this.dataService.getUserProfile(peopleId, (response)=>{
-            // console.log(response.data);
             let user = response.data;
             this.setState({
                 name: user.name,
-                avatarUrl: user.avatarUrl,
+                avatarUrl: user.avatarUrl || this.imagePlaceholder,
                 commentsCount:  user.commentsCount,
                 postsCount:  user.postsCount,
                 about:  user.about,
@@ -62,8 +60,8 @@ class UserProfile extends React.Component {
                     <div className='col-5'>
                         <img src={this.state.avatarUrl} width="100%" id="slika" />
                         
-                        <p><Link to="#"><button type="button" className="btn btn-primary"> Comments count: {this.state.commentsCount}</button></Link></p>
-                        <p><Link to="#"> <button type="button" className="btn btn-secondary"> Posts count:{this.state.postsCount}</button></Link></p>
+                        <p><strong> Comments count: </strong>{this.state.commentsCount}</p>
+                        <p><strong> Posts count: </strong>{this.state.postsCount}</p>
                     </div>
                     <div className='col-7'>
                         <h3>{this.state.name}</h3>
