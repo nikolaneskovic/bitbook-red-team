@@ -6,7 +6,13 @@
 .container-fluid{
     /* background-image: url('./img/bg2.jpg'); */
     padding: 0;
-    background-color: 	rgb(233, 233, 233);
+    background-color: 	rgb(204, 239, 255);
+    background: rgb(255, 255, 255); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgb(36, 179, 184), rgb(143, 41, 190)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(36, 179, 184), rgb(143, 41, 190)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(36, 179, 184), rgb(143, 41, 190)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(36, 179, 184), rgb(143, 41, 190)); /* Standard syntax */
+    
     margin: 0;
 }
 .editProfile{
@@ -71,7 +77,7 @@ label{
 .videoPost{
     padding: 30px;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 40px;
     /* text-align: center; */
 }
 .sngPstPg{
@@ -87,7 +93,16 @@ label{
     padding: 5px;
     border-bottom: 1px solid rgb(183, 183, 224);
 }
-
+.videoPost p{
+    margin-top: 15px; 
+}
+.deleteBtn:hover{
+    background-color: rgb(143, 41, 190);
+}
+.addBtn{
+    background-color: transparent;
+    border: transparent;
+}
 .commentBtn {
     background-color: #a31862;
     color: white;
@@ -96,7 +111,7 @@ label{
     padding: 10px;
     display: block;
     width: 13%;
-    margin-left: 20px;
+    margin-left: 50px;
 }
 .typeOfPost{
     padding-top: 40px;
@@ -120,7 +135,7 @@ label{
     width: 100%;
 }
 .logInPage{
-    background-image: url("img/bgVideo.gif");
+    /* background-image: url("img/bgVideo.gif"); */
     position: absolute;
     bottom: 0;
     top: 0;
@@ -135,7 +150,9 @@ label{
     padding: 20px;
     margin-top: 10px;
 }
-
+.feedPage{
+    min-height: 800px;
+}
 .logInForm{
 padding: 100px;
 }
@@ -170,8 +187,9 @@ padding: 100px;
 
 #logout{
     margin-left: 5px;
-    background-color: white;
-    color: blue;
+    background-color:#a31862;
+    color: white;
+    border: none;
 }
 
 
@@ -200,7 +218,7 @@ padding: 100px;
     background-color: white;
     margin: 10px;
     border-radius: 7px;
-    padding: 5px;
+    padding: 20px;
 }
 .user .row{
     min-height: 150px;
@@ -215,23 +233,23 @@ padding: 100px;
     box-shadow: 4px 4px 4px #dfe3ee;
 }
 
-
 .searchInput{
     display: block;
     width: 100%;
-    margin-top: 40px;
-    padding: 5px;
+    margin: 40px;
+    padding: 10px;
     border: none;
-    box-shadow: 1px 1px 1px #3b5998;
-    border-radius: 5px;
+    border-bottom: 5px solid #1ac7e6;
+    background-color: rgba(6, 184, 255, 0.4);
+}
+.searchInput::-webkit-input-placeholder{
+    color: white;
 }
 
 .profilePage{
     min-height: 1000px;
     background-color: white;
     padding: 60px;
-    
-
 }
 .shortAbout{
     font-style: italic;
@@ -255,9 +273,10 @@ padding: 100px;
     padding: 70px;
     background-color: #1b2c4e;
     color: white;
+    margin-top: 30px;
 }
 .footer span{
-    color: #3b5998;
+    color: #a31862;
 
 }
 .btn-light a{
@@ -272,4 +291,12 @@ padding: 100px;
     margin: 10px;
     background-color: white;
     border-radius: 5px;
+}
+
+.modalBtn{
+    background-color: #a31862;
+    border: #a31862;
+}
+.btn-group{
+    border: none;
 }

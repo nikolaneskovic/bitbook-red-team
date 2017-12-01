@@ -76,7 +76,7 @@ class RegisterForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <label> Username</label><br />
-                            <input id="input_text" type="text" data-length="25" name="username"
+                            <input id="input_text" type="text" data-length="25" name="username" placeholder="username@username.com"
                                 value={this.state.username} onChange={this.handleChange}
                             />
                         </div>
@@ -84,7 +84,7 @@ class RegisterForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <label> Password</label><br />
-                            <input id="input_text" type="password" data-length="25" name="password"
+                            <input id="input_text" type="password" data-length="25" name="password" placeholder="password123"
                                 value={this.state.password} onChange={this.handleChange}
                             />
                         </div>
@@ -92,7 +92,7 @@ class RegisterForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <label> Name</label><br />
-                            <input id="input_text" type="text" data-length="25" name="name"
+                            <input id="input_text" type="text" data-length="25" name="name" placeholder="Name"
                                 value={this.state.name} onChange={this.handleChange}
                             />
                         </div>
@@ -100,7 +100,7 @@ class RegisterForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <label> Email</label><br />
-                            <input id="input_text" type="email" data-length="25" name="email"
+                            <input id="input_text" type="email" data-length="25" name="email" placeholder="username@username.com"
                                 value={this.state.email} onChange={this.handleChange}
                             />
                         </div>

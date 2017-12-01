@@ -19,8 +19,9 @@ export default class Search extends React.Component {
     }
 
     render() {
-        return (<div className="col-12">
-            <input className="searchInput" value={this.state.searchString} onChange={this.handleChange} placeholder="Search" />
+        return (<div className="col-8 offset-2">
+            <input className="searchInput" value={this.state.searchString} onChange={this.handleChange} placeholder="Search . . ." />
+         
         </div>
         );
     }

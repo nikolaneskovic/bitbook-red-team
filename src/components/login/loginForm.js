@@ -96,7 +96,7 @@ class LoginForm extends React.Component {
 
                         <div className="input-field col s6">
                             <label className="login-form"> Username </label> <br />
-                            <input id="input_text" type="text" data-length="25" name="username"
+                            <input id="input_text" type="text" data-length="25" name="username" placeholder="username@username.com"
                                 value={this.state.username} onChange={this.handleChange} onBlur={this.validateLogInForm}
                             />
                             <span>{this.state.invalidEmail} {this.state.emptyUsername}</span>
@@ -109,7 +109,7 @@ class LoginForm extends React.Component {
                     <div className="row">
                         <div className="input-field col s6">
                             <label className="login-form"> Password </label><br />
-                            <input id="input_text" type="password" data-length="25" name="password"
+                            <input id="input_text" type="password" data-length="25" name="password" placeholder="password123"
                                 value={this.state.password} onChange={this.handleChange} onBlur={this.validateLogInForm}
                             /> 
                             <span>{this.state.passLength}</span>

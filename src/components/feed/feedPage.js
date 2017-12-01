@@ -3,6 +3,7 @@ import Modal from "react-modal";
 
 import PostDataService from "../../services/postDataService";
 import RedirectionService from "../../services/redirectService";
+import ReactPaginate from "react-paginate";
 
 import AddBtn from "./addBtn";
 import AddPost from "./modalBox/postModalBox";
@@ -10,7 +11,6 @@ import AddVideo from "./modalBox/videoModalBox";
 import AddImage from "./modalBox/imageModalBox";
 import AllPosts from "./AllPosts";
 import FilterList from "./FilterList";
-import Pagination from "./Pagination";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -19,7 +19,8 @@ class FeedPage extends React.Component {
             allPosts: [],
             showModal: false,
             errorMsgServer: "",
-            selectedType: ""
+            selectedType: "",
+            tenPosts: []
         };
 
         this.postDataService = new PostDataService();
@@ -33,6 +34,7 @@ class FeedPage extends React.Component {
         this.addImageOnFeedPage = this.addImageOnFeedPage.bind(this);
         this.addTextPostOnFeedPage = this.addTextPostOnFeedPage.bind(this);
         this.loadData = this.loadData.bind(this);
+        this.showPosts = this.showPosts.bind(this);
     }
     componentDidMount() {
         this.loadData();
@@ -40,7 +42,12 @@ class FeedPage extends React.Component {
 
     loadData() {
         this.postDataService.getAllPosts((posts) => {
-            this.setState({ allPosts: posts });
+            let tenPosts = posts.slice(0, 10);
+            this.setState({
+                allPosts: posts,
+                tenPosts: tenPosts
+            });
+
         }, error => this.setState({ errorMsgServer: error }));
     }
 
@@ -80,6 +87,13 @@ class FeedPage extends React.Component {
         });
     }
 
+    showPosts() {
+        this.postDataService.getAllPosts((posts) => {
+            let tenPosts = posts.slice(10, 20);
+
+            this.setState({ tenPosts: tenPosts });
+        }, error => this.setState({ errorMsgServer: error }));
+    }
     getModalBoxComponent() {
         if (this.state.selectedType === "image") {
             return <AddImage closeModal={this.handleCloseModal} handleImageUrl={this.addImageOnFeedPage} />;
@@ -93,10 +107,9 @@ class FeedPage extends React.Component {
 
     }
     render() {
-        return (<div className='container'>
+        return (<div className='container feedPage'>
             <div className="row">
                 <AddBtn handleOpen={this.handleOpenModal} />
-                <Pagination />
             </div>
             <Modal
                 className="Modal__Bootstrap modal-dialog"
@@ -106,7 +119,7 @@ class FeedPage extends React.Component {
 
             </Modal>
 
-            <AllPosts posts={this.state.allPosts} refreshPage={this.loadData} />
+            <AllPosts posts={this.state.tenPosts} refreshPage={this.loadData} />
             <div>{this.state.errorMsgServer}</div>
 
         </div>);

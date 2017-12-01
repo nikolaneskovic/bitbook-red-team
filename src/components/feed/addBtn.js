@@ -17,8 +17,8 @@ class AddBtn extends React.Component {
 
             <div className="col-2 offset-10 addBtn">
                 <div className="btn-group">
-                    <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add posts</button>
+                    <button type="button" className="addBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="./../../../img/addBtn.png" width="70px" /></button>
 
                     <div className="dropdown-menu">
                         <button name="image" className="dropdown-item" onClick={() => this.handleClick("image")}>Image</button>

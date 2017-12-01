@@ -30,17 +30,18 @@ class PostOnFeedPage extends React.Component {
             console.log(error);
         });
     }
-
+    
     showDeleteButton() {
         this.dataService.getProfile((profile) => {
             this.setState({ myId: profile.userId });
         }, error => { console.log(error); });
 
         if (this.props.post.userId === this.state.myId) {
-            return <button type="button" className="btn btn-outline-secondary" onClick={this.handleOpenModal}>x</button>;
+            return <button type="button" className="btn btn-outline-secondary deleteBtn" onClick={this.handleOpenModal}>x</button>;
         }
         return;
     }
+    
     
     getComponentByType(type) {
         if (type === "text") {
