@@ -21,7 +21,6 @@ const User = (props) => {
             <div className="row">
                 <div className="col-2 offset-1">
                     {showUserImage()}
-                    {/* <img src={props.user.avatarUrl} /> */}
                 </div>
                 <div className="col-6">
                     <h4> {props.user.name}</h4>

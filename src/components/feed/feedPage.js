@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import PostDataService from "../../services/postDataService";
 import RedirectionService from "../../services/redirectService";
 import ReactPaginate from "react-paginate";
+import FetchDataService from "../../services/fetchDataService";
 
 import AddBtn from "./addBtn";
 import AddPost from "./modalBox/postModalBox";
@@ -11,7 +12,6 @@ import AddVideo from "./modalBox/videoModalBox";
 import AddImage from "./modalBox/imageModalBox";
 import AllPosts from "./AllPosts";
 import FilterList from "./FilterList";
-import { error } from "util";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -25,6 +25,7 @@ class FeedPage extends React.Component {
 
         this.postDataService = new PostDataService();
         this.redirectionService = new RedirectionService();
+        this.fetchDataService = new FetchDataService();
 
 
         this.addVideoOnFeedPage = this.addVideoOnFeedPage.bind(this);
@@ -65,12 +66,14 @@ class FeedPage extends React.Component {
     //     });
     // }
 
-    addImageOnFeedPage(newImage){
-        this.postDataService.uploadImage(newImage,(image)=>{
-            this.setState({imageUrl:image});
-
-            this.handleCloseModal();
-        }, error=>{
+    addImageOnFeedPage(newImage) {
+        this.postDataService.uploadImage(newImage, (image) => {
+            this.fetchDataService.post("ImagePosts", { imageUrl: image }, response => {
+                this.handleCloseModal();
+            }, error => {
+                console.log(error);
+            });
+        }, error => {
             console.log(error);
         });
     }
@@ -95,7 +98,7 @@ class FeedPage extends React.Component {
         });
     }
 
-    
+
     getModalBoxComponent() {
         if (this.state.selectedType === "image") {
             return <AddImage closeModal={this.handleCloseModal} handleImageUrl={this.addImageOnFeedPage} />;

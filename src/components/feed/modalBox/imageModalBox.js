@@ -7,6 +7,7 @@ class AddImage extends React.Component {
         super(props);
         this.state = {
             file: "",
+            imagePreviewUrl: ""
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -25,7 +26,8 @@ class AddImage extends React.Component {
 
         reader.onloadend = () => {
             this.setState({
-                file
+                file,
+                imagePreviewUrl: reader.result
             });
         };
         reader.readAsDataURL(file);
@@ -35,9 +37,14 @@ class AddImage extends React.Component {
         let imgFile = this.state.file;
         this.props.handleImageUrl(imgFile);
     }
+    
 
     render() {
-
+        let { imagePreviewUrl } = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} width="100%" height="400px"/>);
+        }
         return (
             <div className="modal-content">
                 <div className="modal-header">
@@ -56,6 +63,7 @@ class AddImage extends React.Component {
                     <button type="button" className="btn btn-default" onClick={this.handleClick}>Close</button>
                     <button type="button" className="btn btn-primary modalBtn" onClick={this.handleSaveClicked}>Save changes</button>
                 </div>
+                {$imagePreview}
             </div>
 
         );
