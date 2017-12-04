@@ -163,6 +163,11 @@ padding: 100px;
     width: 100px;
     height: 100px;
 } */
+#addImg{
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
 
 #thead{
     text-align: center;

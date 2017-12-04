@@ -3,6 +3,7 @@ import VideoDTO from "../entities/videoDTO";
 import CommentDTO from "../entities/commentDTO";
 import ImageDTO from "../entities/imageDTO";
 import PostDTO from "../entities/postDTO";
+import { error } from "util";
 
 class PostDataService {
     constructor() {
@@ -17,13 +18,33 @@ class PostDataService {
             errorHandler(error);
         });
     }
-    postImage(newImage, imageDataHandler, errorHandler) {
-        this.fetchDataService.post("ImagePosts", { imageUrl: newImage }, (response) => {
-            imageDataHandler(response);
+    uploadImage(newImage, imageDataHandler, errorHandler) {
+        let imageFormData = new FormData();
+        imageFormData.append("newImage", newImage);
+
+        this.fetchDataService.post("upload", imageFormData, (response) => {
+            let image = response.data;
+            
+            this.fetchDataService.post("ImagePosts",{imageUrl:image},response=>{
+                imageDataHandler(response);
+                console.log(response);
+            }, error=>{
+                console.log(error);
+            });
         }), error => {
             errorHandler(error);
         };
     }
+    // postImage(newImage, imageDataHandler, errorHandler) {
+    //     this.fetchDataService.post("ImagePosts", { imageUrl: newImage }, (response) => {
+    //         imageDataHandler(response);
+    //     }), error => {
+    //         errorHandler(error);
+    //     };
+    // }
+
+
+
     postText(newText, textDataHandler, errorHandler) {
         this.fetchDataService.post("TextPosts", { text: newText }, response => {
             textDataHandler(response);

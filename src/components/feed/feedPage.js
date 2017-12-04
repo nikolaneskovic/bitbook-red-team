@@ -11,6 +11,7 @@ import AddVideo from "./modalBox/videoModalBox";
 import AddImage from "./modalBox/imageModalBox";
 import AllPosts from "./AllPosts";
 import FilterList from "./FilterList";
+import { error } from "util";
 
 class FeedPage extends React.Component {
     constructor(props) {
@@ -20,7 +21,6 @@ class FeedPage extends React.Component {
             showModal: false,
             errorMsgServer: "",
             selectedType: "",
-            tenPosts: []
         };
 
         this.postDataService = new PostDataService();
@@ -34,7 +34,6 @@ class FeedPage extends React.Component {
         this.addImageOnFeedPage = this.addImageOnFeedPage.bind(this);
         this.addTextPostOnFeedPage = this.addTextPostOnFeedPage.bind(this);
         this.loadData = this.loadData.bind(this);
-        this.showPosts = this.showPosts.bind(this);
     }
     componentDidMount() {
         this.loadData();
@@ -45,7 +44,6 @@ class FeedPage extends React.Component {
             let tenPosts = posts.slice(0, 10);
             this.setState({
                 allPosts: posts,
-                tenPosts: tenPosts
             });
 
         }, error => this.setState({ errorMsgServer: error }));
@@ -59,10 +57,20 @@ class FeedPage extends React.Component {
         });
 
     }
-    addImageOnFeedPage(newImage) {
-        this.postDataService.postImage(newImage, (response) => {
+    // addImageOnFeedPage(newImage) {
+    //     this.postDataService.postImage(newImage, (response) => {
+    //         this.handleCloseModal();
+    //     }, error => {
+    //         console.log(error);
+    //     });
+    // }
+
+    addImageOnFeedPage(newImage){
+        this.postDataService.uploadImage(newImage,(image)=>{
+            this.setState({imageUrl:image});
+
             this.handleCloseModal();
-        }, error => {
+        }, error=>{
             console.log(error);
         });
     }
@@ -87,13 +95,7 @@ class FeedPage extends React.Component {
         });
     }
 
-    showPosts() {
-        this.postDataService.getAllPosts((posts) => {
-            let tenPosts = posts.slice(10, 20);
-
-            this.setState({ tenPosts: tenPosts });
-        }, error => this.setState({ errorMsgServer: error }));
-    }
+    
     getModalBoxComponent() {
         if (this.state.selectedType === "image") {
             return <AddImage closeModal={this.handleCloseModal} handleImageUrl={this.addImageOnFeedPage} />;
@@ -119,7 +121,7 @@ class FeedPage extends React.Component {
 
             </Modal>
 
-            <AllPosts posts={this.state.tenPosts} refreshPage={this.loadData} />
+            <AllPosts posts={this.state.allPosts} refreshPage={this.loadData} />
             <div>{this.state.errorMsgServer}</div>
 
         </div>);

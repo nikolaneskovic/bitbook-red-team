@@ -6,7 +6,7 @@ class AddImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageUrl: ""
+            file: "",
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -20,14 +20,20 @@ class AddImage extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({
-            imageUrl: event.target.value
-        });
+        let file = event.target.files[0];
+        let reader = new FileReader();
+
+        reader.onloadend = () => {
+            this.setState({
+                file
+            });
+        };
+        reader.readAsDataURL(file);
     }
 
     handleSaveClicked() {
-        let imageUrl = this.state.imageUrl;
-        this.props.handleImageUrl(imageUrl);
+        let imgFile = this.state.file;
+        this.props.handleImageUrl(imgFile);
     }
 
     render() {
@@ -43,7 +49,8 @@ class AddImage extends React.Component {
                 </div>
                 <div className="modal-body modalBox">
                     <h3>New image</h3>
-                    <textarea value={this.state.imageUrl} onChange={this.handleChange}></textarea>
+                    {/* <textarea value={this.state.imageUrl} onChange={this.handleChange}></textarea> */}
+                    <input name="addImg" type="file" id="addImg" onChange={this.handleChange} />
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-default" onClick={this.handleClick}>Close</button>
